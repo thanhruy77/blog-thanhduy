@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog ThanhDuy - Đọc Sách</title>
+    <link rel="icon" href="./Anh/thanhruy77.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/chotoixinmotvedituoitho.css">
+</head>
+
+<body>
+    <header>
+        <h1><img src="./Anh/astronaut.png" width="25px"> Đọc Sách</h1>
+    </header>
+    <nav id="mobile" hidden>
+        <ul class="nav-menu">
+            <li><a href="../../index.html">Trang Chủ</a></li>
+            <li><a href="../../travel.html">Du Lịch</a></li>
+            <li><a href="../../phim.html">Phim</a></li>
+            <li>
+                <a href="#">Khác</a>
+                <ul class="submenu">
+                    <li><a href="../../thantuong.html">Lalisa</a></li>
+                    <li><a href="../../sach.html">Sách</a></li>
+                    <li><a href="../../amnhac.html">Music</a></li>
+                    <li><a href="../../duan.html">Dự Án</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <style>
+        /* Định dạng bảng cho màn hình điện thoại */
+        @media (max-width: 800px) {
+            #pc {
+                display: none;
+            }
+
+            #mobile {
+                display: block;
+            }
+        }
+
+        /* Định dạng bảng cho màn hình máy tính */
+        @media (min-width: 801px) {
+            #pc {
+                display: block;
+            }
+
+            #mobile {
+                display: none;
+            }
+        }
+    </style>
+    <nav id="pc" hidden>
+        <ul class="nav-menu-pc">
+            <li><a href="../../index.html">Trang Chủ</a></li>
+            <li><a href="../../travel.html">Du Lịch</a></li>
+            <li><a href="../../sach.html">Sách</a></li>
+            <li><a href="../../duan.html">Dự Án</a></li>
+            <li><a href="../../phim.html">Phim</a></li>
+            <li><a href="../../amnhac.html">Music</a></li>
+            <li><a href="../../thantuong.html">Lalisa</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2 class="name">ĐẢO MỘNG MƠ</h2>
+        <h3 class="name">Chương 7</h3>
+        <div class="chapter-navigation">
+            <button id="prev-chapter-top">Chương Trước</button>
+            <select id="chapter-list-top">
+                <!-- Tùy chọn sẽ được tạo bằng JavaScript -->
+            </select>
+            <button id="next-chapter-top">Chương Tiếp</button>
+        </div>
+        <div class="content">
+            <div class="chapter-content">
+                <!-- Nội dung ở đây-->
+                <div>
+                    <br>
+                    <p>
+
+                    TRÊN HÒN ĐẢO ROBINSON ĐÓ, LÚC NÀY có ba đứa nhóc đang chụm đầu
+                        dưới tán dù, trên đầu gối mỗi đứa là một cuốn tập và cả ba đang hí hoáy ghi chép.<br><br>Ba đứa
+                        nhóc là chúng ta gọi thế, vì rõ ràng chúng là ba đứa nhóc thật, nhưng tự bọn chúng thì không
+                        thấy như vậy.<br><br>Bọn chúng thấy như thế này:<br><br>- Phó chúa đảo Thứ Bảy là một chàng trai
+                        tráng kiện, da rám nắng, bắp thịt cuồn cuộn, đó là kết quả tôi luyện qua những ngày tháng lênh
+                        đênh trên biển.<br><br>- Chúa đảo Tin còn vạm vỡ hơn nữa, bắp tay như dây chão, gương mặt dứt
+                        khoát là chữ điền và trên người thế nào cũng chằng chịt hằng trăm vết sẹo vì thành tích đánh
+                        nhau với hải tặc - lần nào cũng trọng thương suýt chết nhưng luôn luôn vượt qua được vào phút
+                        chót.<br><br>- Chúa đảo dĩ nhiên có chúa đảo phu nhân và dứt khoát là họ cưới nhau đã được ba
+                        năm. Chúa đảo phu nhân ngoài nhan sắc mặn mà còn là một phụ nữ quả cảm, can trường hiếm
+                        có.<br><br>Bây giờ thì ba con người dũng cảm đó đang tranh thủ thời gian rảnh rỗi không phải
+                        chống chọi với mưa bão để ngồi viết nhật ký về cuộc sống trên đảo hoang.<br><br>Về chuyện này,
+                        thằngTin phải nói khô nước bọt, Bảy và con Thắm mới nghe theo.<br><br>Lúc đầu, Bảy lắc đầu quầy
+                        quậy:<br><br>- Tao tưởng đã lạc vào đảo hoang thì chỉ toàn chơi, khỏi phải chép bài làm bài gì
+                        hết chứ. Biết thế này tao chả thèm đặt chân lên hòn đảo Robinson này làm gì.<br><br>- Ừ, mình
+                        cũng thích lên đây ngồi chơi thôi.<br><br>Con Thắm hùa theo làm Tin tức điên. Nó giận dỗi nhìn
+                        hai đứa bạn:<br><br>- Tụi mày ngốc bỏ xừ. Xưa nay những nhà thám hiểm hoặc những kẻ đi lạc như
+                        bọn mình người nào cũng viết nhật ký hết á.<br><br>- Viết chi vậy?<br><br>- Viết để giết thì
+                        giờ. Thời gian trên đảo hoang bao giờ cũng dài lê thê…<br><br>Cảm thấy lý do này chưa thuyết
+                        phục lắm, Tin tặc lưỡi nói thêm:<br><br>- Hơn nữa, nếu mai mốt bọn mình bỏ xác trên hòn đảo này,
+                        những người đến sau sẽ đọc được nhật ký của tụi mình, sẽ biết là trên hoang đảo xa xôi này từng
+                        có ba con người sinh sống…<br><br>Hình ảnh thằng Tin vẽ ra ảm đạm đến mức con Thắm rụt
+                        cổ:<br><br>- Eo ôi, Tin nói gì ghê quá!<br><br>- Đó là tao ví dụ thôi. - Tin cười hì hì - Còn
+                        nếu như tụi mình quay về đất liền được, tụi mình sẽ in cuốn nhật ký thành sách. Chắc chắn sẽ bán
+                        chạy như tôm tươi. Chẳng mấy chốc tụi mình sẽ trở thành tỉ phú.<br><br>Lần này gam màu Tin vẽ ra
+                        thiệt là tươi sáng, dĩ nhiên thằng Bảy và con Thắm nhận thấy chẳng có lý do gì để phản đối
+                        cả.<br><br>VỀ TRÍ TƯỞNG TƯỢNG, HIỂN NHIÊN CHÚA đảo phu nhân và phó chúa đảo không thể sánh bằng
+                        chúa đảo.<br><br>Cho nên sau khi mở tập ra trên đầu gối, thằng Bảy và con Thắm cứ cắn viết nhìn
+                        thằng Tin.<br><br>Tin viết xong câu thứ nhất, ngoác miệng đọc thật to:<br><br>- Chúng tôi lạc
+                        vào hòn đảo này đã tròn một tháng.<br><br>Chỗ này, con Thắm bắt bẻ ngay:<br><br>- Có nửa tháng
+                        à.<br><br>- Một tháng.<br><br>- Trên cây cọ chỉ có mười bảy vết khắc à.<br><br>- Lát nữa tao
+                        khắc thêm mười ba vết nữa, khó gì!<br><br>Mười bảy vết khắc kia, Tin đã có gian lận trong đó
+                        rồi. Những vết khắc đó rõ ràng nhiều hơn số tuổi của hòn đảo Robinson. Thằng Bảy biết tỏng,
+                        nhưng không nói ra. Không ngờ bữa nay thằng Tin huỵch toẹt luôn. Nó nói chuyện ăn gian bằng vẻ
+                        mặt nghênh ngang khiến hai đứa bạn nó ngớ ra mất một lúc.<br><br>- Nhìn cái gì! - Tin hừ giọng -
+                        Tụi mày viết đi!<br><br>Thế là Bảy và Thắm cúi đầu hí hoáy “Chúng tôi lạc vào hòn đảo này đã
+                        tròn một tháng”.<br><br>Nhật ký của bọn nhóc từ từ dài ra, dĩ nhiên là hoàn toàn giống nhau.
+                        Biết làm thế nào được, chúng ta cần phải thông cảm, vì chúa đảo, chúa đảo phu nhân và phó chúa
+                        đảo đều lạc vào cùng một chỗ, chứng kiến cùng một sự kiện và trải qua cùng một tâm
+                        trạng.<br><br>Cho nên chúng ta đừng ngạc nhiên nếu câu thứ hai của bọn nhóc cũng giống nhau đến
+                        từng dấu phẩy: “Đảo thoai thoải, rất nhiều cát, những cây cọ mọc rải rác giúp hòn đảo bớt hiu
+                        quạnh. Đảo Robinson lọt trong một vùng khí hậu đặc biệt, năm nào cũng có bốn trận bão lớn tràn
+                        qua đây…”<br><br>THẰNG TIN CỨ VIẾT MỘT CÂU, LẠI CẤT cao giọng đọc, y như thầy giáo đọc chính tả
+                        cho học trò chép.<br><br>Nhưng Bảy và Thắm chẳng lấy thế làm tự ái.<br><br>Tụi nó còn cảm thấy
+                        thích thú khi Tin hào hứng tả cảnh:<br><br>“Thỉnh thoảng gió giật rất mạnh, mái lều lợp bằng lá
+                        dừa của chúng tôi bị nhồi liên tục và cuối cùng kông chịu nổi đã đổ sập xuống, may mà chúng tôi
+                        đã nhanh chân thoát ra ngoài. Những lúc đó, mặt biển trông thật dữ dội, sóng trào lên như bắn ra
+                        từ một cái máy phun đặt dưới đáy biển, bọt tung trắng xóa khi quật mạnh vào mỏm đá san hô ở phía
+                        Tây hòn đảo”.<br><br>- Hay quá, Tin! - Con Thắm vừa chép vừa nức nở khen.<br><br>Bảy cũng gật
+                        gù:<br><br>- Mày tả giống thật ghê. Y như cảnh trời mưa hôm nọ.<br><br>Con Thắm đề
+                        nghị:<br><br>- Tin tả cảnh biển đi, Tin. Biển lúc hoàng hôn ấy.<br><br>Tin đưa mắt nhìn ra xa,
+                        trông mặt nó rất mơ màng. Nó đang ngắm cảnh biển lúc hoàng hôn đó mà.<br><br>“Chúng tôi thích
+                        nhất lúc ngồi trên đảo Robinson ngắm hoàng hôn trên biển. Mặt trời như hòn lửa ai ở trên trời vô
+                        ý đánh rơi xuống đại dương…”<br><br>Bảy cười hì hì:<br><br>- Ai đó ở trên trời đang hút thuốc
+                        lá.<br><br>Tin như không nghe thấy Bảy, tiếp tục:<br><br>“Mặt biển lúc đó trông phẳng lì, êm đềm
+                        như một miếng xu xoa khổng lồ và màu sắc của miếng xu xoa thay đổi không ngừng…”.<br><br>Bảy lại
+                        phá ngang:<br><br>- Mày tả biển làm tao thấy đói bụng quá!<br><br>Con Thắm phụ họa:<br><br>-
+                        Mình cũng đói bụng nữa.<br><br>Thằng Tin xếp cuốn tập lại, thở hắt một cái:<br><br>- Ờ, tao cũng
+                        đói bụng luôn. Nhật ký hôm nay viết thế đủ rồi. Mai viết tiếp.<br><br>NGÀY HÔM SAU CON THẮM DẮT
+                        THEO con Pig lên đảo.<br><br>Pig không phải là con heo.<br><br>Pig là tên con cún của nhà con
+                        Thắm.<br><br>Con Pig màu vàng, tai vểnh tai cụp, trông rất tức cười. Nó có vẻ nhút nhát. Từ khi
+                        đặt chân qua cổng nhà thằng Tin, nó rụt rè đánh hơi khắp nơi bằng cái mũi màu hồng. Chắc tại cái
+                        mũi có màu đặc biệt này mà cậu con Thắm đặt tên nó là Pig.<br><br>- Pig! Pig! Lại đây
+                        nào!<br><br>Thằng Bảy ngoắt con Pig, vui vẻ gọi. Nó ở cạnh nhà con Thắm nên quen biết với Pig từ
+                        trước.<br><br>Con Pig hơi phân vân một chút rồi lao về phía Bảy, đuôi ngoáy tít thay cho lời
+                        chào hỏi.<br><br>Thằng Tin tươi cười nhận xét:<br><br>- Con cún này tên hay ghê!<br><br>- Nó
+                        không phải là con cún. - Con Thắm nghiêm trang - Nó là con sư tử.<br><br>- Sư tử á?<br><br>- Ờ,
+                        sư tử. - Con Thắm chỉ tay về phía cây cọ - Hòn đảo này lắm rừng rậm thế kia, phải có thú dữ
+                        chứ.<br><br>Tin sung sướng:<br><br>- Đúng rồi. Đảo hoang thì phải có thú dữ. Nếu không thì buồn
+                        tẻ lắm!<br><br>Bảy kêu lên:<br><br>- Ê, con sư tử của mày ị lên chỗ ngủ của tụi mình rồi,
+                        Thắm.<br><br>Vợ chồng chúa đảo quay phắt về phía con Pig. Quả thực, nhân lúc mọi người bàn tán
+                        và cất nhắn nó lên chức “sư tử”, con Pig phản đối bằng cách kiên quyết chứng minh mình là
+                        cún.<br><br>Chỉ có một con cún mới ị bậy thế thôi.<br><br>NHƯ CHÚNG TA ĐÃ BIẾT, CHÚA ĐẢO THỈNH
+                        thoảng vẫn vào đất liền thăm ba chúa đảo, mẹ chúa đảo và chị Hai chúa đảo.<br><br>Có vẻ như ba
+                        của chúa đảo đã thuyết phục được mẹ chúa đảo và chị Hai chúa đảo tin rằng chúa đảo quả thực đang
+                        sinh sống trên một hòn đảo nên thời gian gần đây chúa đảo không bị mẹ và chị mắng về đủ thứ tội
+                        liên quan đến chuyện nghịch cát nữa.<br><br>Mẹ chúa đảo và chị chúa đảo cũng không còn giữ vẻ
+                        thờ ơ trước những tin tức về hòn đảo.<br><br>Chúa đảo nói, trong bữa ăn:<br><br>- Tụi con đặt
+                        tên cho hòn đảo rồi.<br><br>- Tên gì thế con? - Mẹ chúa đảo hỏi, cái cách bà biểu lộ qua ánh mắt
+                        cho thấy bà muốn người nghe biết bà đang rất tò mò.<br><br>Chúa đảo kiêu hãnh đáp, ngực ưỡn về
+                        phía trước một cách không tự chủ:<br><br>- Tụi con đặt tên cho nó là đảo Robinson.<br><br>Chúa
+                        đảo khoe, trong bữa ăn tiếp theo:<br><br>- Hôm nay con nhìn thấy một con sư tử trên
+                        đảo.<br><br>Chị chúa đảo rụt cổ:<br><br>- Eo ôi, sư tử cơ à?<br><br>- Vâng.<br><br>- Thế em có
+                        bắn nó không?<br><br>- Không. Tụi em thuần hóa nó.<br><br>Chị chúa đảo tủm tỉm:<br><br>- Tức là
+                        bây giờ nó đã ngoan ngoãn như một con cún.<br><br>- Đúng là bây giờ nó ngoan ngoãn như một con
+                        cún.<br><br>Chúa đảo hân hoan đáp, không nghĩ chị chúa đảo đang trêu chúa đảo.<br><br>BA NÓI VỚI
+                        TIN BẰNG GIỌNG HỒ HỞI:<br><br>- Ba đã nhìn thấy con sư tử đó.<br><br>Tin hỏi lại bằng giọng hồ
+                        hởi không kém:<br><br>- Ba nhìn bằng ống dòm hả ba?<br><br>- Dĩ nhiên là ba nhìn bằng ống
+                        dòm.<br><br>Nói xong ba đứng lên, đi vào phòng.<br><br>Rất nhanh, ông quay trở ra. Trên tay ông
+                        là một chiếc ống dòm thật.<br><br>Ông đặt chiếc ống dòm màu đen vào tay Tin:<br><br>- Ba tặng
+                        con đó. Ba nghĩ con cần đến nó hơn ba.<br><br>Ba mỉm cười:<br><br>- Con đang sống trên đảo hoang
+                        mà. Lại có cả sư tử nữa.<br><br>Tin nhắc:<br><br>- Nhưng tụi con đã thuần hóa nó rồi.<br><br>Ba
+                        tặc lưỡi:<br><br>- Biết đâu còn những con khác.<br><br>Chiếc ống dòm có cả dây đeo. Tin đeo vào
+                        cổ rồi đưa ống dòm lên mắt.<br><br>- Con điều chỉnh tầm nhìn bằng cái vòng xoay ở giữa. - Ba
+                        hướng dẫn Tin.<br><br>Hai cha con loay hoay một lúc với chiếc ống dòm.<br><br>Khi Tin qua trở ra
+                        ngoài sân với chiếc ống dòm lủng lẳng trước ngực, không còn nghi ngời gì nữa, trông nó đã giống
+                        chúa đảo lắm rồi.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="chapter-navigation">
+            <button id="prev-chapter-bottom">Chương Trước</button>
+            <select id="chapter-list-bottom">
+                <!-- Tùy chọn sẽ được tạo bằng JavaScript -->
+            </select>
+
+            <button id="next-chapter-bottom">Chương Tiếp</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Blog ThanhDuy. All rights reserved.</p>
+    </footer>
+    <script>
+        // Danh sách các chương và các trang tương ứng
+        const chapters = [
+            { name: "Chương 1", link: "chuong1.html" },
+            { name: "Chương 2", link: "chuong2.html" },
+            { name: "Chương 3", link: "chuong3.html" },
+            { name: "Chương 4", link: "chuong4.html" },
+            { name: "Chương 5", link: "chuong5.html" },
+            { name: "Chương 6", link: "chuong6.html" },
+            { name: "Chương 7", link: "chuong7.html" },
+            { name: "Chương 8", link: "chuong8.html" },
+            { name: "Chương 9", link: "chuong9.html" },
+            { name: "Chương 10", link: "chuong10.html" },
+            { name: "Chương 11", link: "chuong11.html" },
+            { name: "Chương 12", link: "chuong12.html" },
+            { name: "Chương 13", link: "chuong13.html" },
+            { name: "Chương 14", link: "chuong14.html" },
+            { name: "Chương 15", link: "chuong15.html" },
+            { name: "Chương 16", link: "chuong16.html" },
+            // Thêm các chương khác vào đây
+        ];
+
+        // Tạo các tùy chọn cho ô select dựa trên danh sách các chương
+        const chapterListSelects = document.querySelectorAll("select[id^='chapter-list']");
+        chapterListSelects.forEach(select => {
+            chapters.forEach((chapter, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.text = chapter.name;
+                select.appendChild(option);
+            });
+        });
+
+        // Xử lý sự kiện khi người dùng chọn một tùy chọn
+        chapterListSelects.forEach(select => {
+            select.addEventListener("change", function () {
+                const selectedChapterIndex = parseInt(select.value);
+                const selectedChapter = chapters[selectedChapterIndex];
+                window.location.href = selectedChapter.link;
+            });
+        });
+
+        // Xử lý sự kiện khi nhấn nút chuyển chương tiếp theo
+        const nextChapterButtons = document.querySelectorAll(".chapter-navigation button[id^='next-chapter']");
+        nextChapterButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const nextChapterIndex = currentChapterIndex + 1;
+                if (nextChapterIndex < chapters.length) {
+                    window.location.href = chapters[nextChapterIndex].link;
+                } else {
+                    alert("Bạn đã đọc hết sách!");
+                }
+            });
+        });
+
+        // Xử lý sự kiện khi nhấn nút chuyển chương trước
+        const prevChapterButtons = document.querySelectorAll(".chapter-navigation button[id^='prev-chapter']");
+        prevChapterButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const prevChapterIndex = currentChapterIndex - 1;
+                if (prevChapterIndex >= 0) {
+                    window.location.href = chapters[prevChapterIndex].link;
+                }
+            });
+        });
+
+        // Lấy chương hiện tại từ URL khi trang tải
+        const currentChapterLink = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+        const currentChapter = chapters.find(chapter => chapter.link === currentChapterLink);
+        const currentChapterIndex = chapters.indexOf(currentChapter);
+
+        // Cập nhật ô select chương hiện tại
+        chapterListSelects.forEach(select => {
+            select.value = currentChapterIndex;
+        });
+
+
+        // function goBack() {
+        //     window.location.href = '../../sach.html'; // Chuyển đến trang sach.html khi nút được nhấn
+        // }
+    </script>
+</body>
+
+</html>

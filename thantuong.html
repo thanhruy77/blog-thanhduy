@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog ThanhDuy</title>
+    <link rel="icon" href="Anh/thanhruy77.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css(only)/css-thantuong.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<script>
+    $(document).ready(function () {
+        var slides = $('.slideshow img');
+        var currentSlide = 0;
+        var slideInterval = setInterval(nextSlide, 2500); // Đổi ảnh sau mỗi 2.5 giây
+        function nextSlide() {
+            slides.eq(currentSlide).removeClass('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides.eq(currentSlide).addClass('active');
+        }
+    });
+</script>
+
+
+<body>
+    <header>
+        <h1><img src="Anh/astronaut.png" width="25px"> Thanh Duy</h1>
+    </header>
+
+    <nav id="mobile" hidden>
+        <ul class="nav-menu">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li>
+                <a href="#">Khác</a>
+                <ul class="submenu">
+                    <li><a href="thantuong.html">Lalisa</a></li>
+                    <li><a href="phim.html">Phim</a></li>
+                    <li><a href="amnhac.html">Music</a></li>
+                    <li><a href="duan.html">Dự Án</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <style>
+        /* Định dạng bảng cho màn hình điện thoại */
+        @media (max-width: 800px) {
+            #pc {
+                display: none;
+            }
+
+            #mobile {
+                display: block;
+            }
+        }
+
+        /* Định dạng bảng cho màn hình máy tính */
+        @media (min-width: 801px) {
+            #pc {
+                display: block;
+            }
+
+            #mobile {
+                display: none;
+            }
+        }
+    </style>
+    <nav id="pc" hidden>
+        <ul class="nav-menu-pc">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li><a href="duan.html">Dự Án</a></li>
+            <li><a href="phim.html">Phim</a></li>
+            <li><a href="amnhac.html">Music</a></li>
+            <li><a href="thantuong.html">Lalisa</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <div id="than-tuong">
+            <div class="introduction-1">
+                <h2>Lalisa</h2>
+                <audio id="audioPlayer" src="./Background-Music/Windy-Hill.mp3" autoplay loop></audio>
+                <p>Lalisa Manoban, nghệ danh Lisa, là một nữ ca sĩ, rapper, vũ công và người mẫu
+                    người Thái Lan. Cô ấy là thành viên của nhóm nhạc nữ Hàn Quốc Blackpink. Lisa là một trong những
+                    nghệ sĩ solo thành công nhất từ Blackpink.</p>
+                <h4>MV Money - Lisa
+                    <button class="button" onclick="xemmv()">Xem MV</button>
+                </h4>
+            </div>
+            <div class="slideshow-container">
+                <div class="slideshow">
+                    <img src="Anh/Lisa1.jpg" class="active" alt="Image 1">
+                    <img src="Anh/Lisa2.jpg" alt="Image 2">
+                    <img src="Anh/Lisa3.jpg" alt="Image 3">
+                    <img src="Anh/lisa4.jpg" alt="Image 4">
+                </div>
+                <div class="introduction">
+                    <h4>
+                        MV solo: "MONEY", "LALISA", "SGZ+"
+                    </h4>
+                    Chiều cao: Khoảng 1m67.
+                    <br>
+                    Cân nặng: Khoảng 49kg.
+                    <br>
+                    Nội dung MV: "MONEY" là một MV solo khác của Lisa, ra mắt vào năm 2021. MV này mang một phong cách
+                    sang trọng và quyền lực, thể hiện sự tự tin và đẳng cấp của Lisa trong âm nhạc và đời sống.
+                    <br>
+                    Những MV solo của Lisa không chỉ thể hiện khả năng biểu diễn xuất sắc mà còn thể hiện cái nhìn riêng
+                    của cô về âm nhạc và nghệ thuật. Với vẻ ngoài quyến rũ, tài năng đa năng và phong cách sáng tạo,
+                    Lisa đã tạo được sự ấn tượng và đam mê từ người hâm mộ trên toàn thế giới.
+                    <br><br><br><br>
+                </div>
+            </div>
+            <!-- MV -->
+            <dialog class="dialog" id="mv">
+                <div class="video-mp4">
+                    <span class="close-btn" onclick="closeDialog()">&times;</span>
+                    <video class="video" id="videomp4" controls poster="./Anh/money.jpg">
+                        <source src="./MP4/MONEY-LISA.mp4">
+                    </video>
+                </div>
+            </dialog>
+
+        </div>
+    </main>
+
+    <script>
+
+        function xemmv() {
+            var dialog = document.getElementById("mv");
+            var video = document.getElementById("videomp4");
+            // Hiển thị dialog
+            dialog.showModal();
+            // Phát video
+            video.play();
+        }
+        function closeDialog() {
+            var dialog = document.getElementById("mv");
+            var video = document.getElementById("videomp4");
+            // Dừng video
+            video.pause();
+            video.currentTime = 0;
+            // Đóng dialog
+            dialog.close();
+        }
+    </script>
+
+
+    <footer>
+        <p>&copy; 2023 Blog of Thanh Ruy 77.</p>
+    </footer>
+</body>
+
+</html>

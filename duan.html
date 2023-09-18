@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog ThanhDuy</title>
+    <link rel="icon" href="Anh/thanhruy77.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css(only)/css-duan.css">
+</head>
+
+<body>
+    <header>
+        <h1><img src="Anh/astronaut.png" width="25px"> Thanh Duy</h1>
+    </header>
+
+    <nav id="mobile" hidden>
+        <ul class="nav-menu">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="phim.html">Phim</a></li>
+            <li>
+                <a href="#">Khác</a>
+                <ul class="submenu">
+                    <li><a href="thantuong.html">Lalisa</a></li>
+                    <li><a href="sach.html">Sách</a></li>
+                    <li><a href="amnhac.html">Music</a></li>
+                    <li><a href="duan.html">Dự Án</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <style>
+        /* Định dạng bảng cho màn hình điện thoại */
+        @media (max-width: 800px) {
+            #pc {
+                display: none;
+            }
+
+            #mobile {
+                display: block;
+            }
+        }
+
+        /* Định dạng bảng cho màn hình máy tính */
+        @media (min-width: 801px) {
+            #pc {
+                display: block;
+            }
+
+            #mobile {
+                display: none;
+            }
+        }
+    </style>
+    <nav id="pc" hidden>
+        <ul class="nav-menu-pc">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li><a href="duan.html">Dự Án</a></li>
+            <li><a href="phim.html">Phim</a></li>
+            <li><a href="amnhac.html">Music</a></li>
+            <li><a href="thantuong.html">Lalisa</a></li>
+
+        </ul>
+    </nav>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 2px solid #cfcccc;
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #e0dfdf;
+            text-align: center;
+        }
+
+        a {
+            text-decoration: none;
+            /* Xóa đường kẻ dưới chân liên kết */
+            color: red;
+            /* Đổi màu đỏ cho tên liên kết */
+        }
+    </style>
+    <main>
+
+        <div id="du-an" class="content">
+            <h2>Dự Án</h2>
+            <table>
+                <tr>
+                    <th>STT</th>
+                    <th>Tên Dự Án</th>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td><a href="https://github.com/thanhruy77/store" target="_blank">Thiết kế Web bán quần áo</a></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><a href="https://github.com/thanhruy77/systemIot" target="_blank">
+                            Thiết kế ứng dụng Android để điều khiển hệ thống tưới cây</a></td>
+                </tr>
+            </table>
+        </div>
+
+
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Blog of Thanh Ruy 77.</p>
+    </footer>
+    <!-- <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+    <script src="js/firebase_index.js"></script> -->
+</body>
+
+</html>

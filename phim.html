@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog ThanhDuy</title>
+    <link rel="icon" href="Anh/thanhruy77.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css(only)/css-phim.css">
+</head>
+
+<body>
+    <header>
+        <h1><img src="Anh/astronaut.png" width="25px"> Thanh Duy</h1>
+    </header>
+
+    <nav id="mobile" hidden>
+        <ul class="nav-menu">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li>
+                <a href="#">Khác</a>
+                <ul class="submenu">
+                    <li><a href="thantuong.html">Lalisa</a></li>
+                    <li><a href="phim.html">Phim</a></li>
+                    <li><a href="amnhac.html">Music</a></li>
+                    <li><a href="duan.html">Dự Án</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <style>
+        /* Định dạng bảng cho màn hình điện thoại */
+        @media (max-width: 800px) {
+            #pc {
+                display: none;
+            }
+
+            #mobile {
+                display: block;
+            }
+        }
+
+        /* Định dạng bảng cho màn hình máy tính */
+        @media (min-width: 801px) {
+            #pc {
+                display: block;
+            }
+
+            #mobile {
+                display: none;
+            }
+        }
+    </style>
+    <nav id="pc" hidden>
+        <ul class="nav-menu-pc">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li><a href="duan.html">Dự Án</a></li>
+            <li><a href="phim.html">Phim</a></li>
+            <li><a href="amnhac.html">Music</a></li>
+            <li><a href="thantuong.html">Lalisa</a></li>
+
+        </ul>
+    </nav>
+
+    <main>
+        <div id="phim" class="content">
+            <font color="black">
+                <h2> The Film <img src="./Anh/video.png" width="30px" alt=""></h2>
+            </font>
+            <font color="black">
+                <h4>Dưới đây là những bộ phim tôi thấy hay mà bạn nên xem, có link phim ở dưới nha ^^!!!</h4>
+            </font>
+
+            <!-- phim 1-->
+            <div  id="vincenzo" class="phim-container">
+                <div class="phim-info">
+                    <h3>1. Vincenzo (2021)</h3>
+                    <p>Tôi rất ít khi xem phim hành động kiểu này nhưng thực sự phim này rất hay. Xem đi nha =)) <br>
+                    </p>
+                </div>
+                <div class="phim-image">
+                    <img src="Anh/vincenzo.jpg" alt="Vincenzo" height="auto" width="250px" class="image-phim">
+                    <br>
+                    <br>
+                    <i class="theloai">Thể loại:
+                        Phiêu Lưu - Hành Động, Tâm Lý - Tình Cảm, Hình Sự - Chiến Tranh, Hài Hước.</i>
+                    <br>
+                    <br>
+                    <i class="theloai">Diễn viên:
+                        Song Joong Ki, Jun Yeo Bin, Ok Taec Yeon, Kim Yeo Jin, Jo Han Chul. &nbsp;&nbsp;</i>
+                    <p>Link xem phim: <a href="https://motchill.tv/phim/vincenzo-8706.html" target="_blank"
+                            rel="noopener noreferrer">Vincenzo</a></p>
+                </div>
+                <!-- tạo 1 dòng kẻ -->
+                <hr>
+                <h3>Nội dung phim</h3>
+                <p>
+                    <span class="content-vincenzo">"Vincenzo" là một bộ phim hài đen với nội dung xoay quanh
+                        Vincenzo
+                        Cassano. Năm 8 tuổi, Park Joo-hyung (Song Joong-ki) đến Ý sau khi được một gia đình người Ý
+                        nhận
+                        nuôi. Sau đó anh gia nhập băng đảng Mafia...</span>
+                    <span class="read-more">Đọc tiếp</span>
+                </p>
+                <style>
+                    .read-more {
+                        display: inline;
+                        cursor: pointer;
+                        color: blue;
+                        text-decoration: none;
+                    }
+                </style>
+                <script>
+                    var readMore = document.querySelector('.read-more');
+                    var content = document.querySelector('.content-vincenzo');
+                    var paragraph = document.querySelector('p');
+                    readMore.addEventListener('click', function () {
+                        paragraph.classList.toggle('show-full');
+                        if (paragraph.classList.contains('show-full')) {
+                            readMore.textContent = 'Thu gọn';
+                            content.textContent = '"Vincenzo" là một bộ phim hài đen với nội dung xoay quanh Vincenzo Cassano. Năm 8 tuổi, Park Joo-hyung (Song Joong-ki) đến Ý sau khi được một gia đình người Ý nhận nuôi. Sau đó anh gia nhập băng đảng Mafia, nơi anh được Don Fabio - người đứng đầu gia tộc Cassano nhận nuôi. Park Joo-hyung được đổi tên thành Vincenzo Cassano và trở thành luật sư người Ý. Anh làm việc cho Mafia với tư cách là một cố vấn và là cánh tay phải đáng tin cậy nhất của Don Fabio. Sau khi Fabio chết thì Paolo (con ruột của Fabio và là thủ lĩnh mới) cố gắng giết Vincenzo. Nên anh đã bỏ trốn đến Seoul ở Hàn Quốc và bắt đầu thu hồi một lượng vàng khổng lồ (15 tấn) được cất giấu trong mật thất nằm ở dưới tòa nhà Geumga-dong Plaza. Vincenzo đã giúp một ông trùm người Trung Quốc cất giữ vàng trong một kho tiền được bảo vệ bởi mafia trong khu phức hợp. Ông trùm chết. Vì không ai khác biết về số vàng đó. Vincenzo đã lên kế hoạch để lấy số vàng và sử dụng nó làm quỹ hưu trí của mình sau khi rời Ý. Tuy nhiên, một công ty bất động sản thuộc tập đoàn Babel đã chiếm quyền sở hữu tòa nhà một cách bất hợp pháp và Vincenzo phải sử dụng các kỹ năng của mình để lấy lại tòa nhà và khôi phục lại vận may của mình. Tại Hàn Quốc, Vincenzo đã gặp gỡ và quen biết với luật sư Hong Cha-Young (Jeon Yeo-bin), cô là kiểu luật sư sẽ làm mọi cách để thắng kiện. Vincenzo đã phải lòng Hong Cha-Young. Anh cũng đạt được công bằng xã hội theo cách riêng của mình.'
+                        } else {
+                            readMore.textContent = 'Đọc tiếp';
+                            content.textContent = '"Vincenzo" là một bộ phim hài đen với nội dung xoay quanh Vincenzo Cassano. Năm 8 tuổi, Park Joo-hyung (Song Joong-ki) đến Ý sau khi được một gia đình người Ý nhận nuôi. Sau đó anh gia nhập băng đảng Mafia...'
+                        }
+                    });
+                </script>
+
+            </div>
+            <br>
+
+
+
+            <!-- phim 2-->
+            <div id="usandthem" class="phim-container">
+                <div  class="phim-info">
+                    <h3>2. Chúng ta của sau này (Us and Them)</h3>
+                    <p>"Chúng ta của sau này (Us and Them)" là một bộ phim tình cảm lãng mạn, kể về câu chuyện tình yêu
+                        đầy đam mê và bi kịch giữa hai người trẻ. Bộ phim mang đến những cảm xúc sâu lắng về tình yêu và
+                        sự hy sinh."</p>
+                </div>
+                <div class="phim-image">
+                    <img src="Anh/usandthem.jpg" alt="Us and Them" height="auto" width="250px" class="image-phim">
+                    <p>Link xem phim: <a href="https://motchill.tv/phim/chung-ta-cua-sau-nay-424.html" target="_blank"
+                            rel="noopener noreferrer">Us And Them</a></p>
+                </div>
+                <!-- tạo 1 dòng kẻ -->
+                <hr>
+                <h3>Nội dung phim</h3>
+                <p>
+                    Phim Chúng Ta Của Sau Này: xoay quanh một đôi trẻ đang sống nơi xứ người. 10 năm trước, Lâm Kiến
+                    Thanh (Tỉnh Bách Nhiên) và Phương Tiểu Hiểu (Châu Đông Vũ) tình cờ gặp nhau trên một chuyến tàu khi
+                    về quê ăn Tết. Họ có chung ước mơ, lại cùng làm việc ở đất Bắc Kinh. Thế nhưng sau đó, cả hai lại
+                    chia tay đầy đau khổ. 10 năm sau, Kiến Thanh gặp lại Tiểu Hiểu trên một chuyến bay. Vận mệnh một lần
+                    nữa lặp lại, ký ức ngày xưa nhanh chóng ùa về. Liệu đến bây giờ, hai người đã thực sự hiểu được tình
+                    yêu là gì?
+                </p>
+
+            </div>
+            <br>
+
+            <!-- phim 3-->
+            <div id="andthenigo"class="phim-container">
+                <div  class="phim-info">
+                    <h3>3. Và em sẽ đến (And Then I Go)</h3>
+                    <p>"Và em sẽ đến (And Then I Go)" là một bộ phim tâm lý xã hội đầy cảm xúc, kể về cuộc sống và những
+                        thách thức của một cậu bé trẻ tuổi. Bộ phim tạo nên sự độc đáo và đặc biệt bằng cách đề cập đến
+                        những vấn đề nhạy cảm như bạo lực học đường, tâm lý học và tình bạn thời niên thiếu."</p>
+                </div>
+                <div class="phim-image">
+                    <img src="Anh/vaemseden.jpg" alt="And Then I Go" width="250px" height="auto" class="image-phim">
+                    <p>Link xem phim: <a href="https://motphimtv.vip/xem-phim/va-em-se-den-tap-full-425_10157.html"
+                            target="_blank" rel="noopener noreferrer"> And Then I Go</a></p>
+                </div>
+                <!-- tạo 1 dòng kẻ -->
+                <hr>
+                <h3>Nội dung phim</h3>
+                <p>
+                    Và Em Sẽ Đến: được chuyển thể từ cuốn tiểu thuyết nổi tiếng cùng tên của tác giả Takuji Ichikawa.
+                    Được phát hành tại Việt Nam với tựa 'Em sẽ đến cùng cơn mưa' là một trong những cuốn tiểu thuyết văn
+                    học Nhật được yêu thích. "Và Em Sẽ Đến" là câu chuyện kể về một người phụ nữ (Son Ye Jin); trước khi
+                    qua đời, cô đã có một lời hứa khó tin với chồng mình (So Ji Sub) rằng một năm sau, cô sẽ trở lại vào
+                    một ngày mưa. Một năm sau đó, người phụ nữ ấy thật sự đã xuất hiện trước mặt chồng và con trai mình,
+                    nhưng mọi kí ức trong cô về họ đều đã biến mất. Woo Jin đã từng bước để giúp Soo A khơi dậy từng ký
+                    ức mà cô đã lãng quên. Bằng những mảnh ghép từ tình yêu đơn phương anh dành cho cô, ngày hẹn hò đầu
+                    tiên từ thời phổ thông, và nụ hôn đầu tiên… Một lần nữa, Woo Jin và Soo A lại yêu nhau.
+                </p>
+            </div>
+
+
+
+            <!-- phim 4-->
+
+        </div>
+        <!-- End Content -->
+
+
+
+
+        <!-- Nút lên trên -->
+        <button class="scroll-to-top" onclick="scrollToTop()"></button>
+
+
+        <!-- List menu -->
+        <div id="menu-list-film" class="menu-container">
+            <div class="menu-button" onclick="toggleMenu()"> List</div>
+            <ul class="menu-list">
+                <li><a href="#vincenzo">1. Vincenzo.</a></li>
+                <li><a href="#usandthem">2. Chúng ta của sau này.</a></li>
+                <li><a href="#andthenigo">3. Và em sẽ đến.</a></li>
+            </ul>
+        </div>
+
+    </main>
+    <br><br>
+    <footer>
+        <p>&copy; 2023 Blog of Thanh Ruy 77.</p>
+    </footer>
+    <script>
+        // var audio = document.getElementById("menu-list-film");
+        // function hidden() {
+        //     var menuList = document.querySelector('.menu-list');
+        //     if (menuList.style.display === 'block') {
+        //         menuList.style.display='none';
+        //     }
+        //     console.log(menuList.style.display)
+        // }
+        // // Gọi hàm hidden khi người dùng tương tác
+        // document.addEventListener("click", hidden);
+        function toggleMenu() {
+            var menuList = document.querySelector('.menu-list');
+            menuList.style.display = (menuList.style.display == 'block') ? 'none' : 'block';
+        }
+
+        var menuLinks = document.querySelectorAll('.menu-list a');
+        for (var i = 0; i < menuLinks.length; i++) {
+            menuLinks[i].addEventListener('click', function (event) {
+                if (window.innerWidth <= 1400) {
+                    event.preventDefault();
+                    var targetId = this.getAttribute('href');
+                    var targetElement = document.querySelector(targetId);
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                    toggleMenu();
+                }
+                else {
+                    event.preventDefault();
+                    var targetId = this.getAttribute('href');
+                    var targetElement = document.querySelector(targetId);
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+
+        }
+        // JavaScript để xử lý sự kiện khi click nút lên trên
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Hiển thị nút lên trên khi cuộn trang xuống
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.querySelector('.scroll-to-top').style.display = 'block';
+            } else {
+                document.querySelector('.scroll-to-top').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>

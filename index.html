@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog ThanhDuy</title>
+    <link rel="icon" href="Anh/thanhruy77.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./css(only)/css-index.css">
+    <script src="js/jsindex.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
+            authDomain: "blogthanhduy.firebaseapp.com",
+            databaseURL: "https://blogthanhduy-default-rtdb.firebaseio.com",
+            projectId: "blogthanhduy",
+            storageBucket: "blogthanhduy.appspot.com",
+            messagingSenderId: "346123189563",
+            appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e",
+            measurementId: "G-1NFNF0B3E9"
+        };
+        firebase.initializeApp(firebaseConfig);
+        // Initialize Firebase Storage
+        const storage = firebase.storage();
+        // Get a reference to the default storage bucket
+        const storageRef = storage.ref();
+        const database = firebase.database();
+        // const app = initializeApp(firebaseConfig);
+        // const analytics = getAnalytis(app);
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1><img src="Anh/astronaut.png" width="25px"> Thanh Duy</h1>
+    </header>
+
+    <nav id="mobile" hidden>
+        <ul class="nav-menu">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li>
+                <a href="#">Khác</a>
+                <ul class="submenu">
+                    <li><a href="thantuong.html">Lalisa</a></li>
+
+                    <li><a href="phim.html">Phim</a></li>
+                    <li><a href="amnhac.html">Music</a></li>
+                    <li><a href="duan.html">Dự Án</a></li>
+                    <li><a href="loginforthanhduy.html">Login</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <style>
+        /* Định dạng bảng cho màn hình điện thoại */
+        @media (max-width: 800px) {
+            #pc {
+                display: none;
+            }
+
+            #mobile {
+                display: block;
+            }
+        }
+
+        /* Định dạng bảng cho màn hình máy tính */
+        @media (min-width: 801px) {
+            #pc {
+                display: block;
+            }
+
+            #mobile {
+                display: none;
+            }
+        }
+    </style>
+    <nav id="pc" hidden>
+        <ul class="nav-menu-pc">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li><a href="duan.html">Dự Án</a></li>
+            <li><a href="phim.html">Phim</a></li>
+            <li><a href="amnhac.html">Music</a></li>
+            <li><a href="thantuong.html">Lalisa</a></li>
+            <li><a href="loginforthanhduy.html">Login</a></li>
+        </ul>
+    </nav>
+
+    <button class="nut-mo-chatbox" id="nut-mo-chatboxid">
+        <img src="Anh/messenger.png" alt="" width="65px">
+    </button>
+    <div id="chat-container">
+        <div class="botdeptrai">
+            <img src="./Anh/bot.png" width="32px" height="32px" alt="BOT">
+            <span class="botofduy">&nbsp;Thanh Duy's Bot</span>
+            <button class="setting" id="dongForm">❌
+            </button>
+        </div>
+        <div id="chat-display"></div>
+        <div id="chat-input">
+            <input type="text" id="message-input" placeholder="Nhập tin nhắn...">
+            <button id="send-button" class="fa fa-paper-plane"></button>
+            <!-- <button id="dongForm" class="dong">Đóng</button> -->
+        </div>
+    </div>
+    <main>
+        <!-- List menu -->
+        <div id="menu-list-film" class="menu-container">
+            <div class="menu-button" onclick="toggleMenu()"> List</div>
+            <ul class="menu-list">
+                <li>List video du lịch</li>
+                <li><button class="button" onclick="xemmv()">Chuyến đi Thái Nguyên</button>
+                <li><button class="button" onclick="xemmvhp()">Chuyến đi Hải Phòng&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                </li>
+            </ul>
+        </div>
+        <dialog class="dialog" id="mv">
+            <div class="video-mp4">
+                <span class="close-btn" onclick="closeDialog()">&times;</span>
+                <video class="video" id="videomp4" controls poster="./Anh/thainguyenimg.png">
+                    <source src="./MP4/thainguyenvideo.mp4">
+                </video>
+            </div>
+        </dialog>
+        <dialog class="dialog" id="mv1">
+            <div class="video-mp4">
+                <span class="close-btn" onclick="closeDialog1()">&times;</span>
+                <video class="video" id="videomp4hp" controls poster="./Anh/haiphong.png">
+                    <source src="./MP4/haiphong.mp4">
+                </video>
+            </div>
+        </dialog>
+        <div id="trang-chu" class="content">
+            <div>
+                <h2>Thanh Ruy 77 </h2>
+            </div>
+            <img id="trang-chu-img" src="./Anh/thanhruy77.jpg" alt="Hình ảnh giới thiệu">
+            <p>Name: <strong>Lê Văn Thanh Duy</strong>
+                <br>
+                Chào mừng bạn đến với blog của tôi. Ở đây tôi sẽ chia
+                sẻ về một vài thông tin của tôi.
+            </p>
+            <p>
+                Hiện tại (14/06/2023): tôi đang là sinh viên năm 4 trường Đại học Sư phạm kỹ thuật Hưng Yên.
+                <br>
+                Chuyên Ngành : phát triển ứng dụng IoT ^.^!!!
+                <br>
+                Thời gian rảnh ngoài xem phim ra thì đọc sách, nghe nhạc,..
+                <br>
+                Rảnh rảnh viết cái blog chơi chơi.
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <br>
+            </p>
+
+            <style>
+                /* Reset some default styling */
+                body,
+                h1 {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                /* General styles */
+                body {
+                    font-family: Arial, sans-serif;
+                    background-color: #f0f2f5;
+                }
+
+                /* Container for posts */
+                .post {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    margin-top: 20px;
+                }
+
+
+                /* Form for creating a post */
+                #postForm {
+                    width: 100%;
+                    background-color: #fff;
+                    padding: 10px;
+                    border-radius: 8px;
+                    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+                    margin-bottom: 20px;
+                }
+
+                #postForm input[type="text"],
+                #postForm input[type="file"],
+                #postForm button {
+                    margin: 5px;
+                    padding: 10px;
+                    border: none;
+                    border-radius: 8px;
+                    width: 95%;
+                }
+
+                .post-list .post {
+                    width: 102%;
+                    background-color: #fff;
+                    border-radius: 8px;
+                    box-shadow: 0px 2px 4px rgb(69, 69, 69);
+                    margin-bottom: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    position: relative;
+                    /* Add this line */
+                }
+
+                .post-list .post .avatar {
+                    position: absolute;
+                    top: 10px;
+                    /* Adjust this value as needed */
+                    left: 10px;
+                    /* Adjust this value as needed */
+                    max-width: 40px;
+                    width: 300px;
+                    height: auto;
+                    float: left;
+                    margin-right: 20px;
+                }
+
+                .post-list .post .ten {
+                    font-weight: bold;
+                    font-size: 13px;
+                    position: absolute;
+                    top: 12px;
+                    /* Adjust this value as needed */
+                    left: 60px;
+                    /* Adjust this value as needed */
+                }
+
+                .post-list .post .tichxanh {
+                    position: absolute;
+                    top: 8.5px;
+                    /* Adjust this value as needed */
+                    left: 177px;
+                    /* Adjust this value as needed */
+                }
+
+                /* thời gian của post  */
+                .post-list .post .time-class {
+                    font-weight: bold;
+                    font-size: 13px;
+                    position: absolute;
+                    top: 30px;
+                    /* Adjust this value as needed */
+                    left: 60px;
+                    /* Adjust this value as needed */
+                }
+
+
+
+                /*caption của post*/
+                .post-list .post .post-caption {
+                    font-size: 13px;
+                    position: absolute;
+                    top: 50px;
+                    /* Adjust this value as needed */
+                    left: 10px;
+                    /* Adjust this value as needed */
+                }
+
+
+
+                /* ảnh của post*/
+                .post-list .post .post-img {
+                    margin-top: 100px;
+                    max-width: 60%;
+                    max-height: 60%;
+                    margin-bottom: 20px;
+                }
+
+                /* video của post*/
+                .post-list .post .post-video {
+                    margin-top: 100px;
+                    max-width: 55%;
+                    max-height: 55%;
+                    margin-bottom: 20px;
+                }
+
+                .post-list .post p {
+                    margin: 10px 0;
+                }
+
+                .post-list .post button {
+                    flex-direction: row;
+                    background-color: #0e6ae1;
+                    color: #fff;
+                    border: none;
+                    border-radius: 8px;
+                    padding: 5px 10px;
+                    cursor: pointer;
+                    /* align-items: center; */
+                    /* Loại bỏ dòng này */
+                    gap: 5px;
+                    margin: 10px;
+                }
+
+                .button-like-comment {
+                    font-size: 13px;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;
+                    text-align: center;
+                    /* Thêm dòng này để căn giữa theo chiều ngang */
+                }
+
+                .post .post button:hover {
+                    background-color: #1559b5;
+                }
+
+                /* hiển thị trên điện thoại  */
+                @media(max-width:800px) {
+                    .post-list .post .post-img {
+                        margin-top: 100px;
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+
+                    .post-list .post .post-video {
+                        margin-top: 100px;
+                        max-width: 100%;
+                        max-height: 100%;
+                    }
+                }
+            </style>
+            </head>
+            <hr>
+            <h1>Bài Đăng Của Tôi</h1>
+            <div id="postList" class="post-list"></div>
+
+
+
+            <!-- bài báo nổi bật  -->
+            <div id="menu-article-id" class="menu-article">
+                <ul class="article-list">
+                    <h4 class="baidangganday">BÀI ĐĂNG GẦN ĐÂY</h4>
+                    <div id="artcle" class="artcle-class">
+                        <p>Hiện tại chưa có gì mới! Sắp tới có thể sẽ cập nhật thêm một vài tính năng.
+                            <br>
+                            Thank you very much ♥
+                        </p>
+
+
+                        <!-- <p>Một video giải trí!!!</p>
+                        <video class="video" id="videomp4hp" width="100%" controls>
+                            <source src="./MP4/anhoiemmuon.mp4">
+                        </video> -->
+                    </div>
+                </ul>
+            </div>
+
+
+            <!-- Lieen he ( Contact)-->
+            <div id="menu-contact-id" class="menu-contact">
+                <ul class="contact-list">
+                    <h4 class="baidangganday">LIÊN HỆ</h4>
+                    <div id="contact" class="contact-class">
+                        <span class="facebook"> <a href="https://www.facebook.com/thanhduy1311" target="_blank"
+                                rel="noopener noreferrer">Facebook</a></span>
+                        <span class="zalo"> Zalo</span>
+                        <br>
+                        <span class="instagram"> <a href="https://www.instagram.com/thduy.1311/" target="_blank"
+                                rel="noopener noreferrer">Instagram</a></span>
+                    </div>
+                    <br>
+                </ul>
+            </div>
+
+            <style>
+                /* Điều chỉnh hiển thị cho màn hình máy tính */
+                @media only screen and (min-width: 1435px) {
+                    .article-list {
+                        position: absolute;
+                        top: 93px;
+                        right: 105px;
+                        /* Di chuyển menu ra bên trái */
+                        width: 310px;
+                        /* Định rộng của menu */
+                        box-shadow: 0 0 10px rgba(34, 34, 34, 0.5);
+                        padding: 5px;
+                        background-color: #ecf0f1;
+                        border: 1px solid #D9E1E4;
+                        box-shadow: none;
+                        border-radius: 0;
+                        z-index: 1;
+                        /*độ ưu tiên*/
+                    }
+
+                    .article-list li {
+                        margin-bottom: 5px;
+                    }
+
+                    .article-list a {
+                        text-decoration: none;
+                        color: red;
+                    }
+
+                    .article-list {
+                        display: block;
+                    }
+
+                    .baidangganday {
+                        font-family: 'Roboto Condensed', Tahoma, sans-serif;
+                        font-size: 20px;
+                        height: 33px;
+                        line-height: 30px;
+                        max-width: 100%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        border-bottom: 1px solid #4E4E4E;
+                        margin-block-start: 1.33em;
+                        margin-block-end: 1.33em;
+                        margin-inline-start: 0px;
+                        margin-inline-end: 0px;
+                        font-weight: bold;
+                    }
+
+                    .artcle-class {
+                        font-family: 'Courier New', Courier, monospace;
+                    }
+
+
+
+                    /* contact-------------------------------------------------------------------------------------------*/
+                    .contact-list {
+                        position: absolute;
+                        top: 330px;
+                        /* top: 670px; */
+                        right: 105px;
+                        /* Di chuyển menu ra bên trái */
+                        width: 310px;
+                        /* Định rộng của menu */
+                        box-shadow: 0 0 10px rgba(34, 34, 34, 0.1);
+                        padding: 5px;
+                        background-color: #ecf0f1;
+                        border: 1px solid #D9E1E4;
+                        box-shadow: none;
+                        border-radius: 0;
+                        z-index: 1;
+                        /*độ ưu tiên*/
+                    }
+
+                    .contact-list li {
+                        margin-bottom: 5px;
+                    }
+
+                    .contact-list a {
+                        text-decoration: none;
+                        color: red;
+                    }
+
+                    .contact-list {
+                        display: block;
+                    }
+
+                    .contact-class {
+                        font-family: 'Courier New', Courier, monospace;
+                        text-decoration: none;
+                        color: red;
+                    }
+
+                    .facebook {
+                        position: relative;
+                        left: 10px;
+                    }
+
+                    .zalo {
+                        position: absolute;
+                        right: 10px;
+                    }
+
+                    .instagram {
+                        position: relative;
+                        left: 10px;
+                        margin-bottom: 10px;
+                        top: 10px;
+                    }
+
+
+                }
+
+                @media (max-width:1434px) {
+                    .article-list {
+                        display: none;
+                    }
+
+                    .contact-list {
+                        display: none;
+                    }
+                }
+            </style>
+            <script>
+                // Listen for changes in Realtime Database
+                database.ref("posts").on("value", (snapshot) => {
+                    postList.innerHTML = "";
+                    snapshot.forEach((childSnapshot) => {
+                        const post = childSnapshot.val();
+                        const postElement = document.createElement("div");
+                        postElement.innerHTML = `
+                    <div class="post">
+                    <img class="avatar" width="20px" height="60px" src="Anh/thanhruy77.jpg">
+                    <span class="ten">Lê Văn Thanh Duy</span>
+                    <img class="tichxanh" title="Chủ quyền!" width="22px" height="22px" src="Anh/tichxanh.png">
+                    <span id="time" class="time-class"> (${post.time})</span>
+                    <p class="post-caption">${post.caption}</p>
+                        ${post.imageUrl ? `<img class="post-img" src="${post.imageUrl}" alt="${post.caption}">` : ''}
+                        ${post.videoUrl ? `<video class="post-video" controls>
+                        <source src="${post.videoUrl}" type="video/mp4">
+                        </video>` : ''}
+                    <div class="button-like-comment">
+                    <button id="like" onclick="likePost('${childSnapshot.key}')"> &#128077; Like (${post.likes})</button>
+                    <button id="comment" onclick="comment()"> &#128172; Comment</button> 
+                    <button id="share" onclick="share()">➦ Share</button> 
+                    </div>
+                    </div>`;
+                        postList.appendChild(postElement);
+                    });
+                });
+
+                // Like a post
+                function likePost(postId) {
+                    console.log("like");
+                    const likesRef = database.ref(`posts/${postId}/likes`);
+                    likesRef.transaction((currentLikes) => (currentLikes || 0) + 1);
+                }
+
+                function comment() {
+                    // Đăng xuất người dùng
+                    firebase.auth().signOut().then(() => {
+                        // Đăng xuất thành công
+                        console.log("Người dùng đã đăng xuất");
+                    }).catch((error) => {
+                        // Xảy ra lỗi khi đăng xuất
+                        console.error("Lỗi đăng xuất:", error);
+                    });
+                    alert("Tinh nang dang cap nhat");
+                }
+                function share() {
+                    alert("Tinh nang dang cap nhat");
+                }
+            </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!--          <input type="text" id="caption">
+            <input type="file" id="hinhanh">
+            <button id="upload">Tải lên ảnh</button>
+            <button id="delete">delete</button>
+            <div id="imageContainer"></div>
+
+
+            <script>
+                // xóa ảnh
+                const imageName = 'images/thainguyenimg.png'; // Đường dẫn của file ảnh trong Storage
+                const imageRef = storageRef.child(imageName);
+                const imagesReff = database.ref("images");
+
+
+                const deleteButton = document.getElementById("delete");
+
+                deleteButton.addEventListener("click", async () => {
+                    try {
+                        // Xóa ảnh khỏi Firebase Storage
+                        await imageRef.delete();
+                        imagesReff.once("value", (snapshot) => {
+                            snapshot.forEach((childSnapshot) => {
+                                const imageUrl = childSnapshot.val().url;
+                                if (imageUrl.includes("thainguyenimg.png")) {
+                                    childSnapshot.ref.remove()
+                                        .then(() => {
+                                            console.log('Dữ liệu ảnh đã được xóa thành công khỏi Realtime Database.');
+                                        })
+                                        .catch((error) => {
+                                            console.error('Lỗi xóa dữ liệu ảnh khỏi Realtime Database:', error);
+                                        });
+                                }
+                            });
+                        });
+
+                        console.log("Đã xóa ảnh thành công.");
+                        // Cập nhật danh sách hiển thị
+                        imagesRef.on("value", (snapshot) => {
+                            const images = snapshot.val();
+                            imageContainer.innerHTML = ""; // Clear previous content
+
+                            // Display images
+                            for (const key in images) {
+                                const imageUrl = images[key].url;
+                                const imgElement = document.createElement("img");
+                                imgElement.src = imageUrl + '?v=' + Math.random();
+                                imgElement.classList.add("uploaded-image");
+                                imageContainer.appendChild(imgElement);
+                            }
+                        });
+                    } catch (error) {
+                        console.error("Lỗi xóa ảnh:", error);
+                    }
+                });
+
+                // đăng ảnh
+                const nodecaption = document.getElementById("caption");
+                var caption = nodecaption.value;
+                const fileInput = document.getElementById("hinhanh");
+                const uploadButton = document.getElementById("upload");
+                const imageContainer = document.getElementById("imageContainer");
+                uploadButton.addEventListener("click", async () => {
+                    // Kiểm tra xem người dùng đã đăng nhập hay chưa
+                    firebase.auth().onAuthStateChanged((user) => {
+                        if (user) {
+                            // Người dùng đã đăng nhập
+                            console.log("Người dùng đã đăng nhập:", user);
+                            // Bạn có thể thực hiện các hành động liên quan đến người dùng đã đăng nhập ở đây
+                        } else {
+                            // Người dùng chưa đăng nhập
+                            console.log("Người dùng chưa đăng nhập");
+                            // Bạn có thể thực hiện các hành động liên quan đến người dùng chưa đăng nhập ở đây
+                        }
+                    });
+                    const file = fileInput.files[0];
+                    if (file) {
+                        try {
+                            // Upload image to Firebase Storage
+                            const imageRef = storageRef.child("images/" + file.name);
+                            await imageRef.put(file);
+
+                            // Get download URL
+                            const downloadURL = await imageRef.getDownloadURL();
+
+                            // Save URL to Realtime Database
+                            const database = firebase.database();
+                            const imagesRef = database.ref("images");
+                            imagesRef.push({ caption: caption });
+                            imagesRef.push({ url: downloadURL });
+
+                            console.log("Upload image successful. URL:", downloadURL);
+                        } catch (error) {
+                            console.error("Error uploading image:", error);
+                        }
+                    } else {
+                        console.log("Please choose an image file to upload.");
+                    }
+                });
+
+
+
+                // Listen for changes in the Realtime Database
+                const imagesRef = firebase.database().ref("images");
+                imagesRef.on("value", (snapshot) => {
+                    const images = snapshot.val();
+                    imageContainer.innerHTML = ""; // Clear previous content
+
+                    // Display images
+                    for (const key in images) {
+                        const imageUrl = images[key].url;
+                        const imgElement = document.createElement("img");
+                        imgElement.src = imageUrl + '&' + Date.now();
+                        imgElement.classList.add("uploaded-image");
+                        imageContainer.appendChild(imgElement);
+                    }
+                });
+                // // Đăng xuất người dùng
+                // firebase.auth().signOut().then(() => {
+                //     // Đăng xuất thành công
+                //     console.log("Người dùng đã đăng xuất");
+                // }).catch((error) => {
+                //     // Xảy ra lỗi khi đăng xuất
+                //     console.error("Lỗi đăng xuất:", error);
+
+                // });
+            </script> -->
+        </div>
+
+    </main>
+
+
+    <footer>
+        <p>&copy; 2023 Blog of Thanh Ruy 77.</p>
+    </footer>
+</body>
+
+</html>

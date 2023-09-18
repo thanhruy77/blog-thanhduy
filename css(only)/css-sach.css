@@ -1,0 +1,801 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+header {
+    background-color: #67b8e3;
+    /* Mã màu xanh dương nhạt */
+    color: #fff;
+    padding: 18px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+nav {
+    background-color: #f9ca24;
+    padding: 7px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #fff;
+}
+
+main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0px auto;
+    padding: 20px;
+}
+
+p {
+    line-height: 1.5;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+footer {
+    background-color: #7a7a7a;
+    /* Mã màu vàng nhạt */
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    bottom: 0;
+    /* position: fixed;
+    width: 100%; */
+}
+
+footer p {
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+#trang-chu img {
+    width: 300px;
+    height: auto;
+    float: left;
+    margin-right: 20px;
+}
+
+/* hiển thị trên điện thoại */
+@media (max-width: 1400px) {
+    nav {
+        font-size: 16px;
+    }
+
+    main {
+        font-size: 16px;
+    }
+
+    #trang-chu img {
+        width: 50%;
+        float: left;
+    }
+
+    header {
+        padding: 13px;
+    }
+}
+
+/* hiển thị trên máy tinh */
+@media (min-width: 1400px) {
+    nav {
+        font-size: 16x;
+    }
+
+    main {
+        font-size: 16px;
+    }
+
+    header {
+        padding: 13px;
+    }
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: #f9ca24;
+    /* Màu nền của submenu */
+    white-space: nowrap;
+    z-index: 999;
+}
+
+.nav-menu .submenu li {
+    padding: 12px;
+}
+
+.nav-menu li:hover>.submenu {
+    display: block;
+}
+
+
+/* CSS để định dạng nút */
+.scroll-to-top {
+    display: none;
+    /* Ẩn ban đầu */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+
+}
+
+.scroll-to-top:hover {
+    background-color: #777;
+}
+
+/* CSS để thay đổi hiển thị của nút thành mũi tên */
+.scroll-to-top::before {
+    content: '\2191';
+    /* Mã Unicode cho mũi tên lên */
+}
+
+
+
+/* từ đây trở nên là mặc định ---------------------------------------------------------------------------------------------------------------------------*/
+a {
+    text-decoration: none;
+    /* Xóa đường kẻ dưới chân liên kết */
+}
+
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%
+}
+
+.glyphicon {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale
+}
+
+.glyphicon-pencil:before {
+    content: "\270f"
+}
+
+
+.glyphicon-book:before {
+    content: "\1F4D6";
+}
+
+.glyphicon-list:before {
+    content: "\III"
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+*:before,
+*:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+html {
+    font-size: 10px
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff
+}
+
+.text-left {
+    text-align: left
+}
+
+.text-center {
+    text-align: center
+}
+
+.text-info {
+    color: #31708f
+}
+
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px
+}
+
+@media (min-width: 768px) {
+    .container {
+        width: 750px
+    }
+}
+
+@media (min-width: 992px) {
+    .container {
+        width: 970px
+    }
+}
+
+@media (min-width: 1200px) {
+    .container {
+        width: 1170px
+    }
+}
+
+.row {
+    margin-left: -15px;
+    margin-right: -15px
+}
+
+
+.col-xs-2,
+.col-xs-3,
+.col-xs-6,
+.col-xs-7,
+.col-xs-12 {
+    float: left
+}
+
+.col-xs-12 {
+    width: 100%
+}
+
+.col-xs-7 {
+    width: 58.33333333%
+}
+
+.col-xs-6 {
+    width: 50%
+}
+
+.col-xs-3 {
+    width: 25%
+}
+
+.col-xs-2 {
+    width: 16.66666667%
+}
+
+@media (min-width: 768px) {
+    .col-sm-12 {
+        float: left
+    }
+
+    .col-sm-12 {
+        width: 100%
+    }
+}
+
+@media (min-width: 992px) {
+
+    .col-md-3,
+    .col-md-4,
+    .col-md-9 {
+        float: left
+    }
+
+    .col-md-9 {
+        width: 75%
+    }
+
+    .col-md-4 {
+        width: 33.33333333%
+    }
+
+    .col-md-3 {
+        width: 25%
+    }
+}
+
+.dropdown {
+    position: relative
+}
+
+@media (min-width: 992px) {
+    .navbar {
+        border-radius: 4px
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-header {
+        float: left
+    }
+}
+
+@media (min-width: 992px) {
+    .navbar-collapse {
+        width: auto;
+        border-top: 0;
+        -webkit-box-shadow: none;
+        box-shadow: none
+    }
+
+    .navbar-collapse.collapse {
+        display: block !important;
+        height: auto !important;
+        padding-bottom: 0;
+        overflow: visible !important
+    }
+
+    .navbar-static-top .navbar-collapse {
+        padding-left: 0;
+        padding-right: 0
+    }
+}
+
+.cat-desc {
+    white-space: pre-line;
+    max-height: 1000px;
+    overflow: auto;
+}
+
+.panel {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, .05)
+}
+
+.panel-body {
+    padding: 15px
+}
+
+.hide {
+    display: none !important
+}
+
+@-ms-viewport {
+    width: device-width
+}
+
+.visible-md-block,
+.visible-lg-block {
+    display: none !important
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    .visible-md-block {
+        display: block !important
+    }
+
+    .visible-sm-block {
+        display: none !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    .visible-lg-block {
+        display: block !important
+    }
+
+    .visible-sm-block {
+        display: none !important;
+    }
+}
+
+
+.panel {
+    background-color: #ecf0f1;
+    border: 1px solid #D9E1E4;
+    box-shadow: none;
+    border-radius: 0
+}
+
+html,
+body {
+    height: 100%
+}
+
+* {
+    margin: 0
+}
+
+a {
+    color: #4E4E4E
+}
+
+.form-control {
+    box-shadow: none
+}
+
+.form-control {
+    box-shadow: none
+}
+
+
+h2,
+h3,
+h4 {
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    display: inline-block
+}
+
+#wrap {
+    min-height: 100%;
+    min-height: calc(100% - 117px);
+    height: auto !important;
+    height: 100%
+}
+
+#list-page {
+    text-align: center;
+    font-size: 13px
+}
+
+.list {
+    display: table;
+    text-align: left
+}
+
+.list h3 {
+    display: inline
+}
+
+.col-truyen-main,
+#list-page .col-truyen-main .list-truyen {
+    padding: 0
+}
+
+.col-truyen-side .list {
+    background-color: #ecf0f1;
+    border: 1px solid #D9E1E4
+}
+
+.col-truyen-side .list.list-side {
+    background-color: transparent;
+    border: 0
+}
+
+.list>.row {
+    display: table-row;
+    font-family: 'Roboto Condensed', Tahoma, sans-serif;
+    font-size: 15px
+}
+
+.col-truyen-side .list>.row {
+    background-color: #ecf0f1
+}
+
+.title-list>h2,
+.title-list>h4 {
+    font-family: 'Roboto Condensed', Tahoma, sans-serif;
+    font-size: 20px;
+    height: 40px;
+    line-height: 40px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    border-bottom: 1px solid #4E4E4E
+}
+
+#list-page .list>.row>div {
+    height: 140px;
+    line-height: 20px;
+    border-left: 0;
+    border-bottom: 1px dashed #CCC;
+    white-space: normal;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: flex;
+    align-items:flex-start;
+}
+
+#list-page .col-truyen-side .list>.row>div {
+    height: 40px;
+    line-height: 40px;
+    text-align: left;
+    display: block
+}
+
+.col-truyen-side .list.list-cat>.row>div {
+    height: 30px !important;
+    line-height: 35px !important;
+    border: 0 !important;
+    padding-left: 20px !important
+}
+
+.col-truyen-side .list.list-cat>.row>div:last-child {
+    margin-bottom: 8px
+}
+
+#list-page .list>.row>.col-list-image>div {
+    margin: 0 auto;
+}
+
+#list-page .list>.row>div>div>.truyen-title {
+    font-weight: 700;
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 5px;
+    margin-left: 3px
+}
+
+#list-page .list>.row>div>div>.author {
+    font-style: italic;
+    display: block
+}
+
+#list-page .list>.row>div>div>.author>.glyphicon {
+    font-size: 11px;
+    margin-right: 3px
+}
+
+#list-page .list>.row>div>div>.cover {
+    max-height: 100%;
+    max-width: 100%;
+    border: 1px solid #888;
+    padding: 3px;
+    display: block;
+    height: auto;
+    margin: 5px auto
+}
+
+.list>.row>div:first-child {
+    border-left: 0;
+    padding-left: 0
+}
+
+.list>.row>div {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.col-truyen-side .list>.row>div {
+    max-width: 270px;
+    padding: 0
+}
+
+.title-list {
+    text-align: left;
+    height: 40px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #CCC;
+    position: relative
+}
+
+.list-side .title-list {
+    margin-bottom: 15px
+}
+
+.label-title {
+    padding: 1px 3px;
+    font-size: 13px;
+    vertical-align: bottom;
+    margin-left: 5px
+}
+
+.label-full {
+    border: 1px solid #86ad86;
+    color: #86ad86
+}
+
+.label-hot {
+    border: 1px solid #FD8383;
+    color: #FD8383
+}
+
+.label-new {
+    border: 1px solid #8EB3FD;
+    color: #8EB3FD
+}
+
+.label-full:before {
+    content: "Full"
+}
+
+.label-hot:before {
+    content: "Hot"
+}
+
+.label-new:before {
+    content: "Đang Cập Nhật"
+}
+
+.text-info a {
+    color: #31708f
+}
+
+.cat-title {
+    margin-bottom: 20px
+}
+
+.filter {
+    line-height: 40px;
+    height: 40px;
+    width: initial;
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    font-family: 'Roboto Condensed', Tahoma, sans-serif;
+    text-transform: uppercase;
+    background-color: transparent
+}
+
+.filter {
+    top: 39px;
+    background: #444;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 5px
+}
+
+.filter a {
+    color: #f2f2f2
+}
+
+@media all and (-webkit-min-device-pixel-ratio: 0) and (max-width: 480px) {
+    .form-control {
+        font-size: 16px !important
+    }
+}
+
+@media all and (min-width: 768px) {
+    .form-control {
+        font-size: 14px
+    }
+}
+
+@media all and (min-width: 992px) {
+    .dropdown-menu>li {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis
+    }
+
+    .cat-title {
+        margin-bottom: 0
+    }
+
+    .filter {
+        top: 10px;
+        height: 30px;
+        line-height: 30px
+    }
+
+    #list-page .list>.row>div {
+        height: 120px
+    }
+
+    #list-page .list>.row>div>div>.cover {
+        width: 100%
+    }
+
+    .col-truyen-main {
+        width: 73%
+    }
+
+    .col-truyen-side {
+        width: 27%;
+        padding: 0 0 0 7.5px
+    }
+
+    .col-truyen-side .list.list-truyen {
+        margin: 10px 0;
+        padding-right: 14px;
+        padding-left: 14px
+    }
+}
+
+@media all and (min-width: 1025px) {
+    .list {
+        border: 0
+    }
+}
+
+@media all and (max-width: 1024px) {
+    .col-truyen-side .list.list-truyen {
+        padding: 0
+    }
+}
+
+@media all and (max-width: 480px) {
+    #wrap {
+        min-height: calc(100% - 43.5px)
+    }
+
+    .list>.row>div,
+    .title-list>h2,
+    .title-list>h4 {
+        padding: 0 5px !important
+    }
+
+    .container {
+        padding: 0
+    }
+    .breadcrumb-container {
+        padding: 0 5px
+    }
+
+    .breadcrumb>li+li:before {
+        padding: 0 1px
+    }
+
+    .book-text span {
+        display: none
+    }
+
+    .book-text:before {
+        display: inline;
+        content: "Q"
+    }
+
+    .chapter-text span {
+        display: none
+    }
+
+    .chapter-text:before {
+        display: inline;
+        content: "C"
+    }
+}

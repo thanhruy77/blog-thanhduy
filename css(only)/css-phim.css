@@ -1,0 +1,314 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+header {
+    background-color: #67b8e3;
+    /* Mã màu xanh dương nhạt */
+    color: #fff;
+    padding: 18px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+nav {
+    background-color: #f9ca24;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #fff;
+}
+
+main {
+    flex: 1;
+    max-width: 900px;
+    margin: 0px auto;
+    padding: 20px;
+}
+
+p {
+    line-height: 1.5;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+footer {
+    background-color: #7a7a7a;
+    /* Mã màu vàng nhạt */
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    bottom: 0;
+    /* position: fixed;
+    width: 100%; */
+}
+
+footer p {
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+#trang-chu img {
+    width: 300px;
+    height: auto;
+    float: left;
+    margin-right: 20px;
+}
+
+@media (max-width: 1400px) {
+    nav {
+        font-size: 16px;
+    }
+
+    main {
+        font-size: 15px;
+    }
+
+    #trang-chu img {
+        width: 50%;
+        float: left;
+    }
+
+    header {
+        padding: 13px;
+    }
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: #f9ca24;
+    /* Màu nền của submenu */
+    white-space: nowrap;
+}
+
+.nav-menu .submenu li {
+    padding: 12px;
+}
+
+.nav-menu li:hover>.submenu {
+    display: block;
+}
+
+
+/* CSS để định dạng nút */
+.scroll-to-top {
+    display: none;
+    /* Ẩn ban đầu */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+
+}
+
+.scroll-to-top:hover {
+    background-color: #777;
+}
+
+/* CSS để thay đổi hiển thị của nút thành mũi tên */
+.scroll-to-top::before {
+    content: '\2191';
+    /* Mã Unicode cho mũi tên lên */
+}
+
+
+/* từ đây trơ lên -------------------------------------------------------------------------------------------------------------- */
+
+
+
+.phim-image {
+    text-align: center;
+}
+
+.phim-image a {
+    line-height: normal;
+    color: red;
+    text-decoration: none;
+}
+
+
+/* Điều chỉnh hiển thị cho màn hình máy tính */
+@media only screen and (min-width: 1434px) {
+    .menu-button {
+        border-radius: 10px;
+        display: inline-block;
+        padding: 10px;
+        background-color: #555;
+        color: white;
+        cursor: pointer;
+    }
+
+    .menu-list {
+        border-radius: 10px;
+        display: none;
+        position: absolute;
+        top: 26px;
+        left: 0px;
+        /* Di chuyển menu ra bên trái */
+        width: 180px;
+        /* Định rộng của menu */
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        padding: 8px;
+        list-style-type: none;
+        line-height: 2;
+    }
+
+    .menu-list li {
+        margin-bottom: 5px;
+    }
+
+    .menu-list a {
+        text-decoration: none;
+        color: red;
+    }
+
+
+    .menu-button {
+
+        display: none;
+    }
+
+    .menu-list {
+        display: block;
+    }
+
+    .menu-container {
+        position: fixed;
+        top: 195px;
+        left: 20px;
+        z-index: 99;
+    }
+
+    .phim-image .theloai {
+        font-size: 14px;
+    }
+}
+
+/* Điều chỉnh hiển thị cho màn hình điện thoại di động */
+@media only screen and (max-width: 1435px) {
+    .menu-button {
+        border-radius: 10px;
+        display: inline-block;
+        padding: 10px;
+        background-color: #ff9c07;
+        color: white;
+        cursor: pointer;
+    }
+
+    .menu-list {
+        border-radius: 10px;
+        display: none;
+        position: absolute;
+        top: 26px;
+        left: -20px;
+        /* Di chuyển menu ra bên trái */
+        width: 180px;
+        /* Định rộng của menu */
+        background-color: #fff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        padding: 8px;
+        list-style-type: none;
+        line-height: 2;
+    }
+
+    .menu-list li {
+        margin-bottom: 5px;
+    }
+
+    .menu-list a {
+        text-decoration: none;
+        color: red;
+    }
+
+    .menu-button:hover+.menu-list,
+    .menu-list:hover {
+        display: block;
+    }
+
+    .menu-container {
+        position: absolute;
+        top: 130px;
+        right: 42%;
+        z-index: 99;
+    }
+}
+
+.menu-button::before {
+    content: "\2630";
+    /* Mã Unicode cho ba dấu gạch ngang song song */
+}
+
+.image-phim {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    /* Đổ bóng với màu đen và độ mờ */
+}
+
+.phim-container {
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+
+.test{
+    
+    width: 200px;
+}

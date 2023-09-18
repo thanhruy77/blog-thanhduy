@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog ThanhDuy</title>
+    <link rel="icon" href="Anh/thanhruy77.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css(only)/css-sach.css">
+
+<body>
+    <header>
+        <h1><img src="Anh/astronaut.png" width="25px"> Thanh Duy</h1>
+    </header>
+    <nav id="mobile" hidden>
+        <ul class="nav-menu">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li>
+                <a href="#">Khác</a>
+                <ul class="submenu">
+                    <li><a href="thantuong.html">Lalisa</a></li>
+                    <li><a href="phim.html">Phim</a></li>
+                    <li><a href="amnhac.html">Music</a></li>
+                    <li><a href="duan.html">Dự Án</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <style>
+        /* Định dạng bảng cho màn hình điện thoại */
+        @media (max-width: 800px) {
+            #pc {
+                display: none;
+            }
+
+            #mobile {
+                display: block;
+            }
+        }
+
+        /* Định dạng bảng cho màn hình máy tính */
+        @media (min-width: 801px) {
+            #pc {
+                display: block;
+            }
+
+            #mobile {
+                display: none;
+            }
+        }
+    </style>
+    <nav id="pc" hidden>
+        <ul class="nav-menu-pc">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li><a href="duan.html">Dự Án</a></li>
+            <li><a href="phim.html">Phim</a></li>
+            <li><a href="amnhac.html">Music</a></li>
+            <li><a href="thantuong.html">Lalisa</a></li>
+        </ul>
+    </nav>
+
+    <body id="body_home">
+        <div id="wrap">
+            <div class="container" id="list-page">
+                <div class="col-xs-12 col-sm-12 col-md-9 col-truyen-main">
+                    <div class="list list-truyen col-xs-12">
+                        <div class="title-list cat-title">
+                            <h2>SÁCH</h2>
+                        </div>
+
+
+
+
+                        <!--        Truyện    -->
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-3 col-sm-2 col-md-3 col-list-image">
+                                <div>
+                                    <img src="./Book/Dao mong mo/Anh/daomongmo.png" width="100px" height="150px" alt="Đảo Mộng Mơ" title="Đảo Mộng Mơ">
+                                </div>
+                            </div>
+                            <div class="col-xs-9 col-sm-10 col-md-9 col-list-info">
+                                <div>
+                                    <span class="glyphicon glyphicon-book"></span>
+                                    <h3 class="truyen-title" itemprop="name">
+                                        <a href="./Book/Dao mong mo/Thongtin.html" title="Đảo Mộng Mơ" itemprop="url">Đảo
+                                            Mộng Mơ</a>
+                                    </h3>
+                                    <span class="label-title label-hot"></span>
+                                    <span class="label-title label-full"></span>
+                                    <span class="author" itemprop="author">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                        NGUYỄN NHẬT ÁNH
+                                    </span>
+                                    <span class="author">
+                                        <span class="glyphicon glyphicon-list"></span>
+                                        16 chương
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+
+                        <div class="row">
+                            <div class="col-xs-3 col-sm-2 col-md-3 col-list-image">
+                                <div>
+                                    <img src="./Book/Cho toi xin mot ve di tuoi tho/Anh/chotoixinmotvedituoitho.png" width="100px" height="150px" alt="">
+                                </div>
+                            </div>
+                            <div class="col-xs-9 col-sm-10 col-md-9 col-list-info">
+                                <div>
+                                    <span class="glyphicon glyphicon-book"></span>
+                                    <h3 class="truyen-title" itemprop="name">
+                                        <a href="./Book/Cho toi xin mot ve di tuoi tho/Thongtin.html" title="Cho Tôi Xin Một Vé Đi Tuổi Thơ" itemprop="url">Cho Tôi Xin Một Vé Đi Tuổi Thơ</a>
+                                    </h3>
+                                    <span class="label-title label-hot"></span>
+                                    <span class="label-title label-full"></span>
+                                    <span class="author" itemprop="author">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                        NGUYỄN NHẬT ÁNH
+                                    </span>
+                                    <span class="author">
+                                        <span class="glyphicon glyphicon-list"></span>
+                                        12 chương
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-3 col-sm-2 col-md-3 col-list-image">
+                                <div>
+                                    <img src="./Book/Toi Thay Hoa Vang Tren Co Xanh/Anh/tthvtcx.png" width="100px" height="150px" alt="">
+                                </div>
+                            </div>
+                            <div class="col-xs-9 col-sm-10 col-md-9 col-list-info">
+                                <div>
+                                    <span class="glyphicon glyphicon-book"></span>
+                                    <h3 class="truyen-title" itemprop="name">
+                                        <a href="#" onclick="alert('Đang Cập Nhật')" title="Tôi Thấy Hoa Vàng Trên Cỏ Xanh" itemprop="url">Tôi Thấy Hoa Vàng Trên Cỏ Xanh</a>
+                                    </h3>
+                                    <span class="label-title label-new"></span>
+                                    <span class="author" itemprop="author">
+                                        <span class="glyphicon glyphicon-pencil"></span>
+                                        NGUYỄN NHẬT ÁNH
+                                    </span>
+                                    <span class="author">
+                                        <span class="glyphicon glyphicon-list"></span>
+                                        81 chương
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--        Truyện    -->
+
+
+
+                    </div>
+                </div>
+                <div class="visible-md-block visible-lg-block col-md-3 text-center col-truyen-side">
+                    <div class="panel cat-desc text-left">
+                        <div class="panel-body">
+                            Đây là danh sách những cuốn sách mà tôi cảm thấy hay và ý nghĩa.
+                            Tôi nghĩ bạn nên đọc thử qua chúng một lần.
+                            Và mong rằng bạn sẽ thích chúng.
+                            Nếu như có lỗi xin hãy báo lỗi cho tôi biết. 🤭🤭🤭
+                        </div>
+                    </div>
+                    <div class="list list-truyen list-cat col-xs-12">
+                        <div class="title-list">
+                            <h4>Liên Hệ Báo Lỗi Truyện</h4>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <a  target="_blank"href="https://www.facebook.com/thanhduy1311" title="FACEBOOK">FACEBOOK</a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a target="_blank" href="https://www.instagram.com/thduy.1311/" title="INSTAGRAM ">INSTAGRAM
+                                </a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="#" onclick="alert('Chưa Cập Nhật hehe 🤭')" title="ZALO">ZALO</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; 2023 Blog of Thanh Ruy 77.</p>
+        </footer>
+    </body>
+</html>

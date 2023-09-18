@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Album Ảnh</title>
+    <link rel="stylesheet" href="css(only)/album.css">
+</head>
+
+<body>
+    <header>
+        <h1>Album Ảnh</h1>
+    </header>
+
+    <div id="album-images"></div>
+    <!-- Nút quay trở lại -->
+    <div class="back-button" onclick="goBack()">
+        &larr;
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const imageId = urlParams.get('id');
+        const albums = {
+            'album-haiphong': [
+                { src: 'Anh/haiphong.png', alt: 'Hải Phòng 0' },
+                { src: 'Anh/Anh-HaiPhong/haiphong1.jpg', alt: 'Hải Phòng 1' },
+                { src: 'Anh/Anh-HaiPhong/haiphong2.jpg', alt: 'Hải Phòng 2' },
+                { src: 'Anh/Anh-HaiPhong/haiphong3.jpg', alt: 'Hải Phòng 3' },
+                { src: 'Anh/Anh-HaiPhong/haiphong4.jpg', alt: 'Hải Phòng 4' },
+                { src: 'Anh/Anh-HaiPhong/haiphong5.jpg', alt: 'Hải Phòng 5' },
+                { src: 'Anh/Anh-HaiPhong/haiphong6.jpg', alt: 'Hải Phòng 6' }
+            ],
+            'album-thainguyen': [
+                { src: 'Anh/thainguyenimg.png', alt: 'Thái Nguyên 0' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen15.jpg', alt: 'Thái Nguyên 15' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen1.jpg', alt: 'Thái Nguyên 1' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen4.jpg', alt: 'Thái Nguyên 4' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen2.jpg', alt: 'Thái Nguyên 2' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen5.jpg', alt: 'Thái Nguyên 5' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen3.jpg', alt: 'Thái Nguyên 3' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen6.jpg', alt: 'Thái Nguyên 6' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen7.jpg', alt: 'Thái Nguyên 7' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen8.jpg', alt: 'Thái Nguyên 8' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen9.jpg', alt: 'Thái Nguyên 9' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen10.jpg', alt: 'Thái Nguyên 10' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen11.jpg', alt: 'Thái Nguyên 11' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen12.jpg', alt: 'Thái Nguyên 12' },
+                { src: 'Anh/Anh-ThaiNguyen/thainguyen13.jpg', alt: 'Thái Nguyên 13' }
+            ],
+            // Thêm thông tin về các album khác tại đây
+        };
+        const images = albums[imageId];
+        const albumImages = document.getElementById('album-images');
+        if (albums.hasOwnProperty(imageId)) {
+            images.forEach(imageInfo => {
+                const albumImage = document.createElement('div');
+                albumImage.classList.add('album-image');
+                const imgElement = document.createElement('img');
+                imgElement.src = imageInfo.src;
+                imgElement.alt = imageInfo.alt;
+                albumImage.appendChild(imgElement);
+                albumImages.appendChild(albumImage);
+            });
+        }
+        function goBack() {
+            window.history.back();
+        }
+        const albumImagesDialog = document.getElementById('album-images');
+        const imageDialog = document.createElement('div');
+        imageDialog.classList.add('image-dialog');
+        const dialogImageElement = document.createElement('img');
+        imageDialog.appendChild(dialogImageElement);
+
+        const closeButton = document.createElement('div');
+        closeButton.classList.add('close-button');
+        closeButton.innerHTML = '&times;';
+        closeButton.onclick = () => {
+            imageDialog.style.display = 'none';
+        };
+        imageDialog.appendChild(closeButton);
+
+        const prevButton = document.createElement('div');
+        prevButton.classList.add('prev-button');
+        prevButton.innerHTML = '&larr;';
+        prevButton.onclick = () => changeImage(-1);
+        imageDialog.appendChild(prevButton);
+
+        const nextButton = document.createElement('div');
+        nextButton.classList.add('next-button');
+        nextButton.innerHTML = '&rarr;';
+        nextButton.onclick = () => changeImage(1);
+        imageDialog.appendChild(nextButton);
+
+        albumImagesDialog.appendChild(imageDialog);
+
+        albumImagesDialog.addEventListener('click', event => {
+            if (event.target.tagName === 'IMG') {
+                const src = event.target.src;
+                dialogImageElement.src = src;
+                currentImageIndex = findImageIndex(images, src);
+                imageDialog.style.display = 'flex';
+
+                // Hiển thị nút chuyển ảnh khi ảnh được bật lên
+                prevButton.style.display = 'block';
+                nextButton.style.display = 'block';
+            }
+        });
+
+        function findImageIndex(images, src) {
+            for (let i = 0; i < images.length; i++) {
+                if (images[i].src === src) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+        let currentImageIndex = 0;
+
+        function changeImage(step) {
+            const images = albums[imageId];
+            currentImageIndex += step;
+
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            }
+
+            dialogImageElement.src = images[currentImageIndex].src;
+        }
+
+    </script>
+</body>
+
+</html>

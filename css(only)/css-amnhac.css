@@ -1,0 +1,271 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+header {
+    background-color: #67b8e3;
+    /* Mã màu xanh dương nhạt */
+    color: #fff;
+    padding: 18px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+nav {
+    background-color: #f9ca24;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #fff;
+}
+
+main {
+    flex: 1;
+    max-width: 900px;
+    margin: 0px auto;
+    padding: 20px;
+}
+
+p {
+    line-height: 1.5;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+footer {
+    background-color: #7a7a7a;
+    /* Mã màu vàng nhạt */
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    bottom: 0;
+    /* position: fixed;
+width: 100%; */
+}
+
+footer p {
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+#trang-chu img {
+    width: 300px;
+    height: auto;
+    float: left;
+    margin-right: 20px;
+}
+
+/* hiển thị trên điện thoại */
+@media (max-width: 1400px) {
+    nav {
+        font-size: 16px;
+    }
+
+    main {
+        font-size: 15.5px;
+    }
+
+    #trang-chu img {
+        width: 50%;
+        float: left;
+    }
+
+    header {
+        padding: 13px;
+    }
+
+    .video-mp4 {
+        text-align: center;
+    }
+
+    .video-mp4 .video {
+        width: 300px;
+    }
+
+
+}
+
+/* máy tính */
+@media(min-width: 1400px) {
+
+    .video-mp4 {
+        text-align: center;
+    }
+
+    .video-mp4 .video {
+        width: 700px;
+    }
+
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: #f9ca24;
+    /* Màu nền của submenu */
+    white-space: nowrap;
+}
+
+.nav-menu .submenu li {
+    padding: 12px;
+}
+
+.nav-menu li:hover>.submenu {
+    display: block;
+}
+
+
+/* CSS để định dạng nút */
+.scroll-to-top {
+    display: none;
+    /* Ẩn ban đầu */
+    position: fixed;
+    bottom: 90px;
+    right: 0px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+
+}
+
+.scroll-to-top:hover {
+    background-color: #777;
+}
+
+/* CSS để thay đổi hiển thị của nút thành mũi tên */
+.scroll-to-top::before {
+    content: '\2191';
+    /* Mã Unicode cho mũi tên lên */
+}
+
+
+/* từ đây trơ lên -------------------------------------------------------------------------------------------------------------- */
+
+a {
+    text-decoration: none;
+    /* Xóa đường kẻ dưới chân liên kết */
+    color: red;
+    /* Đổi màu đỏ cho tên liên kết */
+}
+
+.music-list {
+    position: relative;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 9999;
+}
+
+
+.music-list .button.playing {
+    background-color: #f9ca24;
+}
+
+.music-list .button {
+    border: 0.5px solid #000;
+    border-radius: 20px;
+    cursor: pointer;
+
+}
+
+audio {
+    border: 1px solid #000;
+    border-radius: 40px;
+}
+
+.song-list-class {
+    margin-top: 30px;
+    line-height: 1;
+    flex-wrap: wrap;
+    /* Thêm thuộc tính này */
+}
+
+.song-list-class .music-div {
+    color: black;
+    cursor: pointer;
+    line-height: 1.5;
+    /* Thay đổi giá trị này */
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    word-break: break-all;
+    clear: both;
+    /* Thêm thuộc tính này */
+    float: none;
+    /* Thêm thuộc tính này */
+    font-size: 14px;
+}
+
+.song-list-class .music-div:hover {
+    background-color: #f9ca24;
+}
+
+.song-list-class .music-div.playing {
+    background-color: #f9ca24;
+}
+
+.song-list-class .music-div.playing::after {
+    content: '\23F8';
+    float: right;
+}
+
+.song-list-class .music-div::after {
+    content: '\25B6';
+    float: right;
+}

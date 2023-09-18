@@ -1,0 +1,319 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+header {
+    background-color: #67b8e3;
+    /* Mã màu xanh dương nhạt */
+    color: #fff;
+    padding: 18px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+nav {
+    background-color: #f9ca24;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #fff;
+}
+
+main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0px auto;
+    padding: 20px;
+}
+
+p {
+    line-height: 1.5;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-top: 20px;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+footer {
+    background-color: #7a7a7a;
+    /* Mã màu vàng nhạt */
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    bottom: 0;
+    /* position: fixed;
+    width: 100%; */
+}
+
+footer p {
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+#trang-chu img {
+    width: 300px;
+    height: auto;
+    float: left;
+    margin-right: 20px;
+}
+
+/* hiển thị trên điện thoại */
+@media (max-width: 1400px) {
+    nav {
+        font-size: 16px;
+    }
+
+    main {
+        font-size: 16px;
+    }
+
+    #trang-chu img {
+        width: 50%;
+        float: left;
+    }
+
+    header {
+        padding: 13px;
+    }
+}
+
+/* hiển thị trên máy tinh */
+@media (min-width: 1400px) {
+    nav {
+        font-size: 16x;
+    }
+
+    main {
+        font-size: 16px;
+    }
+
+    header {
+        padding: 18px;
+    }
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: #f9ca24;
+    /* Màu nền của submenu */
+    white-space: nowrap;
+}
+
+.nav-menu .submenu li {
+    padding: 12px;
+}
+
+.nav-menu li:hover>.submenu {
+    display: block;
+}
+
+
+/* CSS để định dạng nút */
+.scroll-to-top {
+    display: none;
+    /* Ẩn ban đầu */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+
+}
+
+.scroll-to-top:hover {
+    background-color: #777;
+}
+
+/* CSS để thay đổi hiển thị của nút thành mũi tên */
+.scroll-to-top::before {
+    content: '\2191';
+    /* Mã Unicode cho mũi tên lên */
+}
+
+
+
+/* từ đây trở nên là mặc định --------------------------------------------------------------------------------*/
+
+
+.slideshow-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.slideshow {
+    width: 300px;
+    height: 500px;
+    position: relative;
+}
+
+.slideshow img {
+    width: 300px;
+    height: 450px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slideshow img.active {
+    opacity: 1;
+}
+
+.introduction-1 {
+    max-width: 500px;
+    padding: 00px;
+}
+
+.introduction-1 .button {
+    border: 1px solid #000;
+    padding: 7px;
+    background-color: #f9ca24;
+    font-size: 15px;
+    border-radius: 6px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.introduction {
+    max-width: 600px;
+    padding: 20px;
+    line-height: 2;
+}
+
+/* hiển thị trên điện thoại */
+@media (max-width: 1400px) {
+    .slideshow-container {
+        flex-direction: column;
+    }
+
+    .slideshow {
+        width: 300px;
+        height: 450px;
+        margin-bottom: 20px;
+    }
+
+    .dialog {
+        width: 80%;
+        /* Đặt chiều rộng của dialog */
+        max-width: 800px;
+        /* Đặt chiều rộng tối đa của dialog */
+    }
+
+    .dialog .video-mp4 {
+        position: relative;
+        padding-bottom: 56.25%;
+        /* Tỷ lệ khung hình 16:9 */
+        height: 0;
+    }
+
+    .dialog .video-mp4 .video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 0px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 30px;
+        color: #f80505;
+        z-index: 9999;
+    }
+}
+
+/* máy tính */
+@media(min-width: 1401px) {
+    .dialog {
+        width: 80%;
+        /* Đặt chiều rộng của dialog */
+        max-width: 800px;
+        /* Đặt chiều rộng tối đa của dialog */
+    }
+
+    .dialog .video-mp4 {
+        position: relative;
+        padding-bottom: 56.25%;
+        /* Tỷ lệ khung hình 16:9 */
+        height: 0;
+    }
+
+    .dialog .video-mp4 .video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .close-btn {
+        position: absolute;
+        top: 0px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 30px;
+        color: #f80505;
+        z-index: 9999;
+    }
+
+}

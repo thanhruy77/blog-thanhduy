@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog ThanhDuy</title>
+    <link rel="icon" href="Anh/thanhruy77.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./css(only)/css-admin.css">
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
+            authDomain: "blogthanhduy.firebaseapp.com",
+            databaseURL: "https://blogthanhduy-default-rtdb.firebaseio.com",
+            projectId: "blogthanhduy",
+            storageBucket: "blogthanhduy.appspot.com",
+            messagingSenderId: "346123189563",
+            appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e",
+            measurementId: "G-1NFNF0B3E9"
+        };
+        firebase.initializeApp(firebaseConfig);
+        // Initialize Firebase Storage
+        const storage = firebase.storage();
+        // Get a reference to the default storage bucket
+        const storageRef = storage.ref();
+        const database = firebase.database();
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1><img src="Anh/astronaut.png" width="25px"> ADMIN</h1>
+    </header>
+
+    <nav id="mobile" hidden>
+        <ul class="nav-menu">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="phim.html">Phim</a></li>
+            <li>
+                <a href="#">Khác</a>
+                <ul class="submenu">
+                    <li><a href="thantuong.html">Lalisa</a></li>
+                    <li><a href="sach.html">Sách</a></li>
+                    <li><a href="amnhac.html">Music</a></li>
+                    <li><a href="duan.html">Dự Án</a></li>
+                    <li><a href="loginforthanhduy.html">Login</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <style>
+        /* Định dạng menu cho màn hình điện thoại */
+        @media (max-width: 800px) {
+            #pc {
+                display: none;
+            }
+
+            #mobile {
+                display: block;
+            }
+        }
+
+        /* Định dạng menu cho màn hình máy tính */
+        @media (min-width: 801px) {
+            #pc {
+                display: block;
+            }
+
+            #mobile {
+                display: none;
+            }
+        }
+    </style>
+    <nav id="pc" hidden>
+        <ul class="nav-menu-pc">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li><a href="duan.html">Dự Án</a></li>
+            <li><a href="phim.html">Phim</a></li>
+            <li><a href="amnhac.html">Music</a></li>
+            <li><a href="thantuong.html">Lalisa</a></li>
+            <li><a href="loginforthanhduy.html">Login</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div id="trang-chu" class="content">
+            <div>
+                <h2>TRANG DÀNH CHO NGƯỜI QUẢN LÝ</h2>
+                <i>
+                    <h3>
+                        Hacker tha em :< </h3>
+                </i>
+            </div>
+            </head>
+
+            <body>
+                <h1>Create a Post</h1>
+                <form id="postForm">
+                    <input type="text" id="caption" placeholder="Caption của bài">
+                    <img id="img-jpeg-id" class="img-jpeg" alt="">
+                    <input type="file" id="image" accept="image/*,video/*">
+                    <button class="load" type="submit">Post</button>
+                </form>
+                <h1>Quản Lý Bài Đăng</h1>
+                <div id="postList" class="post-list"></div>
+                <script>
+                    // Hiển thị ảnh khi chọn
+                    document.addEventListener("DOMContentLoaded", function () {
+                        const image = document.getElementById("img-jpeg-id");
+                        const input = document.querySelector("input#image");
+
+                        input.addEventListener("change", (e) => {
+                            if (input.files.length > 0) {
+                                image.src = URL.createObjectURL(input.files[0]);
+                            } else {
+                                // Handle the case where no files are selected
+                                image.src = ""; // Clear the image source
+                            }
+                        });
+                    });
+
+                    function showMessage(message) {
+                        const checkinput = document.getElementById('checkinput');
+                        checkinput.innerText = message;
+                        checkinput.style.display = 'block';
+                    }
+
+                    function showMessageautohidden(message) {
+                        const checkinput = document.getElementById('checkinput');
+                        checkinput.innerText = message;
+                        checkinput.style.display = 'block';
+                        setTimeout(() => {
+                            checkinput.style.display = 'none';
+                        }, 2000);
+                    }
+
+                    function hideMessage() {
+                        const checkinput = document.getElementById('checkinput');
+                        checkinput.style.display = 'none';
+                    }
+
+                    async function uploadFileAndSavePost(selectedFile, fileType, caption) {
+                        try {
+                            showMessage(`Đang upload ${fileType === 'image' ? 'ảnh' : 'video'}...`);
+                            const today = new Date();
+                            const dateTime = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()} ${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+
+                            // Tạo tham chiếu đến kho lưu trữ Firebase dựa vào loại tệp
+                            const storageRef = storage.ref(`${fileType}-index/`);
+                            const fileRef = storageRef.child(selectedFile.name);
+                            await fileRef.put(selectedFile);
+
+                            // Lấy URL từ kho lưu trữ
+                            const fileUrl = await fileRef.getDownloadURL();
+                            console.log(`Đăng ${fileType === 'image' ? 'ảnh' : 'video'} thành công. URL:`, fileUrl);
+
+                            // Lưu dữ liệu bài đăng vào Realtime Database
+                            const newPostRef = database.ref("posts").push();
+                            const postData = {
+                                caption: caption,
+                                [`${fileType}Url`]: fileUrl,
+                                likes: 0,
+                                time: dateTime
+                            };
+                            newPostRef.set(postData);
+
+                            // Xóa các trường nhập liệu
+                            captionInput.value = "";
+                            imageInput.value = "";
+
+                            hideMessage();
+                            showMessageautohidden(`Đăng ${fileType === 'image' ? 'ảnh' : 'video'} thành công.`);
+
+                        } catch (error) {
+                            console.error(`Lỗi khi đăng ${fileType === 'image' ? 'ảnh' : 'video'}:`, error);
+                            hideMessage();
+                            showMessageautohidden("Bạn không phải chủ sở hữu!!!");
+                        }
+                    }
+
+                    const postForm = document.getElementById("postForm");
+                    const captionInput = document.getElementById("caption");
+                    const imageInput = document.getElementById("image");
+
+                    postForm.addEventListener("submit", async (e) => {
+                        e.preventDefault();
+                        hideMessage();
+                        firebase.auth().onAuthStateChanged((user) => {
+                            if (user) {
+                                console.log("Người dùng đã đăng nhập");
+                            }
+                            else {
+                                console.log("Người dùng chưa đăng nhập");
+                            }
+                        });
+                        const selectedFile = imageInput.files[0];
+                        if (selectedFile) {
+                            const fileType = selectedFile.type;
+                            const caption = captionInput.value;
+
+                            if (!caption) {
+                                console.log("Không được để trống");
+                                showMessage("Không được để caption trống!");
+                            } else if (fileType.startsWith("image/") || fileType.startsWith("video/")) {
+                                // Kiểm tra và xử lý ảnh hoặc video
+                                await uploadFileAndSavePost(selectedFile, fileType.split("/")[0], caption);
+                            } else {
+                                // Loại tệp không được hỗ trợ
+                                showMessage("Loại tệp không hỗ trợ!");
+                                setTimeout(() => {
+                                    hideMessage();
+                                }, 2000);
+                            }
+                        }
+                        else {
+                            showMessageautohidden("Chưa chọn file!");
+
+                        }
+                    });
+
+                    // Listen for changes in Realtime Database
+                    database.ref("posts").on("value", (snapshot) => {
+                        postList.innerHTML = "";
+                        snapshot.forEach((childSnapshot) => {
+                            const post = childSnapshot.val();
+                            const postElement = document.createElement("div");
+                            postElement.innerHTML = `
+                <div class="post">
+                <img class="avatar" width="20px" height="60px" src="Anh/thanhruy77.jpg">
+                <span class="ten">Lê Văn Thanh Duy</span>
+                <span id="time" class="time-class"> (${post.time})</span>
+                <p class="post-caption">${post.caption}</p>
+                ${post.imageUrl ? `<img class="post-img" src="${post.imageUrl}" alt="${post.caption}">` : ''}
+                ${post.videoUrl ? `<video class="post-video" controls>
+                    <source src="${post.videoUrl}" type="video/mp4">
+                </video>` : ''}
+                <button class="button-like" onclick="likePost('${childSnapshot.key}')">Like (${post.likes})</button>
+                <button id="deleteid" onclick="deletePost('${childSnapshot.key}', '${post.imageUrl || ''}', '${post.videoUrl || ''}')">Delete</button> 
+                </div>`;
+                            postList.appendChild(postElement);
+                        });
+                    });
+
+                    // Like a post
+                    function likePost(postId) {
+                        const likesRef = database.ref(`posts/${postId}/likes`);
+                        likesRef.transaction((currentLikes) => (currentLikes || 0) + 1);
+                    }
+
+                    function hiddenconfirm() {
+                        var xoapost = document.getElementById("DeletePost");
+                        xoapost.style.display = "none";
+                    }
+                    // Delete a post
+                    function deletePost(postId, imageUrl, videoUrl) {
+                        var xoapost = document.getElementById("DeletePost");
+                        var yes = document.getElementById("yes");
+                        var no = document.getElementById("no");
+                        xoapost.style.display = "block";
+                        yes.addEventListener("click", (e) => {
+                            // kiểm tra xem đã đăng nhập chưa
+                            firebase.auth().onAuthStateChanged((user) => {
+                                if (user) {
+                                    // Xác minh sự tồn tại của tệp ảnh trước khi xóa
+                                    if (imageUrl) {
+                                        const imageStorageRef = storage.refFromURL(imageUrl);
+                                        imageStorageRef.getMetadata()
+                                            .then(() => {
+                                                // Tệp ảnh tồn tại, thực hiện xóa
+                                                imageStorageRef.delete()
+                                                    .then(() => {
+                                                        console.log('Dữ liệu ảnh đã được xóa thành công khỏi Storage.');
+                                                    })
+                                                    .catch((error) => {
+                                                        console.error('Lỗi xóa ảnh từ Storage:', error);
+                                                    });
+                                            })
+                                            .catch((error) => {
+                                                console.error('Lỗi xác minh tệp ảnh:', error);
+                                            });
+                                    }
+                                    // Xác minh sự tồn tại của tệp video trước khi xóa
+                                    if (videoUrl) {
+                                        const videoStorageRef = storage.refFromURL(videoUrl);
+                                        videoStorageRef.getMetadata()
+                                            .then(() => {
+                                                // Tệp video tồn tại, thực hiện xóa
+                                                videoStorageRef.delete()
+                                                    .then(() => {
+                                                        console.log('Dữ liệu video đã được xóa thành công khỏi Storage.');
+                                                    })
+                                                    .catch((error) => {
+                                                        console.error('Lỗi xóa video từ Storage:', error);
+                                                    });
+                                            })
+                                            .catch((error) => {
+                                                console.error('Lỗi xác minh tệp video:', error);
+                                            });
+                                    }
+
+                                    // Xóa post từ Realtime Database
+                                    const postRef = database.ref(`posts/${postId}`);
+                                    postRef.remove()
+                                        .then(() => {
+                                            console.log('Dữ liệu bài đăng đã được xóa thành công khỏi Realtime Database.');
+                                        })
+                                        .catch((error) => {
+                                            console.error('Lỗi xóa bài đăng từ Realtime Database:', error);
+                                        });
+                                    hiddenconfirm();
+                                } else {
+                                    hiddenconfirm();
+                                }
+                            });
+                        });
+                        no.addEventListener("click", (e) => {
+                            hiddenconfirm();
+                        });
+                    }
+                </script>
+                <div id="DeletePost" class="hidden">
+                    <p>Bạn có chắc chắn muốn xóa không?</p>
+                    <div class="button-container">
+                        <button class="yes-class" id="yes">Yes</button>
+                        <button class="yes-class" id="no">No</button>
+                    </div>
+                </div>
+                <style>
+                </style>
+                <div id="checkinput" class="check-input"></div>
+        </div>
+    </main>
+    <br><br><br>
+    <footer>
+        <p>&copy; 2023 Blog of Thanh Ruy 77.</p>
+    </footer>
+</body>
+
+</html>

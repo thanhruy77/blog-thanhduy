@@ -1,0 +1,156 @@
+/* Nút quay trở lại */
+.back-button {
+    position: fixed;
+    top: 14px;
+    left: 20px;
+    /* Thay đổi từ right sang left để đưa nút vào bên trái */
+    z-index: 999;
+    cursor: pointer;
+    padding: 15px;
+    /* Tăng padding để làm nút to hơn */
+    background-color: #333;
+    color: white;
+    border-radius: 50%;
+    font-size: 50px;
+    /* Tăng kích thước font chữ để làm nút to hơn */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+}
+
+h1 {
+    font-size: 45px;
+}
+
+#album-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+.album-image {
+    margin: 1rem;
+    max-width: 300px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.album-image img {
+    width: 100%;
+    height: auto;
+}
+
+.image-dialog {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.image-dialog img {
+    max-width: 90vw;
+    max-height: 90vh;
+}
+
+/* Nút chuyển ảnh */
+.prev-button,
+.next-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+    display: none;
+    /* Ẩn nút ban đầu */
+}
+
+.prev-button {
+    font-size: 50px;
+    left: 100px;
+}
+
+.next-button {
+    right: 100px;
+    font-size: 50px;
+}
+/* Nút đóng */
+.close-button {
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    font-size: 80px;
+    color: white;
+    cursor: pointer;
+    z-index: 1001;
+}
+/* hiển thị trên điện thoại */
+@media (max-width: 1400px) {
+    /* Nút chuyển ảnh */
+    .prev-button,
+    .next-button {
+        position: absolute;
+        top: 85%;
+        transform: translateY(-50%);
+        font-size: 36px;
+        color: white;
+        cursor: pointer;
+        display: none;
+        /* Ẩn nút ban đầu */
+    }
+    .prev-button {
+        z-index: 999;
+        cursor: pointer;
+        padding: 15px;
+        /* Tăng padding để làm nút to hơn */
+        background-color: #fad9d9;
+        color: rgb(0, 0, 0);
+        border-radius: 50%;
+        font-size: 120px;
+    }
+
+    .next-button {
+        right: 100px;
+        z-index: 999;
+        cursor: pointer;
+        padding: 15px;
+        /* Tăng padding để làm nút to hơn */
+        background-color: #fad9d9;
+        color: rgb(0, 0, 0);
+        border-radius: 50%;
+        font-size: 120px;
+    }
+
+    /* Nút đóng */
+    .close-button {
+        position: absolute;
+        top: 200px;
+        right: 100px;
+        font-size: 120px;
+        color: white;
+        cursor: pointer;
+        z-index: 1001;
+    }
+}
