@@ -8,7 +8,7 @@
 - [Film](https://thanhruy77.github.io/blog-thanhduy/index.html): Đây là film.
 - [Idol](https://thanhruy77.github.io/blog-thanhduy/thantuong.html): Lalisa, thần tượng mà tôi rất ngưỡng mộ.
 <p align="center">
-  <img src="https://thanhruy77.github.io/blog-thanhduy/Anh/lisa4.jpg" alt="Ảnh bìa blog" width="200px">
+  <img src="./Anh/haiphong.png" alt="Ảnh bìa blog" width="200px">
 </p>
 
 ## Cách sử dụng blog
