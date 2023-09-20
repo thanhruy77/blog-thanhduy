@@ -970,7 +970,7 @@ h4 {
 
     .chapter-text:before {
         display: inline;
-        content: "C";
+        content: "Chương:";
     }
 
     .l-chapter .l-chapters,

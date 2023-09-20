@@ -1,0 +1,355 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-size: 16px;
+}
+
+/* Nút quay trở lại */
+.back-button {
+    position: fixed;
+    top: 1px;
+    left: 14px;
+    /* Thay đổi từ right sang left để đưa nút vào bên trái */
+    z-index: 999;
+    cursor: pointer;
+    padding: 15px;
+    /* Tăng padding để làm nút to hơn */
+    background-color: #67b8e3;
+    color: white;
+    border-radius: 50%;
+    font-size: 20px;
+    /* Tăng kích thước font chữ để làm nút to hơn */
+}
+
+header {
+    background-color: #67b8e3;
+    /* Mã màu xanh dương nhạt */
+    color: #fff;
+    padding: 18px;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+nav {
+    background-color: #f9ca24;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+
+nav ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #fff;
+}
+
+main {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0px auto;
+    padding: 20px;
+}
+
+p {
+    line-height: 1.5;
+}
+
+h2 {
+    color: #333;
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+ul {
+    margin-left: 20px;
+}
+
+footer {
+    background-color: #7a7a7a;
+    /* Mã màu vàng nhạt */
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+    bottom: 0;
+    /* position: fixed;
+    width: 100%; */
+}
+
+footer p {
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+#trang-chu img {
+    width: 300px;
+    height: auto;
+    float: left;
+    margin-right: 20px;
+}
+
+/* hiển thị trên điện thoại */
+@media (max-width: 1400px) {
+    nav {
+        font-size: 16px;
+    }
+
+    main {
+        font-size: 16px;
+    }
+
+    #trang-chu img {
+        width: 50%;
+        float: left;
+    }
+
+    header {
+        padding: 23px;
+    }
+    h2{
+        font-size: 20px;
+    }
+}
+
+/* hiển thị trên máy tinh */
+@media (min-width: 1400px) {
+    nav {
+        font-size: 16x;
+    }
+
+    main {
+        font-size: 16px;
+    }
+
+    header {
+        padding: 18px;
+    }
+}
+
+.nav-menu li {
+    position: relative;
+}
+
+.nav-menu .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: #f9ca24;
+    /* Màu nền của submenu */
+    white-space: nowrap;
+}
+
+.nav-menu .submenu li {
+    padding: 12px;
+}
+
+.nav-menu li:hover>.submenu {
+    display: block;
+}
+
+
+/* CSS để định dạng nút */
+.scroll-to-top {
+    display: none;
+    /* Ẩn ban đầu */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #555;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 50%;
+
+}
+
+.scroll-to-top:hover {
+    background-color: #777;
+}
+
+/* CSS để thay đổi hiển thị của nút thành mũi tên */
+.scroll-to-top::before {
+    content: '\2191';
+    /* Mã Unicode cho mũi tên lên */
+}
+
+
+
+/* từ đây trở nên là mặc định --------------------------------------------------------------------------------*/
+.chapter-navigation {
+    display: flex;
+    justify-content: center;
+}
+
+.name {
+    display: flex;
+    justify-content: center;
+}
+
+/* CSS cho nút chuyển chương */
+.chapter-navigation button {
+    background-color: #f9ca24;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 8px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.chapter-navigation button:hover {
+    background-color: #e0dfdf;
+}
+
+/* CSS cho ô select */
+.chapter-navigation select {
+    background-color: #f9ca24;
+    color: #333;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    width: 200px;
+    cursor: pointer;
+}
+
+/* CSS cho ô option trong select */
+.chapter-navigation select option {
+    font-size: 16px;
+    padding: 12px;
+    height: 20px;
+}
+
+/* Hiệu ứng hover */
+.chapter-navigation select option:hover {
+    background-color: #e0dfdf;
+}
+
+/* Hiệu ứng khi option được chọn */
+.chapter-navigation select option:checked {
+    background-color: #e0dfdf;
+}
+
+/* Hiển thị trên điện thoại */
+@media (max-width: 1200px) {
+    #prev-chapter-top::before {
+        content: "Trước";
+        /* Hiển thị nội dung thay thế cho nút Chương Trước */
+        font-size: 17px;
+        /* Đặt kích thước chữ cho nội dung thay thế */
+    }
+
+    #next-chapter-top::before {
+        content: "Tiếp";
+        /* Hiển thị nội dung thay thế cho nút Chương Tiếp Theo */
+        font-size: 17px;
+        /* Đặt kích thước chữ cho nội dung thay thế */
+    }
+
+    #prev-chapter-bottom::before {
+        content: "Trước";
+        /* Hiển thị nội dung thay thế cho nút Chương Trước */
+        font-size: 17px;
+        /* Đặt kích thước chữ cho nội dung thay thế */
+    }
+
+    #next-chapter-bottom::before {
+        content: "Tiếp";
+        /* Hiển thị nội dung thay thế cho nút Chương Tiếp Theo */
+        font-size: 17px;
+        /* Đặt kích thước chữ cho nội dung thay thế */
+    }
+
+    .chapter-navigation button {
+        font-size: 0;
+        /* Ẩn phần nội dung của nút */
+        padding: 10px 20px;
+        /* Để giữ lại khoảng cách */
+    }
+
+    /* CSS cho nút chuyển chương */
+    .chapter-navigation button {
+        background-color: #f9ca24;
+        color: #333;
+        border: none;
+        padding: 10px 20px;
+        margin: 0 8px;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.3s;
+    }
+
+    .chapter-navigation button:hover {
+        background-color: #e0dfdf;
+    }
+
+    /* CSS cho ô select */
+    .chapter-navigation select {
+        background-color: #f9ca24;
+        color: #333;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        width: 135px;
+        font-size: 17px;
+    }
+
+    /* CSS cho ô option trong select */
+    .chapter-navigation select option {
+        font-size: 16px;
+        padding: 12px;
+        height: 20px;
+    }
+
+    /* Hiệu ứng hover */
+    .chapter-navigation select option:hover {
+        background-color: #e0dfdf;
+    }
+
+    /* Hiệu ứng khi option được chọn */
+    .chapter-navigation select option:checked {
+        background-color: #e0dfdf;
+    }
+}
+
+.chapter-content p {
+    font-family: palatino linotype,arial,times new roman,sans-serif;
+    line-height: 180%;
+    color: #020202;
+    font-size: 23px;
+    word-wrap: break-word;
+}
