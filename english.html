@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog ThanhDuy</title>
+    <link rel="icon" href="Anh/thanhruy77.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css(only)/css-amnhac.css">
+</head>
+
+<body>
+    <header>
+        <h1><img src="Anh/astronaut.png" width="25px"> Thanh Duy</h1>
+    </header>
+
+    <nav id="mobile" hidden>
+        <ul class="nav-menu">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li>
+                <a href="#">Khác</a>
+                <ul class="submenu">
+                    <li><a href="thantuong.html">Lalisa</a></li>
+                    <li><a href="phim.html">Phim</a></li>
+                    <li><a href="amnhac.html">Music</a></li>
+                    <li><a href="duan.html">Dự Án</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <style>
+        /* Định dạng bảng cho màn hình điện thoại */
+        @media (max-width: 800px) {
+            #pc {
+                display: none;
+            }
+
+            #mobile {
+                display: block;
+            }
+        }
+
+        /* Định dạng bảng cho màn hình máy tính */
+        @media (min-width: 801px) {
+            #pc {
+                display: block;
+            }
+
+            #mobile {
+                display: none;
+            }
+        }
+    </style>
+    <nav id="pc" hidden>
+        <ul class="nav-menu-pc">
+            <li><a href="index.html">Trang Chủ</a></li>
+            <li><a href="travel.html">Du Lịch</a></li>
+            <li><a href="sach.html">Sách</a></li>
+            <li><a href="duan.html">Dự Án</a></li>
+            <li><a href="phim.html">Phim</a></li>
+            <li><a href="amnhac.html">Music</a></li>
+            <li><a href="thantuong.html">Lalisa</a></li>
+        </ul>
+    </nav>
+    <main>
+
+        <audio src=""></audio>
+        <!-- Nút lên trên -->
+        <button class="scroll-to-top" onclick="scrollToTop()"></button>
+        <div id="du-an" class="content">
+            <h2>Âm nhạc tôi ưa thích</h2>
+            <p>Nhiều lắm, chẳng thể nào liệt kê ra hết, thôi thì cứ tạm vài bài English =))
+            </p>
+            <p>
+                <!-- <h3>Hạnh Phúc Mới</h3>
+            <div class="video-mp4">
+                <video class="video" id="videomp4" controls poster="./Anh/hanhphucmoi.jpg ">
+                    <source src="./MP4/Hạnh Phúc Mới - Sơn Tùng MTP.mp4">
+                </video>
+            </div> -->
+        </div>
+        <div class="song-list-class" id="song-list">
+            <div class="music-div" onclick="togglePlay(1)" id="playButton1">1. Nothing's Gonna Change My Love For You -
+                AI</div>
+            <br>
+            <div class="music-div" onclick="togglePlay(2)" id="playButton3">3. Love Story - Taylor Swift</div>
+            <br>
+            <div class="music-div" onclick="togglePlay(3)" id="playButton4">4. Jax - Like My Father </div>
+            <br>
+            <div class="music-div" onclick="togglePlay(4)" id="playButton6">6. Stephanie Poetri - I Love You 3000</div>
+            <br>
+        </div>
+        <!-- trình phát nhạc. -->
+        <div class="music-list">
+            <button class="button" id="button-loop" onclick="loopsong()">🔄</button>
+            <audio controls id="audioPlayer">
+                <source id="audioSource" src="" type="audio/mpeg">
+                <source src="" type="audio/wav">
+            </audio>
+        </div>
+
+        <script>
+
+        </script>
+
+
+
+    </main>
+
+
+    <footer class="sticky-footer">
+        <p>&copy; 2023 Blog of Thanh Ruy 77.</p>
+    </footer>
+
+    <script>        // JavaScript để xử lý sự kiện khi click nút lên trên
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Hiển thị nút lên trên khi cuộn trang xuống
+        window.onscroll = function () {
+            scrollFunction();
+        };
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.querySelector('.scroll-to-top').style.display = 'block';
+            } else {
+                document.querySelector('.scroll-to-top').style.display = 'none';
+            }
+        }
+        var currentSong = null;
+        var totalSongs = document.getElementsByClassName("music-div").length;
+        var loop = false;
+        var buttonloop = document.getElementById("button-loop");
+        function loopsong() {
+            loop = !loop;
+            if (!loop) {
+                buttonloop.classList.remove("playing"); // Xóa lớp CSS "playing"
+            }
+            else {
+                buttonloop.classList.add("playing"); // Thêm lớp CSS "playing"
+            }
+            console.log(loop)
+        }
+        function togglePlay(songIndex) {
+            var audioPlayer = document.getElementById("audioPlayer");
+            var audioSource = document.getElementById("audioSource");
+            var playButton = document.getElementById("playButton" + songIndex);
+
+            // Dừng tất cả các video đang phát
+            var videos = document.getElementsByClassName("video");
+            for (var i = 0; i < videos.length; i++) {
+                videos[i].pause();
+            }
+
+            if (currentSong !== songIndex) {
+                // Tắt bài hát hiện tại nếu đang phát
+                if (currentSong !== null) {
+                    var currentPlayButton = document.getElementById("playButton" + currentSong);
+                    // currentPlayButton.innerHTML = "Phát";
+                    audioPlayer.pause();
+                    currentPlayButton.classList.remove("playing"); // Xóa lớp CSS "playing"
+                }
+
+                // Cập nhật nguồn bài hát mới
+                audioSource.src = getSongSource(songIndex);
+                audioPlayer.load();
+                currentSong = songIndex;
+            }
+
+            if (audioPlayer.paused) {
+                audioPlayer.play();
+                playButton.classList.add("playing"); // Thêm lớp CSS "playing"
+            } else {
+                audioPlayer.pause();
+                playButton.classList.remove("playing"); // Xóa lớp CSS "playing"
+            }
+        }
+        audioPlayer.addEventListener("ended", function () {
+            nextSong();
+        });
+        function nextSong() {
+            var nextSongIndex = currentSong + 1;
+            if (nextSongIndex > totalSongs) {
+                if (loop !== true) {
+                    location.reload();
+                }
+                else {
+                    nextSongIndex = 1; // Quay lại bài đầu tiên nếu đến bài cuối cùng
+                }
+            }
+            togglePlay(nextSongIndex);
+        }
+
+        function getSongSource(songIndex) {
+            if (songIndex === 1) {
+                return "./MP3/Nothings Gonna Change My Love For You Lyrics  Justin Bieber AI Cover.mp3";
+            } else if (songIndex === 2) {
+                return "./MP3/Love Story  Taylor Swift Lyrics  Vietsub.mp3";
+            } else if (songIndex === 3) {
+                return "./MP3/Jax-Like My Father.mp3";
+            } else if (songIndex === 4) {
+                return "./MP3/ILOVEYOU3000.mp3";
+            }
+        }
+
+        // đi theo màn hình audio
+        // window.addEventListener('scroll', function () {
+        //     var musicList = document.querySelector('.music-list');
+        //     var footer = document.querySelector('footer');
+        //     var musicListHeight = musicList.offsetHeight;
+        //     var footerTop = footer.offsetTop;
+
+        //     if (window.pageYOffset + window.innerHeight >= footerTop) {
+        //         musicList.style.bottom = (window.pageYOffset + window.innerHeight - footerTop) + 'px';
+        //     } else {
+        //         musicList.style.bottom = '0';
+        //     }
+        // });
+
+
+    </script>
+</body>
+
+</html>
