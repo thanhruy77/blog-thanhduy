@@ -153,7 +153,7 @@
                 <br>
                 Thời gian rảnh ngoài xem phim ra thì đọc sách, nghe nhạc,..
                 <br>
-                Rảnh rảnh viết cái blog chơi chơi.
+                <br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -351,23 +351,39 @@
                 <ul class="article-list">
                     <h4 class="baidangganday">BÀI ĐĂNG GẦN ĐÂY</h4>
                     <div id="artcle" class="artcle-class">
-                        <p>Hiện tại chưa có gì mới! Sắp tới có thể sẽ cập nhật thêm một vài tính năng.
+                        <!-- <p>Hiện tại chưa có gì mới! Sắp tới có thể sẽ cập nhật thêm một vài tính năng.
                             <br>
                             Thank you very much ♥
-                        </p>
+                        </p> -->
 
 
-                        <!-- <p>Một video giải trí!!!</p>
+                        <p id="colorChangingText" style="font-weight: bold;">Capcut này nọ đồ ha!!!😂</p>
                         <video class="video" id="videomp4hp" width="100%" controls>
                             <source src="./MP4/anhoiemmuon.mp4">
-                        </video> -->
+                        </video>
                     </div>
                 </ul>
             </div>
+            <!-- chữ đổi màu  -->
+            <script>
+                const textElement = document.getElementById("colorChangingText");
+
+                let colors = ["red", "blue"]; // Mảng các màu bạn muốn sử dụng
+                let currentIndex = 0;
+
+                function changeColor() {
+                    textElement.style.color = colors[currentIndex];
+                    currentIndex = (currentIndex + 1) % colors.length;
+                }
+
+                // Thay đổi màu mỗi 1 giây
+                setInterval(changeColor, 100);
+
+            </script>
 
 
             <!-- Lieen he ( Contact)-->
-            <div id="menu-contact-id" class="menu-contact">
+            <!-- <div id="menu-contact-id" class="menu-contact">
                 <ul class="contact-list">
                     <h4 class="baidangganday">LIÊN HỆ</h4>
                     <div id="contact" class="contact-class">
@@ -380,7 +396,7 @@
                     </div>
                     <br>
                 </ul>
-            </div>
+            </div> -->
 
             <style>
                 /* Điều chỉnh hiển thị cho màn hình máy tính */
@@ -697,11 +713,26 @@
             </script> -->
         </div>
 
+        <!-- Div hiện ngay khi load trang  -->
+        <!-- <div hidden class="guest"> 
+            Xin chào!
+        </div>
+
+        <style>
+            .guest{
+                height: 100px;
+                width: 100px;
+                background-color: #4E4E4E;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+            }
+        </style> -->
     </main>
 
 
     <footer>
-        <p>&copy; 2023 Blog of Thanh Ruy 77.</p>
+        <p>&copy; 2023 This Blog belongs to Thanh Duy</p>
     </footer>
 </body>
 

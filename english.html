@@ -90,6 +90,17 @@
             <br>
             <div class="music-div" onclick="togglePlay(4)" id="playButton4">4. Stephanie Poetri - I Love You 3000</div>
             <br>
+            <div class="music-div" onclick="togglePlay(5)" id="playButton5">5. Photograph - Ed Sheeran</div>
+            <br>
+            <div class="music-div" onclick="togglePlay(6)" id="playButton6">6. Perfect - Ed Sheeran</div>
+            <br>
+            <div class="music-div" onclick="togglePlay(7)" id="playButton7">7. Cant take my eyes of you - Aesthetic
+            </div>
+            <br>
+            <div class="music-div" onclick="togglePlay(8)" id="playButton8">8. Love Yourself - Justin Bieber</div>
+            <br>
+            <div class="music-div" onclick="togglePlay(9)" id="playButton9">9. Flashlight - Jessie J from Pitch Perfect 2</div>
+            <br>
         </div>
         <!-- trình phát nhạc. -->
         <div class="music-list">
@@ -203,9 +214,18 @@
                 return "./MP3/Jax-Like My Father.mp3";
             } else if (songIndex === 4) {
                 return "./MP3/ILOVEYOU3000.mp3";
+            } else if (songIndex === 5) {
+                return "./MP3/Photograph  Ed Sheeran.mp3";
+            } else if (songIndex === 6) {
+                return "./MP3/Ed Sheeran  Perfect.mp3";
+            } else if (songIndex === 7) {
+                return "./MP3/Cant take my eyes of you  Aesthetic Lyrics.mp3";
+            }else if (songIndex === 8) {
+                return "./MP3/Justin Bieber  Love Yourself Lyrics.mp3";
+            }else if (songIndex === 9) {
+                return "./MP3/Flashlight  Jessie J from Pitch Perfect 2 Lyrics  Vietsub.mp3";
             }
         }
-
         // đi theo màn hình audio
         // window.addEventListener('scroll', function () {
         //     var musicList = document.querySelector('.music-list');
