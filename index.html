@@ -5,6 +5,7 @@
     <title>Blog ThanhDuy</title>
     <link rel="icon" href="Anh/thanhruy77.jpg" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta property="og:image" content="https://blogthanhduy.web.app/Anh/duy.jpg">
     <link rel="stylesheet" href="./css(only)/css-index.css">
     <script src="js/jsindex.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
@@ -35,7 +36,7 @@
 
 <body>
     <header>
-        <h1><img src="Anh/astronaut.png" width="25px"> Thanh Duy</h1>
+        <h1>Blog's Thanh Duy</h1>
     </header>
 
     <nav id="mobile" hidden>
@@ -140,7 +141,7 @@
             <div>
                 <h2>Thanh Ruy 77 </h2>
             </div>
-            <img id="trang-chu-img" src="./Anh/thanhruy77.jpg" alt="Hình ảnh giới thiệu">
+            <img id="trang-chu-img" src="./Anh/duy.jpg" alt="Hình ảnh giới thiệu">
             <p>Name: <strong>Lê Văn Thanh Duy</strong>
                 <br>
                 Chào mừng bạn đến với blog của tôi. Ở đây tôi sẽ chia
@@ -342,7 +343,37 @@
             </head>
             <hr>
             <h1>Bài Đăng Của Tôi</h1>
-            <div id="postList" class="post-list"></div>
+            <div id="postList" class="post-list">
+                <div class="post">
+                    <img class="avatar" width="20px" height="60px" src="Anh/duy.jpg">
+                    <span class="ten">Lê Văn Thanh Duy</span>
+                    <img class="tichxanh" title="Chủ quyền!" width="22px" height="22px" src="Anh/tichxanh.png">
+                    <span id="time" class="time-class"> Date: 19-3-2024</span>
+                    <p class="post-caption" style="font-weight: bold;">I wanna have a love story like that ❤️</p>
+                    <video class="post-video" controls="" poster="./Anh/poster love.jpg">
+                        <source src="./MP4/video love.mp4">
+                    </video>
+                    <div class="button-like-comment">
+                        <button id="like" onclick="likePost('-NmZtNWNUVK2ICSpm0Ct')"> 👍 Like (6k)</button>
+                        <button id="comment" onclick="comment()"> 💬 Comment</button>
+                        <button id="share" onclick="share()">➦ Share</button>
+                    </div>
+                </div>
+                <div class="post">
+                    <img class="avatar" width="20px" height="60px" src="Anh/duy.jpg">
+                    <span class="ten">Lê Văn Thanh Duy</span>
+                    <img class="tichxanh" title="Chủ quyền!" width="22px" height="22px" src="Anh/tichxanh.png">
+                    <span id="time" class="time-class"> (19-3-2024)</span>
+                    <p class="post-caption" style="font-weight: bold;">Youth trip 🍀</p>
+                    <img class="post-img" src="Anh/haiphong.png">
+
+                    <div class="button-like-comment">
+                        <button id="like" onclick="likePost('-NtJb5M2kfUi2XW9coY6')"> 👍 Like (10k)</button>
+                        <button id="comment" onclick="comment()"> 💬 Comment</button>
+                        <button id="share" onclick="share()">➦ Share</button>
+                    </div>
+                </div>
+            </div>
 
 
 
@@ -400,7 +431,118 @@
 
             <style>
                 /* Điều chỉnh hiển thị cho màn hình máy tính */
-                @media only screen and (min-width: 1500px) {
+                @media only screen and (min-width: 1367px) {
+                    .article-list {
+                        position: absolute;
+                        top: 93px;
+                        right: 105px;
+                        /* Di chuyển menu ra bên trái */
+                        width: 280px;
+                        /* Định rộng của menu */
+                        box-shadow: 0 0 10px rgba(34, 34, 34, 0.5);
+                        padding: 5px;
+                        background-color: #ecf0f1;
+                        border: 1px solid #D9E1E4;
+                        box-shadow: none;
+                        border-radius: 0;
+                        z-index: 1;
+                        /*độ ưu tiên*/
+                    }
+
+                    .article-list li {
+                        margin-bottom: 5px;
+                    }
+
+                    .article-list a {
+                        text-decoration: none;
+                        color: red;
+                    }
+
+                    .article-list {
+                        display: block;
+                    }
+
+                    .baidangganday {
+                        font-family: 'Roboto Condensed', Tahoma, sans-serif;
+                        font-size: 18px;
+                        height: 28px;
+                        line-height: 30px;
+                        max-width: 100%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        border-bottom: 1px solid #4E4E4E;
+                        margin-block-start: 1.33em;
+                        margin-block-end: 1.33em;
+                        margin-inline-start: 0px;
+                        margin-inline-end: 0px;
+                        font-weight: bold;
+                    }
+
+                    .artcle-class {
+                        font-family: 'Courier New', Courier, monospace;
+                    }
+
+
+
+                    /* contact-------------------------------------------------------------------------------------------*/
+                    .contact-list {
+                        position: absolute;
+                        top: 330px;
+                        /* top: 670px; */
+                        right: 105px;
+                        /* Di chuyển menu ra bên trái */
+                        width: 310px;
+                        /* Định rộng của menu */
+                        box-shadow: 0 0 10px rgba(34, 34, 34, 0.1);
+                        padding: 5px;
+                        background-color: #ecf0f1;
+                        border: 1px solid #D9E1E4;
+                        box-shadow: none;
+                        border-radius: 0;
+                        z-index: 1;
+                        /*độ ưu tiên*/
+                    }
+
+                    .contact-list li {
+                        margin-bottom: 5px;
+                    }
+
+                    .contact-list a {
+                        text-decoration: none;
+                        color: red;
+                    }
+
+                    .contact-list {
+                        display: block;
+                    }
+
+                    .contact-class {
+                        font-family: 'Courier New', Courier, monospace;
+                        text-decoration: none;
+                        color: red;
+                    }
+
+                    .facebook {
+                        position: relative;
+                        left: 10px;
+                    }
+
+                    .zalo {
+                        position: absolute;
+                        right: 10px;
+                    }
+
+                    .instagram {
+                        position: relative;
+                        left: 10px;
+                        margin-bottom: 10px;
+                        top: 10px;
+                    }
+
+
+                }
+                @media only screen and (min-width: 1435px) {
                     .article-list {
                         position: absolute;
                         top: 93px;
@@ -433,8 +575,8 @@
 
                     .baidangganday {
                         font-family: 'Roboto Condensed', Tahoma, sans-serif;
-                        font-size: 20px;
-                        height: 33px;
+                        font-size: 18px;
+                        height: 28px;
                         line-height: 30px;
                         max-width: 100%;
                         white-space: nowrap;
@@ -512,7 +654,7 @@
 
                 }
 
-                @media (max-width:1434px) {
+                @media (max-width:1366px) {
                     .article-list {
                         display: none;
                     }
@@ -522,7 +664,7 @@
                     }
                 }
             </style>
-            <script>
+            <!-- <script>
                 // Listen for changes in Realtime Database
                 database.ref("posts").on("value", (snapshot) => {
                     postList.innerHTML = "";
@@ -571,7 +713,7 @@
                 function share() {
                     alert("Tinh nang dang cap nhat");
                 }
-            </script>
+            </script> -->
 
 
 

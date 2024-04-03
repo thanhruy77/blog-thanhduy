@@ -136,7 +136,27 @@ footer p {
     main {
         flex: 1;
         max-width: 670px;
-        margin-left: 380px;
+        margin-left: 280px;
+        padding: 20px;
+    }
+}
+/* hiển thị trên máy tinh */
+@media (min-width: 1435px) {
+    nav {
+        font-size: 16x;
+    }
+
+    main {
+        font-size: 16px;
+    }
+
+    header {
+        padding: 18px;
+    }
+    main {
+        flex: 1;
+        max-width: 670px;
+        margin-left: 370px;
         padding: 20px;
     }
 }
@@ -548,7 +568,7 @@ footer p {
 
 
 /* Điều chỉnh hiển thị cho màn hình máy tính */
-@media only screen and (min-width: 1434px) {
+@media only screen and (min-width: 1367px) {
     .menu-button {
         border-radius: 10px;
         display: inline-block;
@@ -636,7 +656,7 @@ footer p {
 }
 
 /* Điều chỉnh hiển thị cho màn hình điện thoại di động */
-@media only screen and (max-width: 1435px) {
+@media only screen and (max-width: 1366px) {
     .menu-button {
         border-radius: 10px;
         display: inline-block;
