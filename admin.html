@@ -160,14 +160,18 @@
                             console.log(`Đăng ${fileType === 'image' ? 'ảnh' : 'video'} thành công. URL:`, fileUrl);
 
                             // Lưu dữ liệu bài đăng vào Realtime Database
-                            const newPostRef = database.ref("posts").push();
-                            const postData = {
-                                caption: caption,
-                                [`${fileType}Url`]: fileUrl,
-                                likes: 0,
-                                time: dateTime
-                            };
-                            newPostRef.set(postData);
+                            const newPostRef = database.ref("posts");
+                            newPostRef.once('value', snapshot => {
+                                const Postcount = 10000000 - snapshot.numChildren();
+                                const newKey = Postcount;
+                                const postData = {
+                                    caption: caption,
+                                    [`${fileType}Url`]: fileUrl,
+                                    likes: 0,
+                                    time: dateTime,
+                                };
+                                newPostRef.child(newKey).set(postData);
+                            })
 
                             // Xóa các trường nhập liệu
                             captionInput.value = "";
