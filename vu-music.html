@@ -71,7 +71,15 @@
         <div id="du-an" class="content">
             <h2>Vũ - Official</h2>
             <p> Những bài hát hay nhất của Vũ. </p>
-                <!-- <h3>Hạnh Phúc Mới</h3>
+            <!-- trình phát nhạc. -->
+            <div class="music-list">
+                <button class="button" id="button-loop" onclick="loopsong()">🔄</button>
+                <audio controls id="audioPlayer">
+                    <source id="audioSource" src="" type="audio/mpeg">
+                    <source src="" type="audio/wav">
+                </audio>
+            </div>
+            <!-- <h3>Hạnh Phúc Mới</h3>
             <div class="video-mp4">
                 <video class="video" id="videomp4" controls poster="./Anh/hanhphucmoi.jpg ">
                     <source src="./MP4/Hạnh Phúc Mới - Sơn Tùng MTP.mp4">
@@ -79,30 +87,17 @@
             </div> -->
         </div>
         <div class="song-list-class" id="song-list">
-            <div class="music-div" onclick="togglePlay(1)" id="playButton1">1. Anh nhớ ra - Vũ</div>
+            <div class="music-div" onclick="togglePlay(1)" id="playButton1">1. Đợi - Vũ</div> <br>
+            <div class="music-div" onclick="togglePlay(2)" id="playButton2">2. Anh nhớ ra - Vũ</div><br>
+            <div class="music-div" onclick="togglePlay(3)" id="playButton3">3. Lời yêu em - Vũ </div> <br>
+            <div class="music-div" onclick="togglePlay(4)" id="playButton4">4. Mùa mưa ngâu nằm cạnh - Vũ </div> <br>
+            <div class="music-div" onclick="togglePlay(5)" id="playButton5">5. Chuyện những người yêu xa - Vũ</div><br>
+            <div class="music-div" onclick="togglePlay(6)" id="playButton6">6. Lạ Lùng - Vũ </div> <br>
+            <div class="music-div" onclick="togglePlay(7)" id="playButton7">7. Bước Qua Mùa Cô Đơn - Vũ </div> <br>
+            <div class="music-div" onclick="togglePlay(8)" id="playButton8">8. Bước Qua nhau - Vũ</div> <br>
+            <div class="music-div" onclick="togglePlay(9)" id="playButton9">9. Đông Kiếm Em - Vũ </div> <br>
+            <div class="music-div" onclick="togglePlay(10)" id="playButton10">10. Những Lời Hứa Bỏ Quên - Vũ </div>
             <br>
-            <div class="music-div" onclick="togglePlay(2)" id="playButton2">2. Nothing's gonna change my love for you - AI &nbsp;&nbsp;</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(3)" id="playButton3">3. Đợi - Vũ</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(4)" id="playButton4">4. Lạ Lùng - Vũ </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(5)" id="playButton5">5. Bước Qua Mùa Cô Đơn - Vũ </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(6)" id="playButton6">6. Bước Qua nhau - Vũ</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(7)" id="playButton7">7. Đông Kiếm Em - Vũ </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(8)" id="playButton8">8. Những Lời Hứa Bỏ Quên - Vũ </div>
-            <br>
-        </div>
-        <!-- trình phát nhạc. -->
-        <div class="music-list">
-            <button class="button" id="button-loop" onclick="loopsong()">🔄</button>
-            <audio controls id="audioPlayer">
-                <source id="audioSource" src="" type="audio/mpeg">
-                <source src="" type="audio/wav">
-            </audio>
         </div>
 
         <script>
@@ -201,20 +196,24 @@
 
         function getSongSource(songIndex) {
             if (songIndex === 1) {
-                return "./MP3/Anh Nhớ Ra - Vũ.mp3";
-            } else if (songIndex === 2) {
-                return "./MP3/Nothings Gonna Change My Love For You Lyrics  Justin Bieber AI Cover.mp3";
-            } else if (songIndex === 3) {
                 return "./MP3/ĐỢI - VŨ ORIGINAL.mp3";
+            } else if (songIndex === 2) {
+                return "./MP3/Anh Nhớ Ra - Vũ.mp3";
+            } else if (songIndex === 3) {
+                return "./MP3/Vũ - Lời Yêu Em.mp3";
             } else if (songIndex === 4) {
-                return "./MP3/LẠ LÙNG  Vũ Original.mp3";
+                return "./MP3/Mùa Mưa Ngâu Nằm Cạnh - Vũ..mp3";
             } else if (songIndex === 5) {
-                return "./MP3/BƯỚC QUA MÙA CÔ ĐƠN  Vũ Official MV.mp3";
+                return "./MP3/Chuyện những người yêu xa  Vũ Original.mp3";
             } else if (songIndex === 6) {
-                return "./MP3/BƯỚC QUA NHAU  Vũ Official MV.mp3";
+                return "./MP3/LẠ LÙNG  Vũ Original.mp3";
             } else if (songIndex === 7) {
-                return "./MP3/ĐÔNG KIẾM EM  Vũ Original.mp3";
-            } else if (songIndex ===8){
+                return "./MP3/BƯỚC QUA MÙA CÔ ĐƠN  Vũ Official MV.mp3"
+            } else if (songIndex === 8) {
+                return "./MP3/BƯỚC QUA NHAU  Vũ Official MV.mp3"
+            } else if (songIndex === 9) {
+                return "./MP3/ĐÔNG KIẾM EM  Vũ Original.mp3"
+            } else if (songIndex === 10) {
                 return "./MP3/NHỮNG LỜI HỨA BỎ QUÊN  VŨ x DEAR JANE Official MV.mp3"
             }
         }

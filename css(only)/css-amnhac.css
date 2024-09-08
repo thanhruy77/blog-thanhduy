@@ -202,14 +202,14 @@ a {
 }
 
 .music-list {
-    position: relative;
-    bottom: -20px;
+    position:relative;
+    /* bottom: -20px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); */
     display: flex;
-    justify-content: center;
+    /* justify-content: center; */
     width: 100%;
-    z-index: 9999;
+    z-index: 99999;
 }
 
 
