@@ -542,6 +542,7 @@
 
 
                 }
+
                 @media only screen and (min-width: 1435px) {
                     .article-list {
                         position: absolute;
@@ -665,7 +666,7 @@
                 }
             </style>
 
-            
+
             <script>
                 // Listen for changes in Realtime Database
                 database.ref("posts").on("value", (snapshot) => {
@@ -675,7 +676,7 @@
                         const postElement = document.createElement("div");
                         postElement.innerHTML = `
                     <div class="post">
-                    <img class="avatar" width="20px" height="60px" src="Anh/thanhruy77.jpg">
+                    <img class="avatar" width="20px" height="60px" src="Anh/duy.jpg">
                     <span class="ten">Lê Văn Thanh Duy</span>
                     <img class="tichxanh" title="Chủ quyền!" width="22px" height="22px" src="Anh/tichxanh.png">
                     <span id="time" class="time-class"> (${post.time})</span>
@@ -687,7 +688,7 @@
                     <div class="button-like-comment">
                     <button id="like" onclick="likePost('${childSnapshot.key}')"> &#128077; Like (${post.likes})</button>
                     <button id="comment" onclick="comment()"> &#128172; Comment</button> 
-                    <button id="share" onclick="share()">➦ Share</button> 
+                    <button id="share" onclick="share('https://blogthanhduy.web.app/index.html')">➦ Share</button> 
                     </div>
                     </div>`;
                         postList.appendChild(postElement);
@@ -710,10 +711,23 @@
                         // Xảy ra lỗi khi đăng xuất
                         console.error("Lỗi đăng xuất:", error);
                     });
-                    alert("Tinh nang dang cap nhat");
+                    alert("Tính năng đang cập nhật");
                 }
-                function share() {
-                    alert("Tinh nang dang cap nhat");
+                function share(link) {
+                    // Đường dẫn bạn muốn chia sẻ
+                    var url = link;
+                    // Sao chép đường dẫn vào khay nhớ tạm
+                    navigator.clipboard.writeText(url)
+                        .then(function () {
+                            // Sao chép thành công, mở chế độ chia sẻ
+                            navigator.share({ url: url })
+                                .then(() => console.log('Chia sẻ thành công'))
+                                .catch((error) => console.error('Lỗi khi chia sẻ:', error));
+                        })
+                        .catch(function (error) {
+                            // Xử lý lỗi khi sao chép đường dẫn
+                            console.error('Sao chép đường dẫn không thành công: ', error);
+                        });
                 }
             </script>
 
