@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Blog ThanhDuy - Đọc Sách</title>
+    <link rel="icon" href="./Anh/thanhruy77.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/chotoixinmotvedituoitho.css">
+</head>
+
+<body>
+    <header>
+        <h1><img src="./Anh/astronaut.png" width="25px"> Đọc Sách</h1>
+    </header>
+    <nav id="mobile" hidden>
+        <ul class="nav-menu">
+            <li><a href="../../index.html">Trang Chủ</a></li>
+            <li><a href="../../travel.html">Du Lịch</a></li>
+            <li><a href="../../phim.html">Phim</a></li>
+            <li>
+                <a href="#">Khác</a>
+                <ul class="submenu">
+                    <li><a href="../../thantuong.html">Lalisa</a></li>
+                    <li><a href="../../sach.html">Sách</a></li>
+                    <li><a href="../../amnhac.html">Music</a></li>
+                    <li><a href="../../duan.html">Dự Án</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <style>
+        /* Định dạng bảng cho màn hình điện thoại */
+        @media (max-width: 800px) {
+            #pc {
+                display: none;
+            }
+
+            #mobile {
+                display: block;
+            }
+        }
+
+        /* Định dạng bảng cho màn hình máy tính */
+        @media (min-width: 801px) {
+            #pc {
+                display: block;
+            }
+
+            #mobile {
+                display: none;
+            }
+        }
+    </style>
+    <nav id="pc" hidden>
+        <ul class="nav-menu-pc">
+            <li><a href="../../index.html">Trang Chủ</a></li>
+            <li><a href="../../travel.html">Du Lịch</a></li>
+            <li><a href="../../sach.html">Sách</a></li>
+            <li><a href="../../duan.html">Dự Án</a></li>
+            <li><a href="../../phim.html">Phim</a></li>
+            <li><a href="../../amnhac.html">Music</a></li>
+            <li><a href="../../thantuong.html">Lalisa</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2 class="name">THÁM TỬ LỪNG DANH CONAN</h2>
+        <h3 class="name">Chương 2</h3>
+        <div class="chapter-navigation">
+            <button id="prev-chapter-top">Chương Trước</button>
+            <select id="chapter-list-top">
+                <!-- Tùy chọn sẽ được tạo bằng JavaScript -->
+            </select>
+            <button id="next-chapter-top">Chương Tiếp</button>
+        </div>
+        <div class="content">
+            <div class="chapter-content">
+                <!-- Nội dung ở đây-->
+                <div>
+                    <div id="pdfCanvasContainer" class="pdf-frame" bis_skin_checked="1">
+                        <iframe src="Anh/2.pdf" width="100%" height="80%" style="min-height: 1000px;" allowfullscreen=""
+                            webkitallowfullscreen=""></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chapter-navigation">
+            <button id="prev-chapter-bottom">Chương Trước</button>
+            <select id="chapter-list-bottom">
+                <!-- Tùy chọn sẽ được tạo bằng JavaScript -->
+            </select>
+
+            <button id="next-chapter-bottom">Chương Tiếp</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Blog ThanhDuy. All rights reserved.</p>
+    </footer>
+    <script>
+        // Danh sách các chương và các trang tương ứng
+        const chapters = [
+            { name: "Chương 1", link: "chuong1.html" },
+            { name: "Chương 2", link: "chuong2.html" },
+            { name: "Chương 3", link: "chuong3.html" },
+            { name: "Chương 4", link: "chuong4.html" },
+            { name: "Chương 5", link: "chuong5.html" },
+            { name: "Chương 6", link: "chuong6.html" },
+            { name: "Chương 7", link: "chuong7.html" },
+            { name: "Chương 8", link: "chuong8.html" },
+            { name: "Chương 9", link: "chuong9.html" },
+            { name: "Chương 10", link: "chuong10.html" },
+        ];
+
+        // Tạo các tùy chọn cho ô select dựa trên danh sách các chương
+        const chapterListSelects = document.querySelectorAll("select[id^='chapter-list']");
+        chapterListSelects.forEach(select => {
+            chapters.forEach((chapter, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.text = chapter.name;
+                select.appendChild(option);
+            });
+        });
+
+        // Xử lý sự kiện khi người dùng chọn một tùy chọn
+        chapterListSelects.forEach(select => {
+            select.addEventListener("change", function () {
+                const selectedChapterIndex = parseInt(select.value);
+                const selectedChapter = chapters[selectedChapterIndex];
+                window.location.href = selectedChapter.link;
+            });
+        });
+
+        // Xử lý sự kiện khi nhấn nút chuyển chương tiếp theo
+        const nextChapterButtons = document.querySelectorAll(".chapter-navigation button[id^='next-chapter']");
+        nextChapterButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const nextChapterIndex = currentChapterIndex + 1;
+                if (nextChapterIndex < chapters.length) {
+                    window.location.href = chapters[nextChapterIndex].link;
+                } else {
+                    alert("Bạn đã đọc hết sách!");
+                }
+            });
+        });
+
+        // Xử lý sự kiện khi nhấn nút chuyển chương trước
+        const prevChapterButtons = document.querySelectorAll(".chapter-navigation button[id^='prev-chapter']");
+        prevChapterButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const prevChapterIndex = currentChapterIndex - 1;
+                if (prevChapterIndex >= 0) {
+                    window.location.href = chapters[prevChapterIndex].link;
+                }
+            });
+        });
+
+        // Lấy chương hiện tại từ URL khi trang tải
+        const currentChapterLink = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+        const currentChapter = chapters.find(chapter => chapter.link === currentChapterLink);
+        const currentChapterIndex = chapters.indexOf(currentChapter);
+
+        // Cập nhật ô select chương hiện tại
+        chapterListSelects.forEach(select => {
+            select.value = currentChapterIndex;
+        });
+
+
+        // function goBack() {
+        //     window.location.href = '../../sach.html'; // Chuyển đến trang sach.html khi nút được nhấn
+        // }
+    </script>
+</body>
+
+</html>
