@@ -1,200 +1,218 @@
 <!DOCTYPE html>
 <html lang="vi">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Upload folder + Auth</title>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
-    <style>
-        body {
-            font-family: Arial;
-            padding: 30px;
-        }
+  <meta charset="UTF-8">
+  <title>📁 Upload Thư Mục Firebase</title>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f3f4f6;
+      padding: 30px;
+      max-width: 900px;
+      margin: auto;
+      color: #333;
+    }
 
-        #drop-zone {
-            border: 3px dashed #aaa;
-            padding: 40px;
-            text-align: center;
-            margin-top: 20px;
-            background: #f9f9f9;
-        }
+    h2 {
+      text-align: center;
+      color: #1e40af;
+    }
 
-        #drop-zone.highlight {
-            background: #e0f7fa;
-        }
+    .auth-box {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      margin-bottom: 20px;
+    }
 
-        #log {
-            white-space: pre-wrap;
-            background: #eee;
-            padding: 15px;
-            border-radius: 6px;
-            margin-top: 20px;
-            height: 250px;
-            overflow-y: auto;
-        }
+    .auth-box input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 6px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+    }
 
-        input {
-            padding: 8px;
-            margin: 5px 0;
-            width: 200px;
-        }
+    .auth-box button {
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      margin-top: 10px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
 
-        button {
-            padding: 8px 12px;
-            margin: 5px;
-        }
+    .auth-box button:hover {
+      background-color: #1d4ed8;
+    }
 
-        .auth-box {
-            margin-bottom: 20px;
-        }
-    </style>
+    #auth-status {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .upload-box {
+      text-align: center;
+      padding: 20px;
+      background: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .upload-box button {
+      background-color: #10b981;
+      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .upload-box button:hover {
+      background-color: #059669;
+    }
+
+    .progress-bar {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+
+    #file-list {
+      margin-top: 20px;
+      background: white;
+      border-radius: 8px;
+      max-height: 400px;
+      overflow-y: auto;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .file-item {
+      padding: 8px 12px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .success {
+      color: #16a34a;
+    }
+
+    .error {
+      color: #dc2626;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  </style>
 </head>
 
 <body>
 
-    <h2>🔥 Upload Folder sau khi Đăng Nhập</h2>
+  <h2>📁 Upload Thư Mục Lên Firebase</h2>
 
-    <div class="auth-box">
-        <input type="email" id="email" placeholder="Email"><br>
-        <input type="password" id="password" placeholder="Mật khẩu"><br>
-        <button onclick="login()">Đăng nhập</button>
-        <button onclick="register()">Đăng ký</button>
-        <button onclick="logout()">Đăng xuất</button>
-        <div id="auth-status">⚠️ Chưa đăng nhập</div>
-    </div>
+  <div class="auth-box">
+    <input type="email" id="email" placeholder="Email đăng nhập">
+    <input type="password" id="password" placeholder="Mật khẩu">
+    <button onclick="login()">🔐 Đăng nhập</button>
+    <button onclick="logout()">🚪 Đăng xuất</button>
+    <div id="auth-status">⚠️ Chưa đăng nhập</div>
+  </div>
 
-    <div id="drop-zone">
-        <strong>Kéo thư mục vào đây</strong><br>
-        (Chỉ hoạt động nếu đã đăng nhập)
-    </div>
+  <div class="upload-box">
+    <p>Chọn một thư mục chứa dự án cần upload</p>
+    <button onclick="document.getElementById('folderInput').click()">📂 Chọn thư mục</button>
+    <input type="file" id="folderInput" webkitdirectory directory multiple>
+    <div class="progress-bar" id="upload-progress">📥 Chưa có tệp nào được tải lên</div>
+  </div>
 
-    <div id="log"></div>
+  <div id="file-list"></div>
 
-    <script>
-        // Firebase config
-        const firebaseConfig = {
-            apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
-            authDomain: "blogthanhduy.firebaseapp.com",
-            projectId: "blogthanhduy",
-            storageBucket: "blogthanhduy.appspot.com",
-            messagingSenderId: "346123189563",
-            appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e"
-        };
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const storageRef = firebase.storage().ref();
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyARrGOTfNEiUaxqAhm1GJeTyP7KNz2DWcc",
+      authDomain: "thduyblog.firebaseapp.com",
+      databaseURL: "https://thduyblog-default-rtdb.firebaseio.com",
+      projectId: "thduyblog",
+      storageBucket: "thduyblog.appspot.com",
+      messagingSenderId: "974463907055",
+      appId: "1:974463907055:web:63e1df721e667a9415d71a"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const storageRef = firebase.storage().ref();
 
-        let currentUser = null;
+    let currentUser = null;
+    const statusText = document.getElementById("auth-status");
+    const progressBar = document.getElementById("upload-progress");
+    const fileList = document.getElementById("file-list");
 
-        const dropZone = document.getElementById("drop-zone");
-        const log = document.getElementById("log");
-        const status = document.getElementById("auth-status");
+    auth.onAuthStateChanged((user) => {
+      currentUser = user;
+      statusText.textContent = user
+        ? "✅ Đã đăng nhập: " + user.email
+        : "⚠️ Chưa đăng nhập";
+    });
 
-        function logMessage(msg) {
-            log.textContent += msg + "\n";
-        }
+    function login() {
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+      auth.signInWithEmailAndPassword(email, password)
+        .then(() => alert("✅ Đăng nhập thành công!"))
+        .catch(err => alert("❌ Lỗi: " + err.message));
+    }
 
-        // Xử lý auth state
-        auth.onAuthStateChanged((user) => {
-            if (user) {
-                currentUser = user;
-                status.textContent = "✅ Đã đăng nhập: " + user.email;
-            } else {
-                currentUser = null;
-                status.textContent = "⚠️ Chưa đăng nhập";
+    function logout() {
+      auth.signOut();
+    }
+
+    document.getElementById("folderInput").addEventListener("change", function (e) {
+      if (!currentUser) {
+        alert("⚠️ Bạn cần đăng nhập trước khi upload!");
+        return;
+      }
+
+      const files = Array.from(e.target.files);
+      if (files.length === 0) return;
+
+      fileList.innerHTML = "";
+      progressBar.textContent = `📤 Đang tải ${files.length} tệp...`;
+
+      let uploaded = 0;
+
+      for (const file of files) {
+        const fullPath = file.webkitRelativePath || file.name;
+        const item = document.createElement("div");
+        item.className = "file-item";
+        item.textContent = `📤 ${fullPath} - Đang tải...`;
+        fileList.appendChild(item);
+
+        const fileRef = storageRef.child("uploads/" + fullPath);
+        fileRef.put(file)
+          .then(() => {
+            uploaded++;
+            item.textContent = `✅ ${fullPath}`;
+            item.classList.add("success");
+            progressBar.textContent = `📥 Đã tải: ${uploaded} / ${files.length}`;
+            if (uploaded === files.length) {
+              progressBar.textContent += " 🎉 Hoàn tất!";
             }
-        });
-
-        // Đăng nhập
-        function login() {
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value.trim();
-            if (!email || !password) return alert("Nhập đầy đủ email và mật khẩu!");
-
-            auth.signInWithEmailAndPassword(email, password)
-                .then(() => logMessage("✅ Đăng nhập thành công!"))
-                .catch(err => alert("❌ Lỗi: " + err.message));
-        }
-
-        // Đăng ký
-        // function register() {
-        //   const email = document.getElementById("email").value.trim();
-        //   const password = document.getElementById("password").value.trim();
-        //   if (!email || !password) return alert("Nhập đầy đủ email và mật khẩu!");
-
-        //   auth.createUserWithEmailAndPassword(email, password)
-        //     .then(() => logMessage("✅ Tạo tài khoản thành công!"))
-        //     .catch(err => alert("❌ Lỗi: " + err.message));
-        // }
-
-        // Đăng xuất
-        function logout() {
-            auth.signOut();
-            logMessage("🚪 Đã đăng xuất.");
-        }
-
-        // Kéo thả folder
-        dropZone.addEventListener("dragover", (e) => {
-            e.preventDefault();
-            dropZone.classList.add("highlight");
-        });
-
-        dropZone.addEventListener("dragleave", () => {
-            dropZone.classList.remove("highlight");
-        });
-
-        dropZone.addEventListener("drop", (e) => {
-            e.preventDefault();
-            dropZone.classList.remove("highlight");
-
-            if (!currentUser) {
-                alert("⚠️ Bạn cần đăng nhập trước khi upload!");
-                return;
-            }
-
-            const items = e.dataTransfer.items;
-            if (!items || !items[0].webkitGetAsEntry) {
-                alert("⚠️ Trình duyệt không hỗ trợ kéo-thả folder!");
-                return;
-            }
-
-            for (let i = 0; i < items.length; i++) {
-                const item = items[i].webkitGetAsEntry();
-                if (item) {
-                    traverseFileTree(item);
-                }
-            }
-        });
-
-        function traverseFileTree(item, path = "") {
-            if (item.isFile) {
-                item.file((file) => {
-                    const fullPath = path + file.name;
-                    uploadFileToFirebase(file, fullPath);
-                });
-            } else if (item.isDirectory) {
-                const dirReader = item.createReader();
-                dirReader.readEntries((entries) => {
-                    for (let i = 0; i < entries.length; i++) {
-                        traverseFileTree(entries[i], path + item.name + "/");
-                    }
-                });
-            }
-        }
-
-        function uploadFileToFirebase(file, fullPath) {
-            const fileRef = storageRef.child("uploads/" + fullPath);
-            fileRef.put(file)
-                .then(() => {
-                    logMessage("✅ Upload: " + fullPath);
-                })
-                .catch((err) => {
-                    logMessage("❌ Lỗi upload: " + fullPath + " - " + err.message);
-                });
-        }
-    </script>
+          })
+          .catch(err => {
+            uploaded++;
+            item.textContent = `❌ ${fullPath} - ${err.message}`;
+            item.classList.add("error");
+            progressBar.textContent = `📥 Đã tải: ${uploaded} / ${files.length}`;
+          });
+      }
+    });
+  </script>
 </body>
-
 </html>
