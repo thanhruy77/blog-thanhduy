@@ -3,9 +3,31 @@
 
 <head>
     <title>Blog ThanhDuy</title>
-    <link rel="icon" href="Anh/duy.jpg" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css(only)/css-duan.css">
+    <link rel="icon" href="Anh/thanhruy77.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <link rel="stylesheet" href="./css(only)/css-duan.css">
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
+            authDomain: "blogthanhduy.firebaseapp.com",
+            databaseURL: "https://blogthanhduy-default-rtdb.firebaseio.com",
+            projectId: "blogthanhduy",
+            storageBucket: "blogthanhduy.appspot.com",
+            messagingSenderId: "346123189563",
+            appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e",
+            measurementId: "G-1NFNF0B3E9"
+        };
+        firebase.initializeApp(firebaseConfig);
+        // Initialize Firebase Storage
+        const storage = firebase.storage();
+        // Get a reference to the default storage bucket
+        const storageRef = storage.ref();
+        const database = firebase.database();
+    </script>
 </head>
 
 <body>
@@ -114,6 +136,39 @@
                 </tr>
             </table>
         </div>
+
+        <br>
+        <label for="key">Key firebase</label>
+        <input type="text" id="key">
+        <br>
+        <br>
+        <label for="text">Value</label>
+        <textarea name="textarea" id="text"></textarea><br> <button onclick="SendtoFirebase()"> Send </button>
+
+        <script>
+            function SendtoFirebase() {
+                console.log("ngu")
+                const key = document.getElementById("key").value.trim();
+                const value = document.getElementById("text").value;
+
+                if (!key || !value) {
+                    alert("Vui lòng nhập key Firebase! or Value!");
+                    return;
+                }
+
+                database.ref("cctv/" + key).set(value)
+                    .then(() => {
+                        alert("Đã lưu thành công!");
+                        location.reload();
+                    })
+                    .catch((error) => {
+                        console.error("Lỗi khi lưu dữ liệu:", error);
+                        alert("Có lỗi xảy ra khi lưu!");
+                        location.reload();
+                    });
+            }
+
+        </script>
 
 
     </main>
