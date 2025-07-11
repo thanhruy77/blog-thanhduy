@@ -1,184 +1,200 @@
 <!DOCTYPE html>
-<html>
+<html lang="vi">
 
 <head>
-    <title>Blog ThanhDuy</title>
-    <link rel="icon" href="Anh/thanhruy77.jpg" type="image/x-icon">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" href="./css(only)/css-duan.css">
+    <meta charset="UTF-8">
+    <title>Upload folder + Auth</title>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
-            authDomain: "blogthanhduy.firebaseapp.com",
-            databaseURL: "https://blogthanhduy-default-rtdb.firebaseio.com",
-            projectId: "blogthanhduy",
-            storageBucket: "blogthanhduy.appspot.com",
-            messagingSenderId: "346123189563",
-            appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e",
-            measurementId: "G-1NFNF0B3E9"
-        };
-        firebase.initializeApp(firebaseConfig);
-        // Initialize Firebase Storage
-        const storage = firebase.storage();
-        // Get a reference to the default storage bucket
-        const storageRef = storage.ref();
-        const database = firebase.database();
-    </script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 30px;
+        }
+
+        #drop-zone {
+            border: 3px dashed #aaa;
+            padding: 40px;
+            text-align: center;
+            margin-top: 20px;
+            background: #f9f9f9;
+        }
+
+        #drop-zone.highlight {
+            background: #e0f7fa;
+        }
+
+        #log {
+            white-space: pre-wrap;
+            background: #eee;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            height: 250px;
+            overflow-y: auto;
+        }
+
+        input {
+            padding: 8px;
+            margin: 5px 0;
+            width: 200px;
+        }
+
+        button {
+            padding: 8px 12px;
+            margin: 5px;
+        }
+
+        .auth-box {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <h1><img src="Anh/astronaut.png" width="25px"> Thanh Duy</h1>
-    </header>
 
-    <nav id="mobile" hidden>
-        <ul class="nav-menu">
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="travel.html">Du Lịch</a></li>
-            <li><a href="phim.html">Phim</a></li>
-            <li>
-                <a href="#">Khác</a>
-                <ul class="submenu">
-                    <li><a href="thantuong.html">Lalisa</a></li>
-                    <li><a href="sach.html">Sách</a></li>
-                    <li><a href="amnhac.html">Music</a></li>
-                    <li><a href="duan.html">Dự Án</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <style>
-        /* Định dạng bảng cho màn hình điện thoại */
-        @media (max-width: 800px) {
-            #pc {
-                display: none;
+    <h2>🔥 Upload Folder sau khi Đăng Nhập</h2>
+
+    <div class="auth-box">
+        <input type="email" id="email" placeholder="Email"><br>
+        <input type="password" id="password" placeholder="Mật khẩu"><br>
+        <button onclick="login()">Đăng nhập</button>
+        <button onclick="register()">Đăng ký</button>
+        <button onclick="logout()">Đăng xuất</button>
+        <div id="auth-status">⚠️ Chưa đăng nhập</div>
+    </div>
+
+    <div id="drop-zone">
+        <strong>Kéo thư mục vào đây</strong><br>
+        (Chỉ hoạt động nếu đã đăng nhập)
+    </div>
+
+    <div id="log"></div>
+
+    <script>
+        // Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
+            authDomain: "blogthanhduy.firebaseapp.com",
+            projectId: "blogthanhduy",
+            storageBucket: "blogthanhduy.appspot.com",
+            messagingSenderId: "346123189563",
+            appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const storageRef = firebase.storage().ref();
+
+        let currentUser = null;
+
+        const dropZone = document.getElementById("drop-zone");
+        const log = document.getElementById("log");
+        const status = document.getElementById("auth-status");
+
+        function logMessage(msg) {
+            log.textContent += msg + "\n";
+        }
+
+        // Xử lý auth state
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                currentUser = user;
+                status.textContent = "✅ Đã đăng nhập: " + user.email;
+            } else {
+                currentUser = null;
+                status.textContent = "⚠️ Chưa đăng nhập";
+            }
+        });
+
+        // Đăng nhập
+        function login() {
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+            if (!email || !password) return alert("Nhập đầy đủ email và mật khẩu!");
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => logMessage("✅ Đăng nhập thành công!"))
+                .catch(err => alert("❌ Lỗi: " + err.message));
+        }
+
+        // Đăng ký
+        // function register() {
+        //   const email = document.getElementById("email").value.trim();
+        //   const password = document.getElementById("password").value.trim();
+        //   if (!email || !password) return alert("Nhập đầy đủ email và mật khẩu!");
+
+        //   auth.createUserWithEmailAndPassword(email, password)
+        //     .then(() => logMessage("✅ Tạo tài khoản thành công!"))
+        //     .catch(err => alert("❌ Lỗi: " + err.message));
+        // }
+
+        // Đăng xuất
+        function logout() {
+            auth.signOut();
+            logMessage("🚪 Đã đăng xuất.");
+        }
+
+        // Kéo thả folder
+        dropZone.addEventListener("dragover", (e) => {
+            e.preventDefault();
+            dropZone.classList.add("highlight");
+        });
+
+        dropZone.addEventListener("dragleave", () => {
+            dropZone.classList.remove("highlight");
+        });
+
+        dropZone.addEventListener("drop", (e) => {
+            e.preventDefault();
+            dropZone.classList.remove("highlight");
+
+            if (!currentUser) {
+                alert("⚠️ Bạn cần đăng nhập trước khi upload!");
+                return;
             }
 
-            #mobile {
-                display: block;
-            }
-        }
-
-        /* Định dạng bảng cho màn hình máy tính */
-        @media (min-width: 801px) {
-            #pc {
-                display: block;
+            const items = e.dataTransfer.items;
+            if (!items || !items[0].webkitGetAsEntry) {
+                alert("⚠️ Trình duyệt không hỗ trợ kéo-thả folder!");
+                return;
             }
 
-            #mobile {
-                display: none;
-            }
-        }
-    </style>
-    <nav id="pc" hidden>
-        <ul class="nav-menu-pc">
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="travel.html">Du Lịch</a></li>
-            <li><a href="sach.html">Sách</a></li>
-            <li><a href="duan.html">Dự Án</a></li>
-            <li><a href="phim.html">Phim</a></li>
-            <li><a href="amnhac.html">Music</a></li>
-            <li><a href="thantuong.html">Lalisa</a></li>
-
-        </ul>
-    </nav>
-    <style>
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        th,
-        td {
-            border: 2px solid #cfcccc;
-            padding: 15px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #e0dfdf;
-            text-align: center;
-        }
-
-        a {
-            text-decoration: none;
-            /* Xóa đường kẻ dưới chân liên kết */
-            color: red;
-            /* Đổi màu đỏ cho tên liên kết */
-        }
-    </style>
-    <main>
-
-        <div id="du-an" class="content">
-            <h2>Dự Án</h2>
-            <table>
-                <tr>
-                    <th>STT</th>
-                    <th>Tên Dự Án</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><a href="https://github.com/thanhruy77/store" target="_blank">Thiết kế Web bán quần áo</a></td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td><a href="https://github.com/thanhruy77/systemIot" target="_blank">
-                            Thiết kế ứng dụng Android để điều khiển hệ thống tưới cây</a></td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td><a href="https://utehytaixiu.web.app/" target="_blank">
-                            Game giải trí (tk: custom || mk: 123) (game vui thôi nhé :))</a></td>
-                </tr>
-            </table>
-        </div>
-
-        <br>
-        <label for="key">Key firebase</label>
-        <input type="text" id="key">
-        <br>
-        <br>
-        <label for="text">Value</label>
-        <textarea name="textarea" id="text"></textarea><br> <button onclick="SendtoFirebase()"> Send </button>
-
-        <script>
-            function SendtoFirebase() {
-                console.log("ngu")
-                const key = document.getElementById("key").value.trim();
-                const value = document.getElementById("text").value;
-
-                if (!key || !value) {
-                    alert("Vui lòng nhập key Firebase! or Value!");
-                    return;
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i].webkitGetAsEntry();
+                if (item) {
+                    traverseFileTree(item);
                 }
-
-                database.ref("cctv/" + key).set(value)
-                    .then(() => {
-                        alert("Đã lưu thành công!");
-                        location.reload();
-                    })
-                    .catch((error) => {
-                        console.error("Lỗi khi lưu dữ liệu:", error);
-                        alert("Có lỗi xảy ra khi lưu!");
-                        location.reload();
-                    });
             }
+        });
 
-        </script>
+        function traverseFileTree(item, path = "") {
+            if (item.isFile) {
+                item.file((file) => {
+                    const fullPath = path + file.name;
+                    uploadFileToFirebase(file, fullPath);
+                });
+            } else if (item.isDirectory) {
+                const dirReader = item.createReader();
+                dirReader.readEntries((entries) => {
+                    for (let i = 0; i < entries.length; i++) {
+                        traverseFileTree(entries[i], path + item.name + "/");
+                    }
+                });
+            }
+        }
 
-
-    </main>
-
-    <footer>
-        <p>&copy; 2023 Blog of Thanh Ruy 77.</p>
-    </footer>
-    <!-- <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
-    <script src="js/firebase_index.js"></script> -->
+        function uploadFileToFirebase(file, fullPath) {
+            const fileRef = storageRef.child("uploads/" + fullPath);
+            fileRef.put(file)
+                .then(() => {
+                    logMessage("✅ Upload: " + fullPath);
+                })
+                .catch((err) => {
+                    logMessage("❌ Lỗi upload: " + fullPath + " - " + err.message);
+                });
+        }
+    </script>
 </body>
 
 </html>
