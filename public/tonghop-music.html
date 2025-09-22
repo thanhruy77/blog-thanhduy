@@ -70,72 +70,13 @@
         <button class="scroll-to-top" onclick="scrollToTop()"></button>
         <div id="du-an" class="content">
             <h2>Âm nhạc tôi ưa thích</h2>
-            <p>Nhiều lắm, chẳng thể nào liệt kê ra hết, thôi thì cứ tạm vài bài =))
-            </p>
-            <p>
-                <!-- <h3>Hạnh Phúc Mới</h3>
-            <div class="video-mp4">
-                <video class="video" id="videomp4" controls poster="./Anh/hanhphucmoi.jpg ">
-                    <source src="./MP4/Hạnh Phúc Mới - Sơn Tùng MTP.mp4">
-                </video>
-            </div> -->
+            <p>Nhiều lắm, chẳng thể nào liệt kê ra hết, thôi thì cứ tạm vài bài =))</p>
         </div>
-        <div class="song-list-class" id="song-list">
-            <div class="music-div" onclick="togglePlay(1)" id="playButton1">1. Nothing's Gonna Change My Love For You -
-                AI</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(2)" id="playButton2">2. Tình Yêu Chậm Trễ - MONSTAR</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(3)" id="playButton3">3. Love Story - Taylor Swift</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(4)" id="playButton4">4. Jax - Like My Father </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(5)" id="playButton5">5. Đông Kiếm Em - Vũ </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(6)" id="playButton6">6. Stephanie Poetri - I Love You 3000</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(7)" id="playButton7">7. Sơn Tùng - Hạnh Phúc Mới </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(8)" id="playButton8">8. My Everything - Tiên Tiên </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(9)" id="playButton9">9. Thêm Bao Nhiêu Lâu - Đạt G</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(10)" id="playButton10">10. Lee Hi - Only</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(11)" id="playButton11">11. Lady Mây - Anh Chưa Thương Em Đến Vậy
-                Đâu </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(12)" id="playButton12">12. Bước Qua Nhau - Vũ</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(13)" id="playButton13">13. Anh Nhớ Ra - Vũ</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(14)" id="playButton14">14. Những Lời Hứa Bỏ Quên - Vũ</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(15)" id="playButton15">15. Photograph - Ed Sheeran</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(16)" id="playButton16">16. Perfect - Ed Sheeran</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(17)" id="playButton17">17. Cant take my eyes of you - Aesthetic
-            </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(18)" id="playButton18">18. Love Yourself - Justin Bieber</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(19)" id="playButton19">19. Flashlight - Jessie J from Pitch
-                Perfect 2</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(20)" id="playButton20">20. Có hẹn với Thanh Xuân - Grey D</div>
-            <br>
-            <div class="music-div" onclick="togglePlay(21)" id="playButton21">21. Mặt trời của em - Hương Ly ft JustaTee
-            </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(22)" id="playButton22">22. Rung động - Duong EDWARD </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(23)" id="playButton23">23. Vùng Ký Ức </div>
-            <br>
-            <div class="music-div" onclick="togglePlay(24)" id="playButton24">24. Chia xa </div>
-            <br>
-        </div>
-        <!-- trình phát nhạc. -->
+
+        <!-- danh sách nhạc sẽ render tự động -->
+        <div class="song-list-class" id="song-list"></div>
+
+        <!-- trình phát nhạc -->
         <div class="music-list">
             <button class="button" id="button-loop" onclick="loopsong()">🔄</button>
             <audio controls id="audioPlayer">
@@ -144,29 +85,18 @@
             </audio>
         </div>
 
-        <script>
-
-        </script>
-
-
-
     </main>
-
 
     <footer class="sticky-footer">
         <p>&copy; 2024 This blog belongs to Thanh Duy.</p>
     </footer>
 
-    <script>        // JavaScript để xử lý sự kiện khi click nút lên trên
+    <script>
+        // Nút scroll lên đầu trang
         function scrollToTop() {
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
-
-        // Hiển thị nút lên trên khi cuộn trang xuống
-        window.onscroll = function () {
-            scrollFunction();
-        };
-
+        window.onscroll = function () { scrollFunction(); };
         function scrollFunction() {
             if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
                 document.querySelector('.scroll-to-top').style.display = 'block';
@@ -174,139 +104,109 @@
                 document.querySelector('.scroll-to-top').style.display = 'none';
             }
         }
-        var currentSong = null;
-        var totalSongs = document.getElementsByClassName("music-div").length;
-        var loop = false;
-        var buttonloop = document.getElementById("button-loop");
+
+
+        // ======== PLAYLIST =========
+        const songs = [
+            { title: "Nothing's Gonna Change My Love For You - AI", src: "./MP3/Nothings Gonna Change My Love For You Lyrics  Justin Bieber AI Cover.mp3" },
+            { title: "Tình Yêu Chậm Trễ - MONSTAR", src: "./MP3/Tình yêu chậm trễ MOON ver  MONSTAR.mp3" },
+            { title: "Love Story - Taylor Swift", src: "./MP3/Love Story  Taylor Swift Lyrics  Vietsub.mp3" },
+            { title: "Jax - Like My Father", src: "./MP3/Jax-Like My Father.mp3" },
+            { title: "Đông Kiếm Em - Vũ", src: "./MP3/ĐÔNG KIẾM EM  Vũ Original.mp3" },
+            { title: "Stephanie Poetri - I Love You 3000", src: "./MP3/ILOVEYOU3000.mp3" },
+            { title: "Sơn Tùng - Hạnh Phúc Mới", src: "./MP3/Hạnh Phúc Mới.mp3" },
+            { title: "My Everything - Tiên Tiên", src: "./MP3/MY EVERYTHING  TIÊN TIÊN.mp3" },
+            { title: "Thêm Bao Nhiêu Lâu - Đạt G", src: "./MP3/Thêm Bao Nhiêu Lâu  Đạt G.mp3" },
+            { title: "Lee Hi - Only", src: "./MP3/ONLY-LEEHI.mp3" },
+            { title: "Lady Mây - Anh Chưa Thương Em Đến Vậy Đâu", src: "./MP3/Anh Chưa Thương Em Đến Vậy Đâu.mp3" },
+            { title: "Bước Qua Nhau - Vũ", src: "./MP3/BƯỚC QUA NHAU  Vũ Official MV.mp3" },
+            { title: "Anh Nhớ Ra - Vũ", src: "./MP3/Anh Nhớ Ra - Vũ.mp3" },
+            { title: "Những Lời Hứa Bỏ Quên - Vũ", src: "./MP3/NHỮNG LỜI HỨA BỎ QUÊN  VŨ x DEAR JANE Official MV.mp3" },
+            { title: "Photograph - Ed Sheeran", src: "./MP3/Photograph  Ed Sheeran.mp3" },
+            { title: "Perfect - Ed Sheeran", src: "./MP3/Ed Sheeran  Perfect.mp3" },
+            { title: "Can't take my eyes off you - Aesthetic", src: "./MP3/Cant take my eyes of you  Aesthetic Lyrics.mp3" },
+            { title: "Love Yourself - Justin Bieber", src: "./MP3/Justin Bieber  Love Yourself Lyrics.mp3" },
+            { title: "Flashlight - Jessie J", src: "./MP3/Flashlight  Jessie J from Pitch Perfect 2 Lyrics  Vietsub.mp3" },
+            { title: "Có hẹn với Thanh Xuân - Grey D", src: "./MP3/có hẹn với thanh xuân  MONSTAR  official music video.mp3" },
+            { title: "Mặt trời của em - Hương Ly ft JustaTee", src: "./MP3/Mặt Trời Của Em  Official MV  Phương Ly ft JustaTee.mp3" },
+            { title: "Rung động - Duong EDWARD", src: "./MP3/RUNGDONG.mp3" },
+            { title: "Vùng Ký Ức", src: "./MP3/Vùng Ký Ức.mp3" },
+            { title: "Chia xa - Dương EDWARD", src: "./MP3/chiaxa.mp3" },
+            { title: "Mùa mưa ngâu nằm cạnh - Vũ.", src: "./MP3/Mùa Mưa Ngâu Nằm Cạnh - Vũ..mp3" },
+            { title: "3107 full album", src: "./MP3/3107 full album.mp3" },
+            { title: "Lạ Lùng", src: "./MP3/Lạ Lùng.mp3" },
+            { title: "Mùa mưa ngâu nằm cạnh - Vũ.", src: "./MP3/Mùa Mưa Ngâu Nằm Cạnh - Vũ..mp3" },
+            { title: "3107 full album", src: "./MP3/3107 full album.mp3" },
+            { title: "Lạ Lùng", src: "./MP3/Lạ Lùng.mp3" },
+        ];
+
+        let currentSong = null;
+        let loop = false;
+        const audioPlayer = document.getElementById("audioPlayer");
+        const audioSource = document.getElementById("audioSource");
+        const buttonloop = document.getElementById("button-loop");
+
+        // render danh sách bài hát
+        function renderSongList() {
+            const list = document.getElementById("song-list");
+            list.innerHTML = "";
+            songs.forEach((song, index) => {
+                const div = document.createElement("div");
+                div.className = "music-div";
+                div.id = "playButton" + (index + 1);
+                div.textContent = `${index + 1}. ${song.title}`;
+                div.onclick = () => togglePlay(index);
+                list.appendChild(div);
+                list.appendChild(document.createElement("br"));
+            });
+        }
+
         function loopsong() {
             loop = !loop;
-            if (!loop) {
-                buttonloop.classList.remove("playing"); // Xóa lớp CSS "playing"
-            }
-            else {
-                buttonloop.classList.add("playing"); // Thêm lớp CSS "playing"
-            }
-            console.log(loop)
+            if (!loop) buttonloop.classList.remove("playing");
+            else buttonloop.classList.add("playing");
         }
-        function togglePlay(songIndex) {
-            var audioPlayer = document.getElementById("audioPlayer");
-            var audioSource = document.getElementById("audioSource");
-            var playButton = document.getElementById("playButton" + songIndex);
 
-            // Dừng tất cả các video đang phát
-            var videos = document.getElementsByClassName("video");
-            for (var i = 0; i < videos.length; i++) {
-                videos[i].pause();
-            }
+        function togglePlay(index) {
+            const playButton = document.getElementById("playButton" + (index + 1));
 
-            if (currentSong !== songIndex) {
-                // Tắt bài hát hiện tại nếu đang phát
+            if (currentSong !== index) {
                 if (currentSong !== null) {
-                    var currentPlayButton = document.getElementById("playButton" + currentSong);
-                    // currentPlayButton.innerHTML = "Phát";
+                    document.getElementById("playButton" + (currentSong + 1)).classList.remove("playing");
                     audioPlayer.pause();
-                    currentPlayButton.classList.remove("playing"); // Xóa lớp CSS "playing"
                 }
-
-                // Cập nhật nguồn bài hát mới
-                audioSource.src = getSongSource(songIndex);
+                audioSource.src = songs[index].src;
                 audioPlayer.load();
-                currentSong = songIndex;
+                currentSong = index;
             }
 
             if (audioPlayer.paused) {
                 audioPlayer.play();
-                playButton.classList.add("playing"); // Thêm lớp CSS "playing"
+                playButton.classList.add("playing");
             } else {
                 audioPlayer.pause();
-                playButton.classList.remove("playing"); // Xóa lớp CSS "playing"
+                playButton.classList.remove("playing");
             }
         }
+
         audioPlayer.addEventListener("ended", function () {
             nextSong();
         });
+
         function nextSong() {
-            var nextSongIndex = currentSong + 1;
-            if (nextSongIndex > totalSongs) {
-                if (loop !== true) {
+            let nextIndex = currentSong + 1;
+            if (nextIndex >= songs.length) {
+                if (!loop) {
                     location.reload();
-                }
-                else {
-                    nextSongIndex = 1; // Quay lại bài đầu tiên nếu đến bài cuối cùng
+                    return;
+                } else {
+                    nextIndex = 0;
                 }
             }
-            togglePlay(nextSongIndex);
+            togglePlay(nextIndex);
         }
 
-        function getSongSource(songIndex) {
-            if (songIndex === 1) {
-                return "./MP3/Nothings Gonna Change My Love For You Lyrics  Justin Bieber AI Cover.mp3";
-            } else if (songIndex === 2) {
-                return "./MP3/Tình yêu chậm trễ MOON ver  MONSTAR.mp3";
-            } else if (songIndex === 3) {
-                return "./MP3/Love Story  Taylor Swift Lyrics  Vietsub.mp3";
-            } else if (songIndex === 4) {
-                return "./MP3/Jax-Like My Father.mp3";
-            } else if (songIndex === 5) {
-                return "./MP3/ĐÔNG KIẾM EM  Vũ Original.mp3";
-            } else if (songIndex === 6) {
-                return "./MP3/ILOVEYOU3000.mp3";
-            } else if (songIndex === 7) {
-                return "./MP3/Hạnh Phúc Mới.mp3";
-            } else if (songIndex === 8) {
-                return "./MP3/MY EVERYTHING  TIÊN TIÊN.mp3";
-            } else if (songIndex === 9) {
-                return "./MP3/Thêm Bao Nhiêu Lâu  Đạt G.mp3";
-            } else if (songIndex === 10) {
-                return "./MP3/ONLY-LEEHI.mp3";
-            } else if (songIndex === 11) {
-                return "./MP3/Anh Chưa Thương Em Đến Vậy Đâu.mp3";
-            } else if (songIndex === 12) {
-                return "./MP3/BƯỚC QUA NHAU  Vũ Official MV.mp3";
-            } else if (songIndex === 13) {
-                return "./MP3/Anh Nhớ Ra - Vũ.mp3";
-            } else if (songIndex === 14) {
-                return "./MP3/NHỮNG LỜI HỨA BỎ QUÊN  VŨ x DEAR JANE Official MV.mp3";
-            } else if (songIndex === 15) {
-                return "./MP3/Photograph  Ed Sheeran.mp3";
-            } else if (songIndex === 16) {
-                return "./MP3/Ed Sheeran  Perfect.mp3";
-            } else if (songIndex === 17) {
-                return "./MP3/Cant take my eyes of you  Aesthetic Lyrics.mp3";
-            } else if (songIndex === 18) {
-                return "./MP3/Justin Bieber  Love Yourself Lyrics.mp3";
-            } else if (songIndex === 19) {
-                return "./MP3/Flashlight  Jessie J from Pitch Perfect 2 Lyrics  Vietsub.mp3";
-            } else if (songIndex === 20) {
-                return "./MP3/có hẹn với thanh xuân  MONSTAR  official music video.mp3";
-            } else if (songIndex === 21) {
-                return "./MP3/Mặt Trời Của Em  Official MV  Phương Ly ft JustaTee.mp3";
-            } else if (songIndex === 22) {
-                return "./MP3/RUNGDONG.mp3";
-            } else if (songIndex === 23) {
-                return "./MP3/Vùng Ký Ức.mp3";
-            } else if (songIndex === 24) {
-                return "./MP3/chiaxa.mp3";
-            } else if (songIndex === 25) {
-                return "./MP3/Mùa Mưa Ngâu Nằm Cạnh - Vũ..mp3";
-            }
-        }
-
-        // đi theo màn hình audio
-        // window.addEventListener('scroll', function () {
-        //     var musicList = document.querySelector('.music-list');
-        //     var footer = document.querySelector('footer');
-        //     var musicListHeight = musicList.offsetHeight;
-        //     var footerTop = footer.offsetTop;
-
-        //     if (window.pageYOffset + window.innerHeight >= footerTop) {
-        //         musicList.style.bottom = (window.pageYOffset + window.innerHeight - footerTop) + 'px';
-        //     } else {
-        //         musicList.style.bottom = '0';
-        //     }
-        // });
-
-
+        renderSongList();
     </script>
 </body>
 
