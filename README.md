@@ -3,17 +3,17 @@
 
 
 ## Các chủ đề chính
-- [Bản thân (Mysefl)](https://thanhruy77.github.io/blog-thanhduy/duan.html): Đây là dự án của tôi.
-- [Dự án (Project)](https://thanhruy77.github.io/blog-thanhduy/duan.html): Đây là dự án của tôi.
-- [Film](https://thanhruy77.github.io/blog-thanhduy/index.html): Đây là film.
-- [Idol](https://thanhruy77.github.io/blog-thanhduy/thantuong.html): Lalisa, thần tượng mà tôi rất ngưỡng mộ.
+- [Bản thân (Mysefl)](https://blogthanhduy.web.app/index.html): Đây là dự án của tôi.
+- [Dự án (Project)](https://blogthanhduy.web.app/duan.html): Đây là dự án của tôi.
+- [Film](https://blogthanhduy.web.app/phim.html): Đây là film.
+- [Music](https://blogthanhduy.web.app/amnhac.html): Music.
 <p align="center">
-  <img src="./Anh/haiphong.png" alt="Ảnh bìa blog" width="200px">
+  <img src="public/Anh/haiphong.png" alt="Ảnh bìa blog" width="200px">
 </p>
 
 ## Cách sử dụng blog
 
-Bạn có thể dễ dàng truy cập vào blog của tôi bằng cách truy cập vào [My Blog](https://thanhruy77.github.io/blog-thanhduy/index.html). Tại đó, bạn có thể duyệt qua các bài viết, đọc và tìm hiểu về các chủ đề mà tôi chia sẻ. Ngoài ra, bạn cũng có thể tìm kiếm bài viết cụ thể hoặc sử dụng các danh mục để lọc các bài viết theo chủ đề.
+Bạn có thể dễ dàng truy cập vào blog của tôi bằng cách truy cập vào [My Blog](https://blogthanhduy.web.app/). Tại đó, bạn có thể duyệt qua các bài viết, đọc và tìm hiểu về các chủ đề mà tôi chia sẻ. Ngoài ra, bạn cũng có thể tìm kiếm bài viết cụ thể hoặc sử dụng các danh mục để lọc các bài viết theo chủ đề.
 
 ## Liên hệ
 
