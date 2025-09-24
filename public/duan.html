@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <title>📁 Upload Thư Mục Firebase</title>
@@ -25,7 +26,7 @@
       background: #ffffff;
       border-radius: 10px;
       padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       margin-bottom: 20px;
     }
 
@@ -62,7 +63,7 @@
       padding: 20px;
       background: #ffffff;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     }
 
     .upload-box button {
@@ -92,7 +93,7 @@
       border-radius: 8px;
       max-height: 400px;
       overflow-y: auto;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     }
 
     .file-item {
@@ -137,14 +138,15 @@
 
   <script>
     const firebaseConfig = {
-      apiKey: "AIzaSyARrGOTfNEiUaxqAhm1GJeTyP7KNz2DWcc",
-      authDomain: "thduyblog.firebaseapp.com",
-      databaseURL: "https://thduyblog-default-rtdb.firebaseio.com",
-      projectId: "thduyblog",
-      storageBucket: "thduyblog.appspot.com",
-      messagingSenderId: "974463907055",
-      appId: "1:974463907055:web:63e1df721e667a9415d71a"
-    };
+    apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
+    authDomain: "blogthanhduy.firebaseapp.com",
+    databaseURL: "https://blogthanhduy-default-rtdb.firebaseio.com",
+    projectId: "blogthanhduy",
+    storageBucket: "blogthanhduy.appspot.com",
+    messagingSenderId: "346123189563",
+    appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e",
+    measurementId: "G-1NFNF0B3E9"
+};
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const storageRef = firebase.storage().ref();
@@ -161,12 +163,21 @@
         : "⚠️ Chưa đăng nhập";
     });
 
-    function login() {
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value.trim();
-      auth.signInWithEmailAndPassword(email, password)
-        .then(() => alert("✅ Đăng nhập thành công!"))
-        .catch(err => alert("❌ Lỗi: " + err.message));
+    async function login() {
+      try { 
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        await auth.signInWithEmailAndPassword(email, password)
+          .then(() => alert("✅ Đăng nhập thành công!"))
+          .catch(err => alert("❌ Lỗi: " + err.message));
+      }
+      catch (error) {
+        const successMessage = document.getElementById('successMessage');
+        successMessage.style.display = 'none';
+        showErromessage("Thông tin đăng nhâp không chính xác!");
+
+
+      }
     }
 
     function logout() {
@@ -215,4 +226,5 @@
     });
   </script>
 </body>
+
 </html>
