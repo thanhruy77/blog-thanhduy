@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vị Hoàng Đế Đến Từ Tinh Cầu Khác - Blog ThanhDuy</title>
+    <link rel="icon" href="Anh/thanhruy77.jpg" type="image/x-icon">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+
+    <style>
+        :root {
+            --primary-color: #38bdf8;
+            --bg-body: #f8fafc;
+            --text-main: #1e293b;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header & Breadcrumb */
+        header {
+            background: #fff;
+            padding: 15px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        /* Book Info Section */
+        .book-hero {
+            display: flex;
+            gap: 40px;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+            margin-bottom: 40px;
+        }
+
+        .book-cover {
+            flex: 0 0 240px;
+        }
+
+        .book-cover img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            object-fit: cover;
+            aspect-ratio: 2/3;
+        }
+
+        .book-details {
+            flex: 1;
+        }
+
+        .book-title {
+            font-size: 32px;
+            margin: 0 0 15px 0;
+            color: #0f172a;
+        }
+
+        .meta-info {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 10px 20px;
+            margin-bottom: 25px;
+        }
+
+        .meta-info b {
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: 0.3s;
+        }
+
+        .btn-read {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-read:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .btn-admin {
+            background: #f59e0b;
+            color: white;
+            display: none;
+        }
+
+        /* Description Section - FIX LỖI CẮT CHỮ */
+        .section-title {
+            font-size: 20px;
+            border-left: 4px solid var(--primary-color);
+            padding-left: 15px;
+            margin-bottom: 20px;
+        }
+
+        .desc-text-full {
+            font-family: 'Merriweather', serif;
+            font-size: 17px;
+            color: #334155;
+            text-align: justify;
+            max-height: none !important;
+            /* Đảm bảo không bị giới hạn chiều cao */
+            overflow: visible !important;
+            /* Hiện toàn bộ nội dung */
+            display: block !important;
+            margin-bottom: 40px;
+        }
+
+        /* Character Intro Cards */
+        .character-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .char-card {
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+        }
+
+        .char-card.kael {
+            background: #f1f5f9;
+            border-left: 5px solid #0ea5e9;
+        }
+
+        .char-card.nhu {
+            background: #fffbeb;
+            border-left: 5px solid #f59e0b;
+        }
+
+        .char-card:hover {
+            transform: scale(1.02);
+        }
+
+        /* Chapter List Grid */
+        .chapter-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+            padding: 0;
+            list-style: none;
+        }
+
+        .chapter-list li a {
+            display: block;
+            padding: 15px;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .chapter-list li a:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            background: #f0f9ff;
+        }
+
+        @media (max-width: 768px) {
+            .book-hero {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+
+            .meta-info {
+                justify-content: center;
+            }
+
+            .character-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                justify-content: center;
+            }
+        }
+
+        /* Tối ưu lại Navigation Menu */
+        #main-nav {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .nav-menu {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-menu>li>a {
+            display: block;
+            padding: 15px 0;
+            text-decoration: none;
+            color: #475569;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-menu>li>a:hover {
+            color: #38bdf8;
+            border-bottom: 2px solid #38bdf8;
+        }
+
+        /* Submenu logic */
+        .has-submenu {
+            position: relative;
+        }
+
+        .submenu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            min-width: 180px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-radius: 0 0 8px 8px;
+            display: none;
+            /* Ẩn mặc định */
+            list-style: none;
+            padding: 10px 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .has-submenu:hover .submenu {
+            display: block;
+            /* Hiện khi di chuột vào */
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        .submenu li a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #475569;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .submenu li a:hover {
+            background: #f0f9ff;
+            color: #38bdf8;
+            padding-left: 25px;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 15px;
+                overflow-x: auto;
+                padding-bottom: 5px;
+            }
+
+            .nav-menu>li>a {
+                white-space: nowrap;
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container" style="padding: 0 20px;">
+            <b>Blog ThanhDuy</b> / Truyện / Vị Hoàng Đế Đến Từ Tinh Cầu Khác
+        </div>
+    </header>
+
+    <nav id="main-nav">
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="../../index.html">Trang Chủ</a></li>
+                <li><a href="../../travel.html">Du Lịch</a></li>
+                <li><a href="../../phim.html">Phim</a></li>
+                <li class="has-submenu">
+                    <a href="#">Khác <span class="arrow">▾</span></a>
+                    <ul class="submenu">
+                        <li><a href="../../thantuong.html">Lalisa</a></li>
+                        <li><a href="../../sach.html">Sách</a></li>
+                        <li><a href="../../amnhac.html">Music</a></li>
+                        <li><a href="../../duan.html">Dự Án</a></li>
+                        <li><a href="../../loginforthanhduy.html">Login</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="book-hero">
+            <div class="book-cover">
+                <img src="Anh/hoangde.png" alt="Bìa truyện" onerror="this.src='Anh/hoangde.png'">
+            </div>
+            <div class="book-details">
+                <h1 class="book-title">Vị Hoàng Đế Đến Từ Tinh Cầu Khác</h1>
+                <div class="meta-info">
+                    <b>Tác giả:</b> <span>Giấu Tên</span>
+                    <b>Thể loại:</b> <span>Space Opera, Romance, Slice-of-Life</span>
+                    <b>Trạng thái:</b> <span>Đang cập nhật</span>
+                </div>
+                <div class="btn-group">
+                    <a href="chuong.html?id=chap1" class="btn btn-read">ĐỌC NGAY</a>
+                    <button id="admin-controls" class="btn btn-admin" onclick="window.location.href='admin.html'">⚙️
+                        QUẢN LÝ</button>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="section-title">Giới thiệu truyện</h3>
+        <div class="desc-text-full">
+            <p>Hắn là Kael’thas – "Thần Hủy Diệt", vị hoàng đế tối cao của Đế chế Thiên hà Xylos. Sau những cuộc chinh
+                phạt vô tận, hắn tìm đến Trái Đất năm 2020 để "ngủ đông" và sống ẩn dật dưới cái tên Hoàng Phong.</p>
+            <p>Sự sống của hắn là vĩnh cửu, nhưng tâm hồn lại mục nát vì trầm cảm. Cho đến khi hắn gặp Ngọc Như - một cô
+                gái bình thường nhưng mang trong mình "sự sống" mãnh liệt tỏa ra từ tâm hồn.</p>
+            <p>Đây là câu chuyện về một vị thần học cách yêu những điều mong manh, và một cô gái dạy cho kẻ hủy diệt
+                biết giá trị của sự tồn tại.</p>
+        </div>
+
+        <h3 class="section-title">Nhân vật chính</h3>
+        <div class="character-grid">
+            <div class="char-card kael">
+                <h4 style="margin:0 0 10px 0">Hoàng Phong (Kael’thas)</h4>
+                <p style="margin:0; font-size: 14px">Hoàng đế vũ trụ trầm cảm, hiện là đầu bếp. Sức mạnh hủy diệt hành
+                    tinh nhưng lại vụng về trong tình yêu.</p>
+            </div>
+            <div class="char-card nhu">
+                <h4 style="margin:0 0 10px 0">Ngọc Như</h4>
+                <p style="margin:0; font-size: 14px">Cô gái Trái Đất lạc quan, kiên cường. Người duy nhất có thể kìm hãm
+                    bóng tối trong tâm hồn Kael’thas.</p>
+            </div>
+        </div>
+
+        <h3 class="section-title">Danh sách chương</h3>
+        <ul class="chapter-list" id="chapter-list-display">
+            <p>Đang tải chương...</p>
+        </ul>
+    </div>
+
+    <script>
+        // Copy Firebase Config từ code cũ của bạn vào đây
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
+            authDomain: "blogthanhduy.firebaseapp.com",
+            databaseURL: "https://blogthanhduy-default-rtdb.firebaseio.com",
+            projectId: "blogthanhduy",
+            storageBucket: "blogthanhduy.appspot.com",
+            messagingSenderId: "346123189563",
+            appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Kiểm tra đăng nhập hiện nút admin
+        firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                document.getElementById('admin-controls').style.display = 'block';
+            }
+        });
+
+        // Load danh sách chương
+        const dbRef = database.ref('chapters');
+        dbRef.on('value', (snapshot) => {
+            const listContainer = document.getElementById('chapter-list-display');
+            listContainer.innerHTML = '';
+
+            snapshot.forEach((child) => {
+                const data = child.val();
+                listContainer.innerHTML += `
+                    <li>
+                        <a href="chuong.html?id=chap${data.number}">
+                            Chương ${data.number}: ${data.title}
+                        </a>
+                    </li>`;
+            });
+        });
+    </script>
+</body>
+
+</html>

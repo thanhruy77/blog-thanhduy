@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hệ thống Quản trị Truyện - Dark Mode</title>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --sidebar: #1e293b;
+            --card: #334155;
+            --text: #f1f5f9;
+            --accent: #38bdf8;
+            --danger: #f43f5e;
+            --success: #10b981;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar bên trái */
+        .sidebar {
+            width: 320px;
+            background: var(--sidebar);
+            border-right: 1px solid #334155;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .btn-back {
+            background: #475569;
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            display: block;
+            transition: 0.3s;
+        }
+
+        .btn-back:hover {
+            background: #64748b;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            border-bottom: 1px solid #334155;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .chap-list {
+            overflow-y: auto;
+            flex: 1;
+            padding: 10px;
+        }
+
+        .chap-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            background: var(--card);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chap-item:hover {
+            background: var(--accent);
+            color: #0f172a;
+        }
+
+        .btn-del-small {
+            background: var(--danger);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        /* Main bên phải */
+        .main-editor {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: var(--accent);
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            background: var(--sidebar);
+            border: 1px solid #475569;
+            color: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            font-size: 18px;
+            outline: none;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 450px;
+            line-height: 1.8;
+            font-size: 20px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .btn-save {
+            background: var(--accent);
+            color: #0f172a;
+        }
+
+        .btn-new {
+            background: var(--success);
+            color: white;
+        }
+
+        :root {
+            --bg: #020617;
+            /* Đen sâu thẳm của vũ trụ */
+            --sidebar: rgba(30, 41, 59, 0.7);
+            /* Kính mờ */
+        }
+
+        body {
+            background: url('https://www.transparenttextures.com/patterns/stardust.png'), var(--bg);
+        }
+
+        .sidebar,
+        .main-editor {
+            backdrop-filter: blur(15px);
+            /* Hiệu ứng Glassmorphism */
+            -webkit-backdrop-filter: blur(15px);
+        }
+
+        .chap-item:hover {
+            background: rgba(56, 189, 248, 0.3);
+            border-left: 4px solid var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="sidebar">
+        <a href="Thongtin.html" class="btn-back">← QUAY LẠI TRANG THÔNG TIN</a>
+
+        <div class="sidebar-header">DANH SÁCH CHƯƠNG</div>
+        <div class="chap-list" id="chapList">
+        </div>
+    </div>
+
+    <div class="main-editor">
+        <h2 id="editorStatus">Viết Chương Mới</h2>
+
+        <input type="number" id="chapNumber" placeholder="Số chương" readonly
+            style="background: #0f172a; cursor: not-allowed; color: #38bdf8; font-weight: bold; border: 1px dashed #38bdf8;">
+        <p style="font-size: 12px; color: #888; margin-top: -10px; margin-bottom: 15px;">
+        </p>
+        <input type="text" id="chapTitle" placeholder="Tiêu đề chương">
+        <textarea id="chapContent"
+            placeholder="Viết nội dung tại đây (Tự động tạo thẻ <br> khi xuống dòng)..."></textarea>
+
+        <div class="actions">
+            <button class="btn btn-new" onclick="resetForm()">+ Viết Mới</button>
+            <button class="btn btn-save" onclick="saveChapter()">Lưu Chương</button>
+        </div>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
+            authDomain: "blogthanhduy.firebaseapp.com",
+            databaseURL: "https://blogthanhduy-default-rtdb.firebaseio.com",
+            projectId: "blogthanhduy",
+            storageBucket: "blogthanhduy.appspot.com",
+            messagingSenderId: "346123189563",
+            appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        let nextChapterAuto = 1;
+
+        // 1. Kiểm tra đăng nhập: Nếu chưa đăng nhập thì đẩy về Thongtin.html hoặc trang login
+        firebase.auth().onAuthStateChanged((user) => {
+            if (!user) {
+                alert("Bạn cần đăng nhập để sử dụng chức năng này!");
+                window.location.href = "Thongtin.html";
+            }
+        });
+
+
+
+
+        // Cập nhật hàm fetchList để tính toán số chương tiếp theo chuẩn xác
+        function fetchList() {
+            database.ref('chapters').on('value', (snapshot) => {
+                const listDiv = document.getElementById('chapList');
+                listDiv.innerHTML = '';
+                let maxNum = 0;
+
+                snapshot.forEach((child) => {
+                    const data = child.val();
+                    const currentNum = parseInt(data.number);
+                    if (currentNum > maxNum) maxNum = currentNum;
+
+                    listDiv.innerHTML += `
+                    <div class="chap-item">
+                        <div style="flex:1" onclick="loadToEdit('chap${data.number}')">Chương ${data.number}: ${data.title}</div>
+                        <button class="btn-del-small" onclick="deleteChapter('chap${data.number}')">Xóa</button>
+                    </div>
+                `;
+                });
+
+                // Lưu lại số chương tiếp theo
+                nextChapterAuto = maxNum + 1;
+
+                // Nếu đang ở chế độ viết mới, tự động điền số chương tiếp theo
+                if (document.getElementById('editorStatus').innerText === "Viết Chương Mới") {
+                    document.getElementById('chapNumber').value = nextChapterAuto;
+                }
+            });
+        }
+
+        // Hàm loadToEdit giữ nguyên nhưng vì input là readonly nên bạn sẽ không sửa được số chương
+        function loadToEdit(id) {
+            database.ref('chapters/' + id).once('value').then((snapshot) => {
+                const data = snapshot.val();
+                document.getElementById('chapNumber').value = data.number;
+                document.getElementById('chapTitle').value = data.title;
+                document.getElementById('chapContent').value = data.content.replace(/<br>/g, '\n');
+                document.getElementById('editorStatus').innerText = "Đang Sửa Chương " + data.number;
+            });
+        }
+
+        // 4. Lưu chương (Tự động format <br>)
+        function saveChapter() {
+            const num = document.getElementById('chapNumber').value;
+            const title = document.getElementById('chapTitle').value;
+            const rawContent = document.getElementById('chapContent').value;
+
+            if (!num || !title || !rawContent) return alert("Vui lòng điền đủ thông tin!");
+
+            const formattedContent = rawContent.replace(/\n/g, '<br>');
+
+            database.ref('chapters/chap' + num).set({
+                number: num,
+                title: title,
+                content: formattedContent
+            }).then(() => {
+                alert("Đã lưu chương " + num + "!");
+                // Giữ nguyên ở đó để xem hoặc nhấn Viết Mới để sang chương tiếp
+            });
+        }
+
+        // 5. Xóa chương
+        function deleteChapter(id) {
+            if (confirm("Bạn có chắc chắn muốn xóa chương này?")) {
+                database.ref('chapters/' + id).remove();
+            }
+        }
+
+        // Cập nhật hàm resetForm để luôn lấy số chương mới nhất
+        function resetForm() {
+            document.getElementById('editorStatus').innerText = "Viết Chương Mới";
+            document.getElementById('chapTitle').value = '';
+            document.getElementById('chapContent').value = '';
+            // Gán ngay số chương tiếp theo đã tính được ở hàm fetchList
+            document.getElementById('chapNumber').value = nextChapterAuto;
+        }
+        fetchList();
+    </script>
+</body>
+
+</html>

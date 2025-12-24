@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Đọc Truyện - Blog Thanh Duy</title>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-database.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f1ea;
+            color: #2c3e50;
+            font-family: 'Merriweather', serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.8;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Thanh tiến trình */
+        #progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 9999;
+        }
+
+        #progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, #bb86fc, #38bdf8);
+            box-shadow: 0 0 10px #38bdf8;
+        }
+
+        /* Nút chuyển Theme */
+        .theme-switch {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #1e293b;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            border: none;
+            font-size: 14px;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        h2.chap-name {
+            text-align: center;
+            font-size: 28px;
+            color: #1a1a1a;
+            margin: 20px 0 40px 0;
+        }
+
+        .main-content {
+            font-size: 22px;
+            text-align: justify;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            min-height: 500px;
+        }
+
+        /* Tùy chỉnh Menu chọn chương */
+        .chap-select {
+            appearance: none;
+            /* Ẩn mũi tên mặc định của trình duyệt */
+            -webkit-appearance: none;
+            background-color: #ffffff;
+            border: 2px solid #38bdf8;
+            border-radius: 30px;
+            /* Bo tròn kiểu viên thuốc */
+            padding: 10px 40px 10px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1e293b;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.1);
+
+            /* Tạo mũi tên tùy chỉnh bằng SVG */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2338bdf8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 18px;
+        }
+
+        .chap-select:hover {
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.3);
+            transform: translateY(-2px);
+            border-color: #0ea5e9;
+        }
+
+        /* Dark mode cho Menu chọn chương */
+        body.dark-mode .chap-select {
+            background-color: #1e293b;
+            color: #f1f5f9;
+            border-color: #38bdf8;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2338bdf8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+        }
+
+        @media (max-width: 480px) {
+            .chap-select {
+                max-width: 100px;
+                font-size: 13px;
+            }
+        }
+
+        button.nav-btn {
+            padding: 10px 18px;
+            border: 1px solid #ddd;
+            background: white;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: sans-serif;
+            font-weight: bold;
+            border-radius: 5px;
+            color: #333;
+        }
+
+        button.nav-btn:hover {
+            background: #e0e0e0;
+            border-color: #bbb;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        body.dark-mode .main-content {
+            background-color: #1e1e1e;
+            color: #d1d1d1;
+            box-shadow: none;
+        }
+
+        body.dark-mode h2.chap-name {
+            color: #38bdf8;
+        }
+
+        body.dark-mode button.nav-btn {
+            background: #2d3748;
+            color: #fff;
+            border-color: #4a5568;
+        }
+
+        body.dark-mode button.nav-btn:hover {
+            background: #4a5568;
+        }
+
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 20px;
+                font-size: 18px;
+            }
+
+            button.nav-btn {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+        }
+
+        .reader-container {
+            max-width: 1400px;
+            /* Tăng chiều rộng màn hình lớn */
+            margin: 30px auto;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .main-content {
+            font-size: 22px;
+            text-align: justify;
+            background: white;
+            padding: 50px 60px;
+            /* Tăng padding bên trong để thoáng chữ */
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            min-height: 500px;
+            line-height: 1.9;
+            /* Giãn dòng thêm một chút cho dễ đọc */
+        }
+
+        /* Fix cho điện thoại để không bị quá to */
+        @media (max-width: 1024px) {
+            .reader-container {
+                max-width: 90%;
+            }
+
+            .main-content {
+                padding: 30px;
+            }
+        }
+
+
+        button.nav-btn:hover {
+            background: #38bdf8;
+            color: white;
+            border-color: #38bdf8;
+            transform: translateY(-2px);
+        }
+
+        body.dark-mode button.nav-btn {
+            background: #334155;
+            color: #f1f5f9;
+            border-color: #475569;
+        }
+
+        /* Style nút quay lại trang thông tin */
+        .back-to-info {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid #38bdf8;
+            border-radius: 50px;
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-info:hover {
+            background: #38bdf8;
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
+        }
+
+        /* Dark mode cho nút quay lại */
+        body.dark-mode .back-to-info {
+            background: rgba(30, 41, 59, 0.8);
+            color: #f1f5f9;
+            border-color: #38bdf8;
+        }
+
+        /* Ẩn chữ trên điện thoại để tiết kiệm diện tích, chỉ hiện icon */
+        @media (max-width: 600px) {
+            .back-to-info span {
+                display: none;
+            }
+
+            .back-to-info {
+                padding: 10px;
+                left: 10px;
+                top: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="Thongtin.html" class="back-to-info" title="Quay lại trang thông tin">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" width="24"
+            height="24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span>Thông tin</span>
+    </a>
+    <div id="progress-container">
+        <div id="progress-bar"></div>
+    </div>
+
+    <button class="theme-switch" id="theme-btn" onclick="toggleTheme()">🌙 Chế độ tối</button>
+
+    <div class="reader-container">
+
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="changeChapter(-1)">← Trước</button>
+
+            <select class="chap-select" onchange="window.location.href='chuong.html?id=' + this.value">
+                <option value="">Đang tải danh sách...</option>
+            </select>
+
+            <button class="nav-btn" onclick="changeChapter(1)">Tiếp →</button>
+        </div>
+
+        <h2 id="display-title" class="chap-name">Đang tải...</h2>
+
+        <div class="main-content" id="display-content">
+        </div>
+
+        <div class="nav-buttons">
+            <button class="nav-btn" onclick="changeChapter(-1)">← Trước</button>
+
+            <select class="chap-select" onchange="window.location.href='chuong.html?id=' + this.value">
+                <option value="">Đang tải danh sách...</option>
+            </select>
+
+            <button class="nav-btn" onclick="changeChapter(1)">Tiếp →</button>
+        </div>
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
+            authDomain: "blogthanhduy.firebaseapp.com",
+            databaseURL: "https://blogthanhduy-default-rtdb.firebaseio.com",
+            projectId: "blogthanhduy",
+            storageBucket: "blogthanhduy.appspot.com",
+            messagingSenderId: "346123189563",
+            appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        let chapId = urlParams.get('id') || 'chap1';
+
+        database.ref('chapters/' + chapId).on('value', (snapshot) => {
+            const data = snapshot.val();
+            if (data) {
+                document.getElementById('display-title').innerText = "Chương " + data.number + ": " + data.title;
+                document.getElementById('display-content').innerHTML = data.content;
+                window.currentNum = parseInt(data.number);
+                window.scrollTo(0, 0); // Tự động cuộn lên đầu khi sang chương mới
+            } else {
+                document.getElementById('display-content').innerText = "Nội dung chương đang được cập nhật...";
+            }
+        });
+
+        function changeChapter(step) {
+            let nextNum = window.currentNum + step;
+            if (nextNum > 0) {
+                window.location.href = `chuong.html?id=chap${nextNum}`;
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.body.classList.toggle('dark-mode');
+            document.getElementById('theme-btn').innerText = isDark ? "☀️ Chế độ sáng" : "🌙 Chế độ tối";
+            localStorage.setItem('reader-theme', isDark ? 'dark' : 'light');
+        }
+
+        // Khôi phục theme cũ
+        if (localStorage.getItem('reader-theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            document.getElementById('theme-btn').innerText = "☀️ Chế độ sáng";
+        }
+
+        // Thanh tiến trình
+        window.onscroll = function () {
+            let progressBar = document.getElementById("progress-bar");
+            if (progressBar) {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                progressBar.style.width = scrolled + "%";
+            }
+        };
+        // Hàm lấy toàn bộ danh sách chương để bỏ vào Select Menu
+        function loadChapterMenu() {
+            database.ref('chapters').on('value', (snapshot) => {
+                const selects = document.querySelectorAll('.chap-select');
+                let optionsHtml = '<option value="">Mục Lục</option>';
+
+                snapshot.forEach((child) => {
+                    const data = child.val();
+                    // Kiểm tra nếu là chương hiện tại thì thêm thuộc tính 'selected'
+                    const isSelected = (child.key === chapId) ? 'selected' : '';
+                    optionsHtml += `<option value="${child.key}" ${isSelected}>Chương ${data.number}</option>`;
+                });
+
+                selects.forEach(select => {
+                    select.innerHTML = optionsHtml;
+                });
+            });
+        }
+
+        // Gọi hàm này ngay sau khi init Firebase
+        loadChapterMenu();
+    </script>
+</body>
+
+</html>

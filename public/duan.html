@@ -115,7 +115,110 @@
   </style>
 </head>
 
+
+
+
 <body>
+
+  <header>
+    <h1><img src="Anh/astronaut.png" width="25px"> Thanh Duy</h1>
+  </header>
+
+  <nav id="mobile" hidden>
+    <ul class="nav-menu">
+      <li><a href="index.html">Trang Chủ</a></li>
+      <li><a href="travel.html">Du Lịch</a></li>
+      <li><a href="sach.html">Sách</a></li>
+      <li>
+        <a href="#">Khác</a>
+        <ul class="submenu">
+          <li><a href="thantuong.html">Lalisa</a></li>
+          <li><a href="phim.html">Phim</a></li>
+          <li><a href="amnhac.html">Music</a></li>
+          <li><a href="duan.html">Dự Án</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+  <style>
+    header {
+      background-color: #67b8e3;
+      /* Mã màu xanh dương nhạt */
+      color: #fff;
+      padding: 18px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    nav {
+      background-color: #f9ca24;
+      padding: 10px;
+    }
+
+    nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    nav ul li {
+      margin: 0 10px;
+    }
+
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      background-color: #fff;
+    }
+
+    /* Định dạng bảng cho màn hình điện thoại */
+    @media (max-width: 800px) {
+      #pc {
+        display: none;
+      }
+
+      #mobile {
+        display: block;
+      }
+    }
+
+    /* Định dạng bảng cho màn hình máy tính */
+    @media (min-width: 801px) {
+      #pc {
+        display: block;
+      }
+
+      #mobile {
+        display: none;
+      }
+    }
+  </style>
+  <nav id="pc" hidden>
+    <ul class="nav-menu-pc">
+      <li><a href="index.html">Trang Chủ</a></li>
+      <li><a href="travel.html">Du Lịch</a></li>
+      <li><a href="sach.html">Sách</a></li>
+      <li><a href="duan.html">Dự Án</a></li>
+      <li><a href="phim.html">Phim</a></li>
+      <li><a href="amnhac.html">Music</a></li>
+      <li><a href="thantuong.html">Lalisa</a></li>
+
+    </ul>
+  </nav>
+
+
 
   <h2>📁 Upload Thư Mục Lên Firebase</h2>
 
@@ -138,15 +241,15 @@
 
   <script>
     const firebaseConfig = {
-    apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
-    authDomain: "blogthanhduy.firebaseapp.com",
-    databaseURL: "https://blogthanhduy-default-rtdb.firebaseio.com",
-    projectId: "blogthanhduy",
-    storageBucket: "blogthanhduy.appspot.com",
-    messagingSenderId: "346123189563",
-    appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e",
-    measurementId: "G-1NFNF0B3E9"
-};
+      apiKey: "AIzaSyBVWwk5WYkOOFjYReBQNiqVmJDOzLlJX34",
+      authDomain: "blogthanhduy.firebaseapp.com",
+      databaseURL: "https://blogthanhduy-default-rtdb.firebaseio.com",
+      projectId: "blogthanhduy",
+      storageBucket: "blogthanhduy.appspot.com",
+      messagingSenderId: "346123189563",
+      appId: "1:346123189563:web:bd8a38044b8295e8a0cb1e",
+      measurementId: "G-1NFNF0B3E9"
+    };
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const storageRef = firebase.storage().ref();
@@ -164,7 +267,7 @@
     });
 
     async function login() {
-      try { 
+      try {
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value.trim();
         await auth.signInWithEmailAndPassword(email, password)
