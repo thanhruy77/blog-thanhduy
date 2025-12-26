@@ -428,15 +428,18 @@
         dbRef.on('value', (snapshot) => {
             const listContainer = document.getElementById('chapter-list-display');
             listContainer.innerHTML = '';
-
+            let chaptersArray = [];
             snapshot.forEach((child) => {
-                const data = child.val();
+                chaptersArray.push(child.val());
+            });
+            chaptersArray.sort((a, b) => parseInt(a.number) - parseInt(b.number));
+            chaptersArray.forEach((data) => {
                 listContainer.innerHTML += `
-                    <li>
-                        <a href="chuong.html?id=chap${data.number}">
-                            Chương ${data.number}: ${data.title}
-                        </a>
-                    </li>`;
+            <li>
+                <a href="chuong.html?id=chap${data.number}">
+                    Chương ${data.number}: ${data.title}
+                </a>
+            </li>`;
             });
         });
     </script>

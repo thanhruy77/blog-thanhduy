@@ -234,25 +234,29 @@
             database.ref('chapters').on('value', (snapshot) => {
                 const listDiv = document.getElementById('chapList');
                 listDiv.innerHTML = '';
-                let maxNum = 0;
 
+                let chaptersArray = [];
                 snapshot.forEach((child) => {
-                    const data = child.val();
+                    chaptersArray.push(child.val());
+                });
+
+                // Sắp xếp theo số chương
+                chaptersArray.sort((a, b) => parseInt(a.number) - parseInt(b.number));
+
+                let maxNum = 0;
+                chaptersArray.forEach((data) => {
                     const currentNum = parseInt(data.number);
                     if (currentNum > maxNum) maxNum = currentNum;
 
                     listDiv.innerHTML += `
-                    <div class="chap-item">
-                        <div style="flex:1" onclick="loadToEdit('chap${data.number}')">Chương ${data.number}: ${data.title}</div>
-                        <button class="btn-del-small" onclick="deleteChapter('chap${data.number}')">Xóa</button>
-                    </div>
-                `;
+                <div class="chap-item">
+                    <div style="flex:1" onclick="loadToEdit('chap${data.number}')">Chương ${data.number}: ${data.title}</div>
+                    <button class="btn-del-small" onclick="deleteChapter('chap${data.number}')">Xóa</button>
+                </div>
+            `;
                 });
 
-                // Lưu lại số chương tiếp theo
                 nextChapterAuto = maxNum + 1;
-
-                // Nếu đang ở chế độ viết mới, tự động điền số chương tiếp theo
                 if (document.getElementById('editorStatus').innerText === "Viết Chương Mới") {
                     document.getElementById('chapNumber').value = nextChapterAuto;
                 }

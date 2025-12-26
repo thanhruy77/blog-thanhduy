@@ -371,11 +371,19 @@
                 const selects = document.querySelectorAll('.chap-select');
                 let optionsHtml = '<option value="">Mục Lục</option>';
 
+                let chaptersArray = [];
                 snapshot.forEach((child) => {
-                    const data = child.val();
-                    // Kiểm tra nếu là chương hiện tại thì thêm thuộc tính 'selected'
-                    const isSelected = (child.key === chapId) ? 'selected' : '';
-                    optionsHtml += `<option value="${child.key}" ${isSelected}>Chương ${data.number}</option>`;
+                    let data = child.val();
+                    data.key = child.key; // Lưu lại key (ví dụ: chap1) để dùng cho value của option
+                    chaptersArray.push(data);
+                });
+
+                // Sắp xếp theo số chương
+                chaptersArray.sort((a, b) => parseInt(a.number) - parseInt(b.number));
+
+                chaptersArray.forEach((data) => {
+                    const isSelected = (data.key === chapId) ? 'selected' : '';
+                    optionsHtml += `<option value="${data.key}" ${isSelected}>Chương ${data.number}</option>`;
                 });
 
                 selects.forEach(select => {
