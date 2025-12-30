@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta property="og:image" content="https://blogthanhduy.web.app/Anh/duy.jpg">
     <link rel="stylesheet" href="./css(only)/css-index.css">
+
+
     <script src="js/jsindex.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
@@ -31,44 +33,11 @@
 </head>
 
 <body>
-    <header>
-        <h1>Blog's Thanh Duy</h1>
-    </header>
 
-    <nav id="mobile" hidden>
-        <ul class="nav-menu">
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="travel.html">Du Lịch</a></li>
-            <li><a href="sach.html">Sách</a></li>
-            <li>
-                <a href="#">Khác</a>
-                <ul class="submenu">
-                    <li><a href="thantuong.html">Lalisa</a></li>
-
-                    <li><a href="phim.html">Phim</a></li>
-                    <li><a href="amnhac.html">Music</a></li>
-                    <li><a href="duan.html">Dự Án</a></li>
-                    <li><a href="loginforthanhduy.html">Login</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <style>
-
-    </style>
-    <nav id="pc" hidden>
-        <ul class="nav-menu-pc">
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="travel.html">Du Lịch</a></li>
-            <li><a href="sach.html">Sách</a></li>
-            <li><a href="duan.html">Dự Án</a></li>
-            <li><a href="phim.html">Phim</a></li>
-            <li><a href="amnhac.html">Music</a></li>
-            <li><a href="thantuong.html">Lalisa</a></li>
-            <li><a href="loginforthanhduy.html">Login</a></li>
-        </ul>
-    </nav>
-
+    <div id="main-navbar"></div>
+    <script src="js/navbar.js" defer></script>
+    <link rel="stylesheet" href="./css(only)/css_nav.css">
+    
     <button class="nut-mo-chatbox" id="nut-mo-chatboxid">
         <img src="Anh/messenger.png" alt="" width="65px">
     </button>
@@ -83,11 +52,11 @@
         <div id="chat-input">
             <input type="text" id="message-input" placeholder="Nhập tin nhắn...">
             <button id="send-button" class="fa fa-paper-plane"></button>
-            <!-- <button id="dongForm" class="dong">Đóng</button> -->
+
         </div>
     </div>
     <main>
-        <!-- List menu -->
+
         <div id="menu-list-film" class="menu-container">
             <div class="menu-button" onclick="toggleMenu()"> List</div>
             <ul class="menu-list">
@@ -199,11 +168,11 @@
                     </div>
                 </ul>
             </div>
-            <!-- chữ đổi màu  -->
+
             <script>
                 const textElement = document.getElementById("colorChangingText");
 
-                let colors = ["red", "blue"]; // Mảng các màu bạn muốn sử dụng
+                let colors = ["red", "blue", "yellow"];
                 let currentIndex = 0;
 
                 function changeColor() {
@@ -211,10 +180,9 @@
                     currentIndex = (currentIndex + 1) % colors.length;
                 }
 
-                // Thay đổi màu mỗi 1 giây
-                setInterval(changeColor, 100);
 
-                // Listen for changes in Realtime Database
+                setInterval(changeColor, 150);
+
                 database.ref("posts").on("value", (snapshot) => {
                     postList.innerHTML = "";
                     snapshot.forEach((childSnapshot) => {
@@ -240,8 +208,6 @@
                         postList.appendChild(postElement);
                     });
                 });
-
-                // Like a post
                 function likePost(postId) {
                     console.log("like");
                     const likesRef = database.ref(`posts/${postId}/likes`);
@@ -249,172 +215,27 @@
                 }
 
                 function comment() {
-                    // Đăng xuất người dùng
                     firebase.auth().signOut().then(() => {
-                        // Đăng xuất thành công
                         console.log("Người dùng đã đăng xuất");
                     }).catch((error) => {
-                        // Xảy ra lỗi khi đăng xuất
                         console.error("Lỗi đăng xuất:", error);
                     });
                     alert("Tính năng đang cập nhật");
                 }
                 function share(link) {
-                    // Đường dẫn bạn muốn chia sẻ
                     var url = link;
-                    // Sao chép đường dẫn vào khay nhớ tạm
                     navigator.clipboard.writeText(url)
                         .then(function () {
-                            // Sao chép thành công, mở chế độ chia sẻ
                             navigator.share({ url: url })
                                 .then(() => console.log('Chia sẻ thành công'))
                                 .catch((error) => console.error('Lỗi khi chia sẻ:', error));
                         })
                         .catch(function (error) {
-                            // Xử lý lỗi khi sao chép đường dẫn
                             console.error('Sao chép đường dẫn không thành công: ', error);
                         });
                 }
             </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-            <!--          <input type="text" id="caption">
-            <input type="file" id="hinhanh">
-            <button id="upload">Tải lên ảnh</button>
-            <button id="delete">delete</button>
-            <div id="imageContainer"></div>
-
-
-            <script>
-                // xóa ảnh
-                const imageName = 'images/thainguyenimg.png'; // Đường dẫn của file ảnh trong Storage
-                const imageRef = storageRef.child(imageName);
-                const imagesReff = database.ref("images");
-
-
-                const deleteButton = document.getElementById("delete");
-
-                deleteButton.addEventListener("click", async () => {
-                    try {
-                        // Xóa ảnh khỏi Firebase Storage
-                        await imageRef.delete();
-                        imagesReff.once("value", (snapshot) => {
-                            snapshot.forEach((childSnapshot) => {
-                                const imageUrl = childSnapshot.val().url;
-                                if (imageUrl.includes("thainguyenimg.png")) {
-                                    childSnapshot.ref.remove()
-                                        .then(() => {
-                                            console.log('Dữ liệu ảnh đã được xóa thành công khỏi Realtime Database.');
-                                        })
-                                        .catch((error) => {
-                                            console.error('Lỗi xóa dữ liệu ảnh khỏi Realtime Database:', error);
-                                        });
-                                }
-                            });
-                        });
-
-                        console.log("Đã xóa ảnh thành công.");
-                        // Cập nhật danh sách hiển thị
-                        imagesRef.on("value", (snapshot) => {
-                            const images = snapshot.val();
-                            imageContainer.innerHTML = ""; // Clear previous content
-
-                            // Display images
-                            for (const key in images) {
-                                const imageUrl = images[key].url;
-                                const imgElement = document.createElement("img");
-                                imgElement.src = imageUrl + '?v=' + Math.random();
-                                imgElement.classList.add("uploaded-image");
-                                imageContainer.appendChild(imgElement);
-                            }
-                        });
-                    } catch (error) {
-                        console.error("Lỗi xóa ảnh:", error);
-                    }
-                });
-
-                // đăng ảnh
-                const nodecaption = document.getElementById("caption");
-                var caption = nodecaption.value;
-                const fileInput = document.getElementById("hinhanh");
-                const uploadButton = document.getElementById("upload");
-                const imageContainer = document.getElementById("imageContainer");
-                uploadButton.addEventListener("click", async () => {
-                    // Kiểm tra xem người dùng đã đăng nhập hay chưa
-                    firebase.auth().onAuthStateChanged((user) => {
-                        if (user) {
-                            // Người dùng đã đăng nhập
-                            console.log("Người dùng đã đăng nhập:", user);
-                            // Bạn có thể thực hiện các hành động liên quan đến người dùng đã đăng nhập ở đây
-                        } else {
-                            // Người dùng chưa đăng nhập
-                            console.log("Người dùng chưa đăng nhập");
-                            // Bạn có thể thực hiện các hành động liên quan đến người dùng chưa đăng nhập ở đây
-                        }
-                    });
-                    const file = fileInput.files[0];
-                    if (file) {
-                        try {
-                            // Upload image to Firebase Storage
-                            const imageRef = storageRef.child("images/" + file.name);
-                            await imageRef.put(file);
-
-                            // Get download URL
-                            const downloadURL = await imageRef.getDownloadURL();
-
-                            // Save URL to Realtime Database
-                            const database = firebase.database();
-                            const imagesRef = database.ref("images");
-                            imagesRef.push({ caption: caption });
-                            imagesRef.push({ url: downloadURL });
-
-                            console.log("Upload image successful. URL:", downloadURL);
-                        } catch (error) {
-                            console.error("Error uploading image:", error);
-                        }
-                    } else {
-                        console.log("Please choose an image file to upload.");
-                    }
-                });
-
-
-
-                // Listen for changes in the Realtime Database
-                const imagesRef = firebase.database().ref("images");
-                imagesRef.on("value", (snapshot) => {
-                    const images = snapshot.val();
-                    imageContainer.innerHTML = ""; // Clear previous content
-
-                    // Display images
-                    for (const key in images) {
-                        const imageUrl = images[key].url;
-                        const imgElement = document.createElement("img");
-                        imgElement.src = imageUrl + '&' + Date.now();
-                        imgElement.classList.add("uploaded-image");
-                        imageContainer.appendChild(imgElement);
-                    }
-                });
-                // // Đăng xuất người dùng
-                // firebase.auth().signOut().then(() => {
-                //     // Đăng xuất thành công
-                //     console.log("Người dùng đã đăng xuất");
-                // }).catch((error) => {
-                //     // Xảy ra lỗi khi đăng xuất
-                //     console.error("Lỗi đăng xuất:", error);
-
-                // });
-            </script> -->
         </div>
     </main>
 

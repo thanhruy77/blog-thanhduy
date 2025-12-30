@@ -9,68 +9,23 @@
 </head>
 
 <body>
-    <header>
-        <h1><img src="Anh/astronaut.png" width="25px"> Thanh Duy</h1>
-    </header>
-
-    <nav id="mobile" hidden>
-        <ul class="nav-menu">
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="travel.html">Du Lịch</a></li>
-            <li><a href="sach.html">Sách</a></li>
-            <li>
-                <a href="#">Khác</a>
-                <ul class="submenu">
-                    <li><a href="thantuong.html">Lalisa</a></li>
-                    <li><a href="phim.html">Phim</a></li>
-                    <li><a href="amnhac.html">Music</a></li>
-                    <li><a href="duan.html">Dự Án</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <style>
-        /* Định dạng bảng cho màn hình điện thoại */
-        @media (max-width: 800px) {
-            #pc {
-                display: none;
-            }
-
-            #mobile {
-                display: block;
-            }
-        }
-
-        /* Định dạng bảng cho màn hình máy tính */
-        @media (min-width: 801px) {
-            #pc {
-                display: block;
-            }
-
-            #mobile {
-                display: none;
-            }
-        }
-    </style>
-    <nav id="pc" hidden>
-        <ul class="nav-menu-pc">
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="travel.html">Du Lịch</a></li>
-            <li><a href="sach.html">Sách</a></li>
-            <li><a href="duan.html">Dự Án</a></li>
-            <li><a href="phim.html">Phim</a></li>
-            <li><a href="amnhac.html">Music</a></li>
-            <li><a href="thantuong.html">Lalisa</a></li>
-        </ul>
-    </nav>
+    <div id="main-navbar"></div>
+    <script src="js/navbar.js" defer></script>
+    <link rel="stylesheet" href="./css(only)/css_nav.css">
     <main>
 
         <audio src=""></audio>
         <!-- Nút lên trên -->
         <button class="scroll-to-top" onclick="scrollToTop()"></button>
-        <div id="du-an" class="content">
-            <h2>Âm nhạc tôi ưa thích</h2>
-            <p>Nhiều lắm, chẳng thể nào liệt kê ra hết, thôi thì cứ tạm vài bài =))</p>
+
+        <div class="artist-header">
+            <img src="./Anh/astronaut.png" alt="Vũ" class="artist-avatar"
+                onerror="this.src='https://via.placeholder.com/150'">
+            <div class="artist-info">
+                <h2>Tổng hợp nhạc tôi thích</h2>
+                <p>Tuyển tập những bản tình ca hay nhất.</p>
+                <button class="play-all-btn">Phát ngẫu nhiên</button>
+            </div>
         </div>
 
         <!-- danh sách nhạc sẽ render tự động -->
@@ -86,10 +41,6 @@
         </div>
 
     </main>
-
-    <footer class="sticky-footer">
-        <p>&copy; 2024 This blog belongs to Thanh Duy.</p>
-    </footer>
 
     <script>
         // Nút scroll lên đầu trang
@@ -157,7 +108,6 @@
                 div.textContent = `${index + 1}. ${song.title}`;
                 div.onclick = () => togglePlay(index);
                 list.appendChild(div);
-                list.appendChild(document.createElement("br"));
             });
         }
 

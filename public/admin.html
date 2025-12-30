@@ -31,62 +31,9 @@
 </head>
 
 <body>
-    <header>
-        <h1><img src="Anh/astronaut.png" width="25px"> ADMIN</h1>
-    </header>
-
-    <nav id="mobile" hidden>
-        <ul class="nav-menu">
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="travel.html">Du Lịch</a></li>
-            <li><a href="phim.html">Phim</a></li>
-            <li>
-                <a href="#">Khác</a>
-                <ul class="submenu">
-                    <li><a href="thantuong.html">Lalisa</a></li>
-                    <li><a href="sach.html">Sách</a></li>
-                    <li><a href="amnhac.html">Music</a></li>
-                    <li><a href="duan.html">Dự Án</a></li>
-                    <li><a href="loginforthanhduy.html">Login</a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-    <style>
-        /* Định dạng menu cho màn hình điện thoại */
-        @media (max-width: 800px) {
-            #pc {
-                display: none;
-            }
-
-            #mobile {
-                display: block;
-            }
-        }
-
-        /* Định dạng menu cho màn hình máy tính */
-        @media (min-width: 801px) {
-            #pc {
-                display: block;
-            }
-
-            #mobile {
-                display: none;
-            }
-        }
-    </style>
-    <nav id="pc" hidden>
-        <ul class="nav-menu-pc">
-            <li><a href="index.html">Trang Chủ</a></li>
-            <li><a href="travel.html">Du Lịch</a></li>
-            <li><a href="sach.html">Sách</a></li>
-            <li><a href="duan.html">Dự Án</a></li>
-            <li><a href="phim.html">Phim</a></li>
-            <li><a href="amnhac.html">Music</a></li>
-            <li><a href="thantuong.html">Lalisa</a></li>
-            <li><a href="loginforthanhduy.html">Login</a></li>
-        </ul>
-    </nav>
+       <div id="main-navbar"></div>
+    <script src="js/navbar.js" defer></script>
+    <link rel="stylesheet" href="./css(only)/css_nav.css">
     <main>
         <div id="trang-chu" class="content">
             <div>

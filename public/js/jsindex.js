@@ -141,10 +141,6 @@ document.addEventListener("DOMContentLoaded", function () {
         } else if (/bot ơi|bạn ơi/.test(lowercaseMessage)) {
             reply = "Ơi bot đẹp trai đâyyyyy!!"
         } else if (/mấy giờ/.test(lowercaseMessage)) {
-            // const date = new Date();
-            // const hours = date.getHours();
-            // const minutes = date.getMinutes();
-            // reply = `Bây giờ là ${hours} giờ ${minutes} phút.`;
             reply = "Trời ơi có điện thoại mà còn hỏi tui mấy giờ là saooo?";
         } else if (/buồn/.test(lowercaseMessage)) {
             reply = "Ồ! Tuy tôi chỉ là người máy, tôi không có cảm xúc, nhưng nếu bạn buồn thì tôi có thể giúp bạn đó. Bạn muốn tôi đưa ra lời 'an ủi' hay là gì không?"
@@ -401,40 +397,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-
-
-// đoạn này đổi màu khung chát
-
-// document.addEventListener("DOMContentLoaded", function () {
-//     // Lấy các phần tử cần sử dụng
-//     const settingButton = document.querySelector(".setting");
-//     const colorList = document.querySelector(".color-list");
-
-//     // Xử lý sự kiện khi nhấn vào nút setting
-//     settingButton.addEventListener("click", function () {
-//         colorList.classList.toggle("hidden");
-//     });
-
-//     // Xử lý sự kiện khi chọn màu
-//     const colorOptions = document.querySelectorAll(".color-option");
-//     colorOptions.forEach(function (option) {
-//         option.addEventListener("click", function () {
-//             const color = this.dataset.color;
-//             document.getElementById("chat-display").style.backgroundColor = color;
-//             document.getElementById("chat-container").style.backgroundColor = color;
-//             document.getElementById("chat-input").style.backgroundColor = color;
-//             colorList.classList.add("hidden");
-//         });
-//     });
-//     document.addEventListener("click", function (event) {
-//         const target = event.target;
-//         if (!target.matches(".setting")) {
-//             colorList.classList.add("hidden");
-//         }
-//     });
-
-// });
 
 
 

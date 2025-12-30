@@ -8,19 +8,6 @@
   <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f3f4f6;
-      padding: 30px;
-      max-width: 900px;
-      margin: auto;
-      color: #333;
-    }
-
-    h2 {
-      text-align: center;
-      color: #1e40af;
-    }
 
     .auth-box {
       background: #ffffff;
@@ -120,103 +107,10 @@
 
 <body>
 
-  <header>
-    <h1><img src="Anh/astronaut.png" width="25px"> Thanh Duy</h1>
-  </header>
 
-  <nav id="mobile" hidden>
-    <ul class="nav-menu">
-      <li><a href="index.html">Trang Chủ</a></li>
-      <li><a href="travel.html">Du Lịch</a></li>
-      <li><a href="sach.html">Sách</a></li>
-      <li>
-        <a href="#">Khác</a>
-        <ul class="submenu">
-          <li><a href="thantuong.html">Lalisa</a></li>
-          <li><a href="phim.html">Phim</a></li>
-          <li><a href="amnhac.html">Music</a></li>
-          <li><a href="duan.html">Dự Án</a></li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-  <style>
-    header {
-      background-color: #67b8e3;
-      /* Mã màu xanh dương nhạt */
-      color: #fff;
-      padding: 18px;
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: 30px;
-    }
-
-    nav {
-      background-color: #f9ca24;
-      padding: 10px;
-    }
-
-    nav ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-    }
-
-    nav ul li {
-      margin: 0 10px;
-    }
-
-
-    nav ul li a {
-      text-decoration: none;
-      color: #333;
-      font-weight: bold;
-      transition: color 0.3s;
-    }
-
-    nav ul li a:hover {
-      background-color: #fff;
-    }
-
-    /* Định dạng bảng cho màn hình điện thoại */
-    @media (max-width: 800px) {
-      #pc {
-        display: none;
-      }
-
-      #mobile {
-        display: block;
-      }
-    }
-
-    /* Định dạng bảng cho màn hình máy tính */
-    @media (min-width: 801px) {
-      #pc {
-        display: block;
-      }
-
-      #mobile {
-        display: none;
-      }
-    }
-  </style>
-  <nav id="pc" hidden>
-    <ul class="nav-menu-pc">
-      <li><a href="index.html">Trang Chủ</a></li>
-      <li><a href="travel.html">Du Lịch</a></li>
-      <li><a href="sach.html">Sách</a></li>
-      <li><a href="duan.html">Dự Án</a></li>
-      <li><a href="phim.html">Phim</a></li>
-      <li><a href="amnhac.html">Music</a></li>
-      <li><a href="thantuong.html">Lalisa</a></li>
-
-    </ul>
-  </nav>
+    <div id="main-navbar"></div>
+    <script src="js/navbar.js" defer></script>
+    <link rel="stylesheet" href="./css(only)/css_nav.css">
 
 
 
