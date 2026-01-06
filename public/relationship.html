@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Love Story</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff4d6d;
+            --secondary-color: #ff758f;
+            --bg-gradient: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            --glass-bg: rgba(255, 255, 255, 0.2);
+            --glass-border: rgba(255, 255, 255, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: var(--bg-gradient);
+            overflow-x: hidden;
+            color: #4a4a4a;
+        }
+
+        /* Canvas cho hiệu ứng tim bay */
+        #heartCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 90%;
+            max-width: 800px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .profiles {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid #fff;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: transform 0.3s;
+        }
+
+        .avatar:hover {
+            transform: scale(1.1);
+        }
+
+        .heart-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        .counter-title {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-top: 20px;
+        }
+
+        .main-counter {
+            font-size: 4rem;
+            font-weight: 700;
+            color: #fff;
+            margin: 10px 0;
+            text-shadow: 0 5px 10px rgba(255, 77, 109, 0.3);
+        }
+
+        .detailed-counter {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .time-box {
+            background: rgba(255, 255, 255, 0.3);
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .time-box span {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .time-box label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .anniversary-info {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .anniversary-info h3 {
+            margin-bottom: 5px;
+            color: var(--primary-color);
+        }
+
+        .quote {
+            margin-top: 30px;
+            font-style: italic;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .profiles { flex-direction: row; gap: 10px; }
+            .avatar { width: 80px; height: 80px; }
+            .main-counter { font-size: 2.5rem; }
+            .detailed-counter { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="heartCanvas"></canvas>
+
+    <div class="container">
+        <h1>Our Love Story</h1>
+        
+        <div class="profiles">
+            <div class="profile">
+                <img src="Anh/duy.jpg" alt="Boy" class="avatar" id="avatar1">
+                <p style="margin-top:10px; font-weight:bold;">Me</p>
+            </div>
+            <div class="heart-icon">❤️</div>
+            <div class="profile">
+                <img src="Anh/hien_avt.png" alt="Girl" class="avatar" id="avatar2">
+                <p style="margin-top:10px; font-weight:bold;">Her</p>
+            </div>
+        </div>
+
+        <p class="counter-title">Chúng mình đã bên nhau được</p>
+        <div class="main-counter" id="totalDays">0 ngày</div>
+
+        <div class="detailed-counter">
+            <div class="time-box"><span id="hours">00</span><label>Giờ</label></div>
+            <div class="time-box"><span id="minutes">00</span><label>Phút</label></div>
+            <div class="time-box"><span id="seconds">00</span><label>Giây</label></div>
+            <div class="time-box"><span id="nextAnniv">0</span><label>Đến Kỷ Niệm</label></div>
+        </div>
+
+        <div class="anniversary-info">
+            <h3 id="annivTitle">Kỷ niệm tiếp theo</h3>
+            <p id="annivDate">Ngày 14 tháng 02 năm 2026</p>
+            <p id="annivCountdown" style="font-weight: bold; margin-top: 5px;"></p>
+        </div>
+
+        <p class="quote">"Yêu không chỉ là nhìn nhau, mà là cùng nhau nhìn về một hướng."</p>
+    </div>
+
+    <script>
+        // CẤU HÌNH Ở ĐÂY
+        const startDate = new Date('2024-06-27T00:00:00'); // Ngày bắt đầu yêu
+        const anniversaryDay = 27;
+        const anniversaryMonth = 6; 
+
+        function updateCounter() {
+            const now = new Date();
+            const diff = now - startDate;
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutes = Math.floor((diff / (1000 * 60)) % 60);
+            const seconds = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('totalDays').innerText = days + " ngày";
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+
+            // Tính ngày đến kỷ niệm năm tiếp theo
+            let nextAnniv = new Date(now.getFullYear(), anniversaryMonth - 1, anniversaryDay);
+            if (now > nextAnniv) {
+                nextAnniv.setFullYear(now.getFullYear() + 1);
+            }
+            const timeToAnniv = nextAnniv - now;
+            const daysToAnniv = Math.ceil(timeToAnniv / (1000 * 60 * 60 * 24));
+            
+            document.getElementById('nextAnniv').innerText = daysToAnniv;
+            document.getElementById('annivDate').innerText = `Ngày ${anniversaryDay} tháng ${anniversaryMonth} năm ${nextAnniv.getFullYear()}`;
+            document.getElementById('annivCountdown').innerText = `Còn ${daysToAnniv} ngày nữa là đến kỷ niệm năm!`;
+        }
+
+        setInterval(updateCounter, 1000);
+        updateCounter();
+
+        // HIỆU ỨNG TRÁI TIM BAY
+        const canvas = document.getElementById('heartCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const hearts = [];
+        class Heart {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = canvas.height + Math.random() * 100;
+                this.size = Math.random() * 15 + 5;
+                this.speed = Math.random() * 2 + 1;
+                this.opacity = Math.random() * 0.5 + 0.3;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.opacity;
+                ctx.fillStyle = '#ff4d6d';
+                ctx.beginPath();
+                ctx.moveTo(this.x, this.y);
+                ctx.bezierCurveTo(this.x - this.size/2, this.y - this.size/2, this.x - this.size, this.y + this.size/3, this.x, this.y + this.size);
+                ctx.bezierCurveTo(this.x + this.size, this.y + this.size/3, this.x + this.size/2, this.y - this.size/2, this.x, this.y);
+                ctx.fill();
+                ctx.restore();
+            }
+            update() {
+                this.y -= this.speed;
+                if (this.y < -20) this.reset();
+            }
+        }
+
+        for (let i = 0; i < 20; i++) {
+            hearts.push(new Heart());
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            hearts.forEach(h => {
+                h.update();
+                h.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>

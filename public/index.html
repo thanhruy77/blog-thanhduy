@@ -37,7 +37,7 @@
     <div id="main-navbar"></div>
     <script src="js/navbar.js" defer></script>
     <link rel="stylesheet" href="./css(only)/css_nav.css">
-    
+
     <button class="nut-mo-chatbox" id="nut-mo-chatboxid">
         <img src="Anh/messenger.png" alt="" width="65px">
     </button>
@@ -100,6 +100,38 @@
                 Thời gian rảnh ngoài xem phim ra thì đọc sách, nghe nhạc,..
                 <br>
                 <br>
+                <button class="btn-love" onclick="relationship();">Relationship</button> <!-- làm button này đẹp lên -->
+
+                <style>
+                    .btn-love {
+                        padding: 15px 35px;
+                        font-size: 1.1rem;
+                        font-weight: 700;
+                        color: white;
+                        background: linear-gradient(45deg, #ff4d6d, #ff758f, #ff8fa3);
+                        background-size: 200% auto;
+                        border: none;
+                        border-radius: 50px;
+                        cursor: pointer;
+                        box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
+                        transition: all 0.4s ease;
+                        outline: none;
+                        font-family: 'Quicksand', sans-serif;
+                        letter-spacing: 1px;
+                    }
+
+                    .btn-love:hover {
+                        background-position: right center;
+                        /* Hiệu ứng chuyển màu gradient */
+                        transform: translateY(-5px) scale(1.05);
+                        box-shadow: 0 15px 25px rgba(255, 77, 109, 0.5);
+                    }
+
+                    .btn-love:active {
+                        transform: translateY(-2px);
+                    }
+                </style>
+                <br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -112,6 +144,12 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <br>
             </p>
+
+            <script>
+                function relationship() {
+                    window.open("relationship.html", "_blank");
+                }
+            </script>
 
             </head>
             <hr>
